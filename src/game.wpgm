@@ -1,0 +1,6 @@
+
+program abc {
+
+	console.println('Hello Wollok')
+
+}
