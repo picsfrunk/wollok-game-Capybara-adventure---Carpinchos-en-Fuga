@@ -6,15 +6,16 @@ import enemies.*
 object capybara {
 
 	var property position = game.at(0,0)
-	var property sufijo = ""
+	var property sufijo = "inicial"
 	
 	method image() = "capy_" + self.sufijo() + ".png"		
 	
 	method mover(direccion) {
-		var proximaPosition=direccion.siguiente(position)
 //		self.validarPosition(proximaPosition)
 		self.sufijo(direccion)
-		position = proximaPosition		
+		position=direccion.siguiente(position)
+	
+//		position = proximaPosition		
 	}
 
 	
