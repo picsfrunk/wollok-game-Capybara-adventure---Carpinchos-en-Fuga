@@ -9,6 +9,13 @@ object capybara {
 	var property sufijo = ""
 	
 	method image() = "capy_" + self.sufijo() + ".png"		
+	
+	method mover(direccion) {
+		var proximaPosition=direccion.siguiente(position)
+//		self.validarPosition(proximaPosition)
+		self.sufijo(direccion)
+		position = proximaPosition		
+	}
 
 	
 }

@@ -3,7 +3,7 @@ import objects.*
 import capybara.*
 
 
-class Humanos {
+class Humano {
 	var property position = game.at(0,0)
 	var property sufijo = ""
 	
@@ -18,13 +18,13 @@ class AnimalControl {
 	method image() = "animal_control_" + self.sufijo() + ".png"	
 }
 
-class WildAnimals {
+class WildAnimal {
 
 	
 	
 }
 
-class Aligator inherits WildAnimals {
+class Aligator inherits WildAnimal {
 	var property position = game.at(0,0)
 
 	
@@ -32,7 +32,7 @@ class Aligator inherits WildAnimals {
 	
 }
 
-class Snake inherits WildAnimals {
+class Snake inherits WildAnimal {
 	var property position = game.at(0,0)
 
 	

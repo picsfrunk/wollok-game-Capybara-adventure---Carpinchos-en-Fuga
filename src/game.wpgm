@@ -1,6 +1,24 @@
+import wollok.game.* 
+import objects.*
+import capybara.*
+import enemies.* 
+import niveles.*
 
-program abc {
 
-	console.println('Hello Wollok')
+program capybaras {
 
+	game.title("Carpinchos en Fuga")
+	game.height(10)
+	game.width(10)
+
+//	nivel1.cargar()
+
+	game.boardGround("fondo_nivel1.jpg")
+	
+	game.addVisual(capybara)
+	
+	keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
+	keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
+
+	game.start()
 }
