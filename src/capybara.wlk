@@ -1,6 +1,7 @@
 import wollok.game.* 
 import objects.*
 import enemies.*
+import randomizer.*
 
 
 object capybara {
@@ -11,13 +12,28 @@ object capybara {
 	method image() = "capy_" + self.sufijo() + ".png"		
 	
 	method mover(direccion) {
-//		self.validarPosition(proximaPosition)
+		const proximaPosition=direccion.siguiente(position)
+		self.validarPosition(proximaPosition)
 		self.sufijo(direccion)
-		position=direccion.siguiente(position)
-	
-//		position = proximaPosition		
+		position = proximaPosition		
 	}
-
+	
+	method validarPosition(_position) {
+		niveles.validarPosition(_position)
+		self.puedeSaltar(_position)
+	}	
+	
+	method gravedad() {
+		const siguiente = abajo.siguiente(position)
+		if(position.y() > 0 && self.puedeSaltar(siguiente)) {
+			position = abajo.siguiente(position)
+		}
+	}
+	
+	method puedeSaltar(_siguiente) {
+		return 	game.getObjectsIn(_position).
+				all({visual => visual.atravesable()} )	
+	}		
 	
 }
 

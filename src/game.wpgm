@@ -3,13 +3,15 @@ import objects.*
 import capybara.*
 import enemies.* 
 import niveles.*
+import randomizer.*
+
 
 
 program capybaras {
 
 	game.title("Carpinchos en Fuga")
-	game.height(10)
-	game.width(10)
+	game.height(12)
+	game.width(12)
 
 //	nivel1.cargar()
 

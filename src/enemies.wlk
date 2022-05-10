@@ -1,6 +1,7 @@
 import wollok.game.* 
 import objects.*
 import capybara.*
+import randomizer.*
 
 
 class Humano {
