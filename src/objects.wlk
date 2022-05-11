@@ -3,6 +3,7 @@ import enemies.*
 import capybara.*
 
 class Botella {
+	method atravesable() = true
 	
 }
 
@@ -24,32 +25,47 @@ class Birkir inherits Botella {
 }
 
 
+class Obstaculos {
+	method atravesable() = false
+	
+} 
+
+class Stump inherits Obstaculos {
+	var property position = game.at(0,0)	
+	method image() = "stump.png"		
+	
+}
+
+object wall inherits Obstaculos {
+	var property position = game.at(0,0)
+	method image() = "wall.png"		
+	
+}
+
+object fence inherits Obstaculos {
+	var property position = game.at(0,0)
+	method image() = "fence.png"
+	
+}
+
+
 class Llave {
 	var property position = game.at(0,0)
 	method image() = "key.png"	
-}
-
-class Stump {
-	var property position = game.at(0,0)	
-	method image() = "stump.png"		
+	method atravesable() = true
+	
 }
 
 
 object cave {
 	var property position = game.at(0,0)
 	method image() = "cave.png"	
+	method atravesable() = true
+	
 }
 
 
-object wall {
-	var property position = game.at(0,0)
-	method image() = "wall.png"		
-}
 
-object fence {
-	var property position = game.at(0,0)
-	method image() = "fence.png"		
-}
 
 
 object vida {
@@ -62,14 +78,14 @@ object tiempo {
 
 
 object izquierda {
-	
-	method siguiente(position) {
-		return 	position.left(1)
-	}
+	method siguiente(position) = position.left(1)
 }
 
 object derecha {
-	method siguiente(position) {
-		return 	position.right(1)		
-	}	
+	method siguiente(position) = position.right(1)		
+}
+
+
+object abajo {
+	method siguiente(position) = position.down(1)
 }

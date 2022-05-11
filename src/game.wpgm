@@ -15,8 +15,9 @@ program capybaras {
 
 //	nivel1.cargar()
 
-	game.boardGround("fondo_nivel1.jpg")
+	game.boardGround("black.png")
 	
+	game.addVisual("fondo_nivel1.jpg")
 	game.addVisual(capybara)
 	
 	keyboard.left().onPressDo(  { capybara.mover(izquierda) } )

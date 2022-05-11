@@ -2,6 +2,7 @@ import wollok.game.*
 import objects.*
 import enemies.*
 import randomizer.*
+import niveles.*
 
 
 object capybara {
@@ -19,9 +20,11 @@ object capybara {
 	}
 	
 	method validarPosition(_position) {
-		niveles.validarPosition(_position)
+		validador.validarPosition(_position)
 		self.puedeSaltar(_position)
 	}	
+	
+
 	
 	method gravedad() {
 		const siguiente = abajo.siguiente(position)
@@ -30,7 +33,7 @@ object capybara {
 		}
 	}
 	
-	method puedeSaltar(_siguiente) {
+	method puedeSaltar(_position) {
 		return 	game.getObjectsIn(_position).
 				all({visual => visual.atravesable()} )	
 	}		
