@@ -3,6 +3,7 @@ import objects.*
 import capybara.*
 import enemies.* 
 import randomizer.*
+import generador.*
 
 class Nivel {
 	var property nivel = 0
@@ -24,7 +25,7 @@ object nivel1 inherits Nivel {
 	override method cargar() {
 		self.nivel(1)
 		super()
-//		game.onTick(800, "HUMANOS", { capybara.gravedad()})
+		enemiesCreator.showEnemies()
 	}
 	
 	

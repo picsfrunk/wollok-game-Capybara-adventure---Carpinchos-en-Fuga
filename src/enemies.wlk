@@ -14,12 +14,13 @@ class Enemy {
 		}
 			
 	}	
+	method isEnemy() = true
 	
 }
 class Human inherits Enemy{
-	var property sufijo = ""
+	var property sufijo = "worker2"
 	
-	method image() = "human_" + self.sufijo() + ".png"	
+	method image() = "human_" + self.sufijo().toString() + ".png"	
 	
 }
 class AnimalControl inherits Enemy {

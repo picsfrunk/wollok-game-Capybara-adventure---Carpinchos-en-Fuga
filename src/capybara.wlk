@@ -9,6 +9,7 @@ object capybara {
 	var property position = game.at((game.width() / 2) - 1,0)
 	var property sufijo = "inicial"
 	method image() = "capy_" + self.sufijo() + ".png"		
+	method isEnemy() = false
 	method mover(direccion) {
 		const proximaPosition = direccion.siguiente(position)
 		self.validarPosition(proximaPosition)
