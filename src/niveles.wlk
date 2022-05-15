@@ -24,34 +24,24 @@ object nivel1 inherits Nivel {
 	override method cargar() {
 		self.nivel(1)
 		super()
-<<<<<<< HEAD
 	}
 	
 	
-=======
 	}	
->>>>>>> Denu
-}
 object nivel2 inherits Nivel{
 	
 	override method cargar() {
 		self.nivel(2)
 		super()
 	}	
-<<<<<<< HEAD
-	
-=======
->>>>>>> Denu
+
 }
 object nivel3 inherits Nivel{
 	override method cargar() {
 		self.nivel(3)
 		super()
 	}	
-<<<<<<< HEAD
-	
-=======
->>>>>>> Denu
+
 }
 object validador {
 	method validarPosition(position) {
