@@ -24,6 +24,7 @@ object nivel1 inherits Nivel {
 	override method cargar() {
 		self.nivel(1)
 		super()
+//		game.onTick(800, "HUMANOS", { capybara.gravedad()})
 	}
 	
 	

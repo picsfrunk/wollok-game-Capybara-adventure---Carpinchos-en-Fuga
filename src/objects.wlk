@@ -4,39 +4,39 @@ import capybara.*
 import randomizer.*
 
 
-class Botella {
+class Bottle {
 	method atravesable() = true
 	
 }
-class Beer inherits Botella {
+class Beer inherits Bottle {
 	var property position = game.at(0,0)
 	method image() = "beer.png"	
 	
 }
-class Tequila inherits Botella {
+class Tequila inherits Bottle {
 	var property position = game.at(0,0)	
 	method image() = "tequila.png"	
 }
 
-class Birkir inherits Botella {
+class Birkir inherits Bottle {
 	var property position = game.at(0,0)	
 	method image() = "birkir.png"	
 }
-class Obstaculos {
+class Obstacles {
 	method atravesable() = false
 	
 } 
-class Stump inherits Obstaculos {
+class Stump inherits Obstacles {
 	var property position = game.at(0,0)	
 	method image() = "stump.png"		
 	
 }
-object wall inherits Obstaculos {
+object wall inherits Obstacles {
 	var property position = game.at(0,0)
 	method image() = "wall.png"		
 	
 }
-object fence inherits Obstaculos {
+object fence inherits Obstacles {
 	var property position = game.at(0,0)
 	method image() = "fence.png"
 	
@@ -53,10 +53,10 @@ object cave {
 	method atravesable() = true
 	
 }
-object vida {
+object hp {
 	
 }
-object tiempo {
+object time {
 	
 }
 object izquierda {

@@ -3,33 +3,41 @@ import objects.*
 import capybara.*
 import randomizer.*
 import niveles.*
-
-class Humano {
+class Enemy {
 	var property position = game.at(0,0)
+	method gravedad() {
+		if(position.y() >= 0 ) {
+			position = abajo.siguiente(position)
+		}
+		else{
+			game.removeVisual(self)
+		}
+			
+	}	
+	
+}
+class Human inherits Enemy{
 	var property sufijo = ""
 	
 	method image() = "human_" + self.sufijo() + ".png"	
+	
 }
-class AnimalControl {
-	var property position = game.at(0,0)
+class AnimalControl inherits Enemy {
 	var property sufijo = ""
 	
 	method image() = "animal_control_" + self.sufijo() + ".png"	
 }
-class WildAnimal {
+class WildAnimal inherits Enemy {
 
 	
 	
 }
 class Aligator inherits WildAnimal {
-	var property position = game.at(0,0)
-
 	
 	method image() = "aligator.png"	
 	
 }
 class Snake inherits WildAnimal {
-	var property position = game.at(0,0)
 
 	
 	method image() = "snake.png"		
