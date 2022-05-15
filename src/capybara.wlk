@@ -15,7 +15,7 @@ object capybara {
 	method mover(direccion) {
 		const proximaPosition = direccion.siguiente(position)
 		self.validarPosition(proximaPosition)
-		self.sufijo(direccion)
+		self.sufijo(direccion.toString())
 		position = proximaPosition		
 	}
 	
