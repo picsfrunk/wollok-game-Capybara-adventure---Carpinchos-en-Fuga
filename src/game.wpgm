@@ -5,8 +5,6 @@ import enemies.*
 import niveles.*
 import randomizer.*
 
-
-
 program capybaras {
 
 	game.title("Carpinchos en Fuga")

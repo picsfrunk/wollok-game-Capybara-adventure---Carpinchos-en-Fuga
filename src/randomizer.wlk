@@ -7,7 +7,6 @@ object randomizer {
 					(0..  game.height() - 1).anyOne()
 		) 
 	}
-	
 	method emptyPosition() {
 		const position = self.position()
 		if(game.getObjectsIn(position).isEmpty()) {
