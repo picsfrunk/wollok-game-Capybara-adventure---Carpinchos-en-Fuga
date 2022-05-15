@@ -25,7 +25,7 @@ object nivel1 inherits Nivel {
 	override method cargar() {
 		self.nivel(1)
 		super()
-		enemiesCreator.showEnemies()
+		humanGenerator.show()
 	}
 	
 	

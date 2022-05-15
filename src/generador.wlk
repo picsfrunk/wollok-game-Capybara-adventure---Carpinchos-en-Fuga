@@ -25,11 +25,9 @@ object humanGenerator inherits EnemyGenerator {
 			objetosGenerados.add(nuevo)
 		}
 	}
-}
-
-object enemiesCreator {
-	method showEnemies(){
-		game.onTick(3000, "HUMANOS", { humanGenerator.generar() })
+	method show(){
+		game.onTick(3000, "HUMANOS", { self.generar() })
 		game.onTick(1000, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
 	}
 }
+
