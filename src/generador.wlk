@@ -2,16 +2,21 @@ import enemies.*
 import randomizer.*
 import wollok.game.* 
 
-
 object humanFactory {
 	method buildHuman() {
 		return new Human(position=randomizer.emptyPosition())
 	}	
 }
-
-object humanGenerator {
-	const maximo = 6
+class EnemyGenerator {
+	const max = 6
 	const objetosGenerados = []
+	method borrar(obj) {
+		objetosGenerados.remove(obj)
+	}
+	method hayQueGenerar() = objetosGenerados.size() <= max
+	
+}
+object humanGenerator inherits EnemyGenerator {
 
 	method generar() {
 		if(self.hayQueGenerar()) {
@@ -20,12 +25,6 @@ object humanGenerator {
 			objetosGenerados.add(nuevo)
 		}
 	}
-	
-	
-	
-	method hayQueGenerar() {
-		return objetosGenerados.size() <= maximo
-	}	
 }
 
 object enemiesCreator {
