@@ -12,16 +12,8 @@ program capybaras {
 	game.title("Carpinchos en Fuga")
 	game.height(12)
 	game.width(12)
-
-//	nivel1.cargar()
-
 	game.boardGround("black.png")
-	
-	game.addVisual("fondo_nivel1.jpg")
-	game.addVisual(capybara)
-	
-	keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
-	keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 
+	nivel1.cargar()
 	game.start()
 }
