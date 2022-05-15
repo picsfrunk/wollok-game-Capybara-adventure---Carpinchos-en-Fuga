@@ -1,6 +1,8 @@
 import wollok.game.* 
 import enemies.*
 import capybara.*
+import randomizer.*
+
 
 class Botella {
 	method atravesable() = true

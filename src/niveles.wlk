@@ -2,6 +2,8 @@ import wollok.game.*
 import objects.*
 import capybara.*
 import enemies.* 
+import randomizer.*
+
 
 class Nivel {
 	var property nivel = 0
@@ -12,6 +14,14 @@ class Nivel {
 		game.schedule(3000, {game.stop()})
 	}
 	
+	method cargar() {
+		game.boardGround(self.image())
+		game.addVisual(capybara)
+		
+		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
+		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
+		keyboard.up().onPressDo( { capybara.mover(arriba) } )
+	}	
 	
 }
 
@@ -19,14 +29,9 @@ class Nivel {
 object nivel1 inherits Nivel {
 	
 	
-	method cargar() {
+	override method cargar() {
 		self.nivel(1)
-		game.boardGround(self.image())
-		game.addVisual(capybara)
-		
-		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
-		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
-		keyboard.up().onPressDo( { capybara.mover(arriba) } )
+		super()
 		game.onTick(800, "GRAVEDAD", { capybara.gravedad()})			
 	}
 	

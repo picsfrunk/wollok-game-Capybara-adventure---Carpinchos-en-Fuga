@@ -2,6 +2,7 @@ import wollok.game.*
 import objects.*
 import capybara.*
 import randomizer.*
+import niveles.*
 
 
 class Humano {
