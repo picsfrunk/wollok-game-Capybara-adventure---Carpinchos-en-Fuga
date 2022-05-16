@@ -10,6 +10,7 @@ object capybara {
 	var property sufijo = "inicial"
 	method image() = "capy_" + self.sufijo() + ".png"		
 	method isEnemy() = false
+	method isBottle() = false
 	method mover(direccion) {
 		const proximaPosition = direccion.siguiente(position)
 		self.validarPosition(proximaPosition)

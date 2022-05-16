@@ -7,6 +7,7 @@ import generador.*
 class Enemy {
 	var property position = game.at(0,0)
 	method isEnemy() = true
+	method isBottle() = false
 	method atravesable() = true
 	method borrar()
 	method gravedad() {
@@ -21,17 +22,14 @@ class Enemy {
 }
 class Human inherits Enemy{
 	var sufijo 
-	
 	method image() = "human_worker" + sufijo.toString() + ".png"	
 	override method borrar(){
 		humanGenerator.borrar(self)
 	}
-	
 }
 class AnimalControl inherits Enemy {
-	var property sufijo = ""
 	
-	method image() = "animal_control_" + self.sufijo() + ".png"	
+	method image() = "animal_control.png"	
 }
 class Aligator inherits Enemy {
 	

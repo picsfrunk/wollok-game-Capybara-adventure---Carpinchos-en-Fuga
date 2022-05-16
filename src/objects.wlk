@@ -2,24 +2,37 @@ import wollok.game.*
 import enemies.*
 import capybara.*
 import randomizer.*
+import generador.*
 
-
-class Bottle {
+class Objects {
+	var property position = game.at(0,0)
 	method atravesable() = true
-	
+	method isEnemy() = false
+	method borrar()	
+	method gravedad() {
+		if(position.y() >= 0 ) {
+			position = abajo.siguiente(position)
+		}
+		else{
+			game.removeVisual(self)
+			self.borrar()
+		}
+	}		
+}
+class Bottle inherits Objects {
+	method isBottle() = true
+	override method borrar(){
+		bottleGenerator.borrar(self)
+	}	
 }
 class Beer inherits Bottle {
-	var property position = game.at(0,0)
 	method image() = "beer.png"	
-	
 }
 class Tequila inherits Bottle {
-	var property position = game.at(0,0)	
 	method image() = "tequila.png"	
 }
 
 class Birkir inherits Bottle {
-	var property position = game.at(0,0)	
 	method image() = "birkir.png"	
 }
 class Obstacles {
@@ -27,21 +40,18 @@ class Obstacles {
 	
 } 
 class Stump inherits Obstacles {
-	var property position = game.at(0,0)	
 	method image() = "stump.png"		
 	
 }
 object wall inherits Obstacles {
-	var property position = game.at(0,0)
 	method image() = "wall.png"		
 	
 }
 object fence inherits Obstacles {
-	var property position = game.at(0,0)
 	method image() = "fence.png"
 	
 }
-class Llave {
+class Llave  {
 	var property position = game.at(0,0)
 	method image() = "key.png"	
 	method atravesable() = true

@@ -26,6 +26,7 @@ object nivel1 inherits Nivel {
 		self.nivel(1)
 		super()
 		humanGenerator.show()
+		bottleGenerator.show()
 	}
 	
 	
