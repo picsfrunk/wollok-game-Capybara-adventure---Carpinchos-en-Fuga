@@ -16,17 +16,13 @@ class Enemy {
 		else{
 			game.removeVisual(self)
 			self.borrar()
-//			humanGenerator.borrar(self) // OJO!! CAMBIAR A EL GENERICO
 		}
-		
-			
 	}	
-	
 }
 class Human inherits Enemy{
-	var property sufijo = "worker2"
+	var sufijo 
 	
-	method image() = "human_" + self.sufijo().toString() + ".png"	
+	method image() = "human_worker" + sufijo.toString() + ".png"	
 	override method borrar(){
 		humanGenerator.borrar(self)
 	}

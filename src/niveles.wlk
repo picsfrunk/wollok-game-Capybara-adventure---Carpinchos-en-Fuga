@@ -14,7 +14,7 @@ class Nivel {
 	method cargar() {
 		game.boardGround(self.image())
 		game.addVisual(capybara)
-		
+		game.errorReporter(capybara)	
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
@@ -48,10 +48,10 @@ object nivel3 inherits Nivel{
 object validador {
 	method validarPosition(position) {
 		if (! position.x().between(0, game.width() -1)){
-			self.error("!!!!")
+			self.error("")
 		}	
 		if(! position.y().between(0, game.height() - 1)) {
-			self.error("!")
+			self.error("")
 		}		
 	}
 }

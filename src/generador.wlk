@@ -3,7 +3,8 @@ import randomizer.*
 import wollok.game.* 
 
 object humanFactory {
-	method buildHuman() = new Human(position=randomizer.emptyPosition())
+	const rango = [1,2,3]
+	method buildHuman() = new Human(sufijo=rango.anyOne(),position=randomizer.emptyPosition())
 }
 class EnemyGenerator {
 	const max = 6

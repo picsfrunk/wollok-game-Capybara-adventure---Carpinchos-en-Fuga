@@ -6,12 +6,10 @@ import niveles.*
 import randomizer.*
 
 program capybaras {
-
 	game.title("Carpinchos en Fuga")
 	game.height(12)
 	game.width(12)
 	game.boardGround("black.png")
-
 	nivel1.cargar()
 	game.start()
 }
