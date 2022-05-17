@@ -25,8 +25,12 @@ object nivel1 inherits Nivel {
 	override method cargar() {
 		self.nivel(1)
 		super()
+//	    game.hideAttributes(capybara)	
+		
 		humanGenerator.show()
 		bottleGenerator.show()
+		
+		game.onCollideDo(capybara, { algo => algo.crash(capybara) })
 	}
 	
 	
@@ -45,14 +49,4 @@ object nivel3 inherits Nivel{
 		super()
 	}	
 
-}
-object validador {
-	method validarPosition(position) {
-		if (! position.x().between(0, game.width() -1)){
-			self.error("")
-		}	
-		if(! position.y().between(0, game.height() - 1)) {
-			self.error("")
-		}		
-	}
 }

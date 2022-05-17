@@ -7,8 +7,8 @@ import randomizer.*
 
 program capybaras {
 	game.title("Carpinchos en Fuga")
-	game.height(12)
-	game.width(12)
+	game.height(14)
+	game.width(14)
 	game.boardGround("black.png")
 	nivel1.cargar()
 	game.start()

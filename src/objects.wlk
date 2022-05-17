@@ -17,7 +17,10 @@ class Objects {
 			game.removeVisual(self)
 			self.borrar()
 		}
-	}		
+	}	
+	method crash(visual){
+		
+	}
 }
 class Bottle inherits Objects {
 	method isBottle() = true

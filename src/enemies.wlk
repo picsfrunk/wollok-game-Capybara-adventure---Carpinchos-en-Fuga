@@ -19,12 +19,18 @@ class Enemy {
 			self.borrar()
 		}
 	}	
+	method crash(visual)
 }
 class Human inherits Enemy{
 	var sufijo 
+	const damage = 5
 	method image() = "human_worker" + sufijo.toString() + ".png"	
 	override method borrar(){
 		humanGenerator.borrar(self)
+	}
+	override method crash(visual){
+		visual.loseLives(damage)
+		game.removeVisual(self)
 	}
 }
 class AnimalControl inherits Enemy {
