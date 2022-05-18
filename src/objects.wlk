@@ -3,6 +3,7 @@ import enemies.*
 import capybara.*
 import randomizer.*
 import generador.*
+import sonido.*
 
 class Objects {
 	var property position = game.at(0,0)

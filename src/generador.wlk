@@ -2,6 +2,7 @@ import enemies.*
 import randomizer.*
 import wollok.game.* 
 import objects.*
+import sonido.*
 
 object humanFactory {
 	const rango = [1,2,3]

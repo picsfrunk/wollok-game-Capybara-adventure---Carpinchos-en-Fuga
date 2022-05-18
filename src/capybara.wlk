@@ -3,6 +3,7 @@ import objects.*
 import enemies.*
 import randomizer.*
 import niveles.*
+import sonido.*
 
 object capybara {
 	var property position = game.at(game.width().div(2)-1,0)
