@@ -9,6 +9,7 @@ object capybara {
 	var property position = game.at((game.width() / 2) - 1,0)
 	var property sufijo = "inicial"
 	var property life = 100
+	//agregar limite de cero para perder
 	method image() = "capy_" + self.sufijo() + ".png"		
 	method isEnemy() = false
 	method isBottle() = false

@@ -33,9 +33,9 @@ class Human inherits Enemy{
 		game.removeVisual(self)
 	}
 }
-class AnimalControl inherits Enemy {
+class AnimalControl inherits Human {
 	
-	method image() = "animal_control.png"	
+	override method image() = "animal_control" + sufijo.toString() + ".png"	
 }
 class Aligator inherits Enemy {
 	

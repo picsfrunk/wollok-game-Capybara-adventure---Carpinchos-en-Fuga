@@ -36,7 +36,7 @@ object humanGenerator inherits ObjectGenerator {
 	}
 	method show(){
 		game.onTick(3000, "HUMANS", { self.generar() })
-		game.onTick(1000, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
+		game.onTick(800, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
 	}
 }
 object bottleGenerator inherits ObjectGenerator {
