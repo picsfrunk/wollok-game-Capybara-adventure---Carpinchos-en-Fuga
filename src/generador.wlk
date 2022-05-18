@@ -27,7 +27,7 @@ class ObjectGenerator {
 	
 }
 object humanGenerator inherits ObjectGenerator {
-	
+	var property timeHumanGravity = 800
 	method generar() {
 		max = 6
 		if(self.hayQueGenerar()) {
@@ -38,7 +38,13 @@ object humanGenerator inherits ObjectGenerator {
 	}
 	method show(){
 		game.onTick(2000, "HUMANS", { self.generar() })
-		game.onTick(800, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
+		game.onTick(timeHumanGravity, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
+	}
+	method upTimeHumanGravity(n){
+		self.timeHumanGravity(timeHumanGravity + n)
+		game.removeTickEvent("HUMANGRAVITY")
+		game.onTick(timeHumanGravity, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
+		
 	}
 }
 object bottleGenerator inherits ObjectGenerator {

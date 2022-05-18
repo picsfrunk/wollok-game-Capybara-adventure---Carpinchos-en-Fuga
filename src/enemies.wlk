@@ -10,7 +10,7 @@ class Enemy {
 	var property position = game.at(0,0)
 	method isEnemy() = true
 	method isBottle() = false
-	method atravesable() = true
+	method isObstacle() = false
 	method borrar()
 	method gravedad() {
 		if(position.y() >= 0 ) {
@@ -32,7 +32,8 @@ class Human inherits Enemy{
 	}
 	override method crash(visual){
 		visual.loseLives(damage)
-		game.removeVisual(self)
+		visual.crash()
+//		game.removeVisual(self)
 	}
 }
 class AnimalControl inherits Human {

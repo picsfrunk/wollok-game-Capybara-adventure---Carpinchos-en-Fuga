@@ -4,6 +4,7 @@ import enemies.*
 import randomizer.*
 import niveles.*
 import sonido.*
+import generador.*
 
 object capybara {
 	var property position = game.at(game.width().div(2)-1,0)
@@ -34,7 +35,7 @@ object capybara {
 	}	
 	method puedeSaltar(_position) {
 		return 	game.getObjectsIn(_position).
-				all({visual => visual.atravesable()} )	
+				all({visual => ! visual.isObstacle() } )	
 	}		
 	method gravity() {
 		if(position.y() > 0 ) 
@@ -52,7 +53,11 @@ object capybara {
 		game.say(self, self.life().toString())
 	}
 	method drinkBottle(bottle){
-		
+		bottle.drink()
+		game.say(self, humanGenerator.timeHumanGravity().toString() )
+	}
+	method crash(){
+		self.sufijo("shock")
 	}
 }
 

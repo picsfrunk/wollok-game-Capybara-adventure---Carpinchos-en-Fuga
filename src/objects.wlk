@@ -7,7 +7,7 @@ import sonido.*
 
 class Objects {
 	var property position = game.at(0,0)
-	method atravesable() = true
+	method isObstacle() = false
 	method isEnemy() = false
 	method borrar()	
 	method gravedad() {
@@ -24,13 +24,24 @@ class Objects {
 	}
 }
 class Bottle inherits Objects {
+	var property timeUp = 500
 	method isBottle() = true
 	override method borrar(){
 		bottleGenerator.borrar(self)
 	}	
+	override method crash(visual){
+		visual.drinkBottle(self)
+		game.removeVisual(self)
+		self.borrar()
+	}
+	method drink(){
+		humanGenerator.upTimeHumanGravity(timeUp)
+	}	
 }
 class Beer inherits Bottle {
 	method image() = "beer.png"	
+
+			
 }
 class Tequila inherits Bottle {
 	method image() = "tequila.png"	
@@ -40,7 +51,7 @@ class Birkir inherits Bottle {
 	method image() = "birkir.png"	
 }
 class Obstacles {
-	method atravesable() = false
+	method isObstacle() = true
 	
 } 
 class Stump inherits Obstacles {
