@@ -18,7 +18,8 @@ class Nivel {
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
-		game.onTick(800, "GRAVEDAD", { capybara.gravedad()})			
+		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
+		capybara.gravityOn()
 	}	
 }
 object nivel1 inherits Nivel {
@@ -29,8 +30,6 @@ object nivel1 inherits Nivel {
 		
 		humanGenerator.show()
 		bottleGenerator.show()
-		
-		game.onCollideDo(capybara, { algo => algo.crash(capybara) })
 	}
 	
 	

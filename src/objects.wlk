@@ -81,7 +81,6 @@ object derecha {
 object abajo {
 	method siguiente(position) = position.down(1)
 }
-
 object arriba {
 	method siguiente(position) = position.up(1)
 }

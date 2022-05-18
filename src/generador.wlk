@@ -17,7 +17,7 @@ object birkirFactory {
 	method buildBottle() = new Birkir(position=randomizer.emptyPosition())
 }
 class ObjectGenerator {
-	const max = 6
+	var property max = 0
 	const objetosGenerados = []
 	method borrar(obj) {
 		objetosGenerados.remove(obj)
@@ -26,8 +26,9 @@ class ObjectGenerator {
 	
 }
 object humanGenerator inherits ObjectGenerator {
-
+	
 	method generar() {
+		max = 6
 		if(self.hayQueGenerar()) {
 			const nuevo = humanFactory.buildHuman()
 			game.addVisual(nuevo)
@@ -35,7 +36,7 @@ object humanGenerator inherits ObjectGenerator {
 		}
 	}
 	method show(){
-		game.onTick(3000, "HUMANS", { self.generar() })
+		game.onTick(2000, "HUMANS", { self.generar() })
 		game.onTick(800, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
 	}
 }
@@ -43,6 +44,7 @@ object bottleGenerator inherits ObjectGenerator {
 	const factories = [beerFactory, tequilaFactory, birkirFactory]
 	method newBottle() = factories.anyOne().buildBottle()
 	method generar() {
+		max = 3
 		if(self.hayQueGenerar()) {
 			const nuevo = self.newBottle()
 			game.addVisual(nuevo)
@@ -50,7 +52,7 @@ object bottleGenerator inherits ObjectGenerator {
 		}
 	}
 	method show(){
-		game.onTick(4000, "BOTTLES", { self.generar() })
+		game.onTick(5000, "BOTTLES", { self.generar() })
 		game.onTick(1000, "BOTTLESGRAVITY", { game.allVisuals().filter( {visual => visual.isBottle()} ).forEach( { bottle => bottle.gravedad()} ) } )		
 	}	
 }
