@@ -4,6 +4,7 @@ import capybara.*
 import enemies.* 
 import randomizer.*
 import generador.*
+import sonido.*
 
 class Nivel {
 	var property nivel = 0

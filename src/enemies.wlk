@@ -4,6 +4,8 @@ import capybara.*
 import randomizer.*
 import niveles.*
 import generador.*
+import sonido.*
+
 class Enemy {
 	var property position = game.at(0,0)
 	method isEnemy() = true
