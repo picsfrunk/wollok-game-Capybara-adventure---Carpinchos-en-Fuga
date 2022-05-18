@@ -9,6 +9,7 @@ object capybara {
 	var property sufijo = "inicial"
 	var property life = 100
 	var property nextPosition = game.at(0,0)
+	var property tGravity = 750
 	//agregar limite de cero para perder
 	method image() = "capy_" + self.sufijo() + ".png"		
 	method isEnemy() = false
@@ -24,12 +25,11 @@ object capybara {
 //		game.say(self, position.toString())
 	}
 	method validarPosition(_nextPosition) {
-		if ( _nextPosition.x() == -1 )
+		if (   (_nextPosition.x() == 0) 
+			or (_nextPosition.x() == game.width() - 1) 
+			or (! self.puedeSaltar(_nextPosition) )
+			or (_nextPosition.y() == 2) )
 			nextPosition = position	
-		if ( _nextPosition.x() == game.width() )
-			nextPosition = position 
-		if (! self.puedeSaltar(_nextPosition))
-			self.error("No puedo saltar")
 	}	
 	method puedeSaltar(_position) {
 		return 	game.getObjectsIn(_position).
@@ -41,10 +41,10 @@ object capybara {
 	}
 	method stopGravity(){
 		game.removeTickEvent("CAPYGRAVITY")
-		game.schedule(300, {self.gravityOn()})
+		game.schedule(500, { self.gravityOn() })
 	}
 	method gravityOn(){
-		game.onTick(500, "CAPYGRAVITY", { self.gravity()})					
+		game.onTick(tGravity, "CAPYGRAVITY", { self.gravity()})					
 	}
 	method loseLives(damage){
 		life = life - damage

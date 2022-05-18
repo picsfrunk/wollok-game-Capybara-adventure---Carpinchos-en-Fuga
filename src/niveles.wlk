@@ -15,11 +15,11 @@ class Nivel {
 		game.boardGround(self.image())
 		game.addVisual(capybara)
 		game.errorReporter(capybara)	
+		capybara.gravityOn()
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
 		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
-		capybara.gravityOn()
 	}	
 }
 object nivel1 inherits Nivel {

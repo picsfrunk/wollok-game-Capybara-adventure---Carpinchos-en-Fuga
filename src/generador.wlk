@@ -53,7 +53,7 @@ object bottleGenerator inherits ObjectGenerator {
 	}
 	method show(){
 		game.onTick(5000, "BOTTLES", { self.generar() })
-		game.onTick(1000, "BOTTLESGRAVITY", { game.allVisuals().filter( {visual => visual.isBottle()} ).forEach( { bottle => bottle.gravedad()} ) } )		
+		game.onTick(500, "BOTTLESGRAVITY", { game.allVisuals().filter( {visual => visual.isBottle()} ).forEach( { bottle => bottle.gravedad()} ) } )		
 	}	
 }
 

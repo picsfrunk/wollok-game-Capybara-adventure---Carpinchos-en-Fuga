@@ -3,7 +3,7 @@ object randomizer {
 		
 	method position() {
 		return 	game.at( 
-					(0 .. game.width() - 1 ).anyOne(), game.height() ) 
+					(1 .. game.width() - 2 ).anyOne(), game.height() - 2 ) 
 	}
 	method emptyPosition() {
 		const position = self.position()
