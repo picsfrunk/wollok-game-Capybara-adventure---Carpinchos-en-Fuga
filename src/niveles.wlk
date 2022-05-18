@@ -30,10 +30,9 @@ object pantallaInicial {
 	method iniciar() {
 		game.addVisualIn(self, game.center())
 		musicaInicial.play()
-		configuracion.musicaOnOff()
+		musicConfig.musicaOnOff()
 		game.schedule(5000, {image="instrucciones.png"})
 		self.enterParaJugar()
-	
 	}
 }
 class Nivel {

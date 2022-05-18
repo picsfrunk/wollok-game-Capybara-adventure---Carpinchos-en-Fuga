@@ -11,7 +11,7 @@ const musicaNivel3 = new Sound(file = "Crazy black light.mp3")
 const sonidoGanar = new Sound(file = "China.mp3")
 const sonidoPerder = new Sound(file = "China.mp3")
 
-object configuracion {
+object musicConfig {
 	var track = self.pista()
 	method pista(){
 		if (inicio & ! lvl) 
