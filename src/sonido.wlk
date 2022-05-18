@@ -8,6 +8,8 @@ const musicaInicial = new Sound(file = "Simple Orange.mp3")
 const musicaNivel1 = new Sound(file = "China.mp3")
 const musicaNivel2 = new Sound(file = "Boat 14.mp3")
 const musicaNivel3 = new Sound(file = "Crazy black light.mp3")
+const sonidoGanar = new Sound(file = "China.mp3")
+const sonidoPerder = new Sound(file = "China.mp3")
 
 object configuracion {
 	var track = self.pista()
