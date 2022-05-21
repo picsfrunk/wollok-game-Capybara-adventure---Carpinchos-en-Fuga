@@ -23,6 +23,7 @@ class Nivel {
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
 		keyboard.down().onPressDo( { capybara.mover(abajo) } )
 		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
+		game.schedule(6000, { capybara.lose() })
 	}	
 }
 object nivel1 inherits Nivel {

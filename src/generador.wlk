@@ -4,6 +4,7 @@ import wollok.game.*
 import objects.*
 import sonido.*
 import niveles.*
+
 class Factory {
 	method random() = randomizer.emptyPosition()
 }
@@ -22,11 +23,11 @@ object birkirFactory inherits Factory{
 }
 class ObjectGenerator {
 	var property max = 0
-	const objetosGenerados = []
+	const genObjects = []
 	method borrar(obj) {
-		objetosGenerados.remove(obj)
+		genObjects.remove(obj)
 	}
-	method hayQuegenerate() = objetosGenerados.size() <= max
+	method haveToGenerate() = genObjects.size() <= max
 	
 }
 object humanGenerator inherits ObjectGenerator {
@@ -34,10 +35,10 @@ object humanGenerator inherits ObjectGenerator {
 	var property timeHumanTickGen = nivel1.initTimeHumanTick()
 	method generate() {
 		max = 6
-		if(self.hayQuegenerate()) {
+		if(self.haveToGenerate()) {
 			const newHuman = humanFactory.buildHuman()
 			game.addVisual(newHuman)
-			objetosGenerados.add(newHuman)
+			genObjects.add(newHuman)
 		}
 	}
 	method onlyEnemies() =
@@ -78,10 +79,10 @@ object bottleGenerator inherits ObjectGenerator {
 		game.allVisuals().filter( {visual => visual.isBottle()} )		
 	method generate() {
 		max = 3
-		if(self.hayQuegenerate()) {
+		if(self.haveToGenerate()) {
 			const newBottle = self.newBottle()
 			game.addVisual(newBottle)
-			objetosGenerados.add(newBottle)
+			genObjects.add(newBottle)
 		}
 	}
 	method show(){

@@ -49,5 +49,11 @@ object capybara inherits objects.DefaultObjects {
 	method shock(){
 		self.sufijo("shock")
 	}
+	method lose(){
+		
+	}
+	method win(){
+		
+	}
 }
 
