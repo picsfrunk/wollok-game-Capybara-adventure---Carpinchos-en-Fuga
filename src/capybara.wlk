@@ -11,7 +11,6 @@ object capybara {
 	var property sufijo = "inicial"
 	var property life = 100
 	var property nextPosition = game.at(0,0)
-	var property tGravity = 750
 	//agregar limite de cero para perder
 	method image() = "capy_" + self.sufijo() + ".png"		
 	method isEnemy() = false
@@ -22,9 +21,8 @@ object capybara {
 		self.validarPosition(nextPosition)
 		self.sufijo(direccion.toString())
 		if (direccion.equals(arriba))
-			self.stopGravity()
+			game.schedule(1000, { self.mover(abajo) })
 		position = nextPosition		
-//		game.say(self, position.toString())
 	}
 	method validarPosition(_nextPosition) {
 		if (   (_nextPosition.x() == 0) 
@@ -37,26 +35,15 @@ object capybara {
 		return 	game.getObjectsIn(_position).
 				all({visual => ! visual.isObstacle() } )	
 	}		
-	method gravity() {
-		if(position.y() > 0 ) 
-			self.position(abajo.siguiente(position))
-	}
-	method stopGravity(){
-		game.removeTickEvent("CAPYGRAVITY")
-		game.schedule(500, { self.gravityOn() })
-	}
-	method gravityOn(){
-		game.onTick(tGravity, "CAPYGRAVITY", { self.gravity()})					
-	}
 	method loseLives(damage){
 		life = life - damage
 		game.say(self, self.life().toString())
 	}
 	method drinkBottle(bottle){
 		bottle.drink()
-		game.say(self, humanGenerator.timeHumanGravity().toString() )
+//		game.say(self, humanGenerator.timeHumanGravity().toString() )
 	}
-	method crash(){
+	method shock(){
 		self.sufijo("shock")
 	}
 }

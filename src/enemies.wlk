@@ -6,22 +6,8 @@ import niveles.*
 import generador.*
 import sonido.*
 
-class Enemy {
-	var property position = game.at(0,0)
-	method isEnemy() = true
-	method isBottle() = false
-	method isObstacle() = false
-	method borrar()
-	method gravedad() {
-		if(position.y() >= 0 ) {
-			position = abajo.siguiente(position)
-		}
-		else{
-			game.removeVisual(self)
-			self.borrar()
-		}
-	}	
-	method crash(visual)
+class Enemy inherits objects.VisualObjects {
+	override method isEnemy() = true
 }
 class Human inherits Enemy{
 	var sufijo 
@@ -32,7 +18,7 @@ class Human inherits Enemy{
 	}
 	override method crash(visual){
 		visual.loseLives(damage)
-		visual.crash()
+		visual.shock()
 //		game.removeVisual(self)
 	}
 }

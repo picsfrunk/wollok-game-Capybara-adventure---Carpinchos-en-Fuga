@@ -4,13 +4,16 @@ import capybara.*
 import randomizer.*
 import generador.*
 import sonido.*
-
-class Objects {
-	var property position = game.at(0,0)
+class DefaultObjects {
 	method isObstacle() = false
 	method isEnemy() = false
+	method isBottle() = false
+	
+}
+class VisualObjects inherits DefaultObjects {
+	var property position = game.at(0,0)
 	method borrar()	
-	method gravedad() {
+	method velocidad() {
 		if(position.y() >= 0 ) {
 			position = abajo.siguiente(position)
 		}
@@ -19,13 +22,11 @@ class Objects {
 			self.borrar()
 		}
 	}	
-	method crash(visual){
-		
-	}
+	method crash(visual)
 }
-class Bottle inherits Objects {
+class Bottle inherits VisualObjects {
 	var property timeUp = 500
-	method isBottle() = true
+	override method isBottle() = true
 	override method borrar(){
 		bottleGenerator.borrar(self)
 	}	
@@ -50,8 +51,8 @@ class Tequila inherits Bottle {
 class Birkir inherits Bottle {
 	method image() = "birkir.png"	
 }
-class Obstacles {
-	method isObstacle() = true
+class Obstacles inherits DefaultObjects {
+	override method isObstacle() = true
 	
 } 
 class Stump inherits Obstacles {
@@ -78,12 +79,6 @@ object cave {
 	method atravesable() = true
 	
 }
-object hp {
-	
-}
-object time {
-	
-}
 object izquierda {
 	method siguiente(position) = position.left(1)
 }
@@ -92,6 +87,21 @@ object derecha {
 }
 object abajo {
 	method siguiente(position) = position.down(1)
+}
+object display inherits DefaultObjects {
+	var property message = ''
+	var property position = game.at(game.width() - 3, game.height() - 1)
+	method text() = 'Gravedad: ' + message
+	method write(_message){
+		message = _message
+		}
+		
+}
+object hp {
+	
+}
+object time {
+	
 }
 object arriba {
 	method siguiente(position) = position.up(1)

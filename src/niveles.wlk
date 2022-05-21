@@ -15,11 +15,13 @@ class Nivel {
 	method cargar() {
 		game.boardGround(self.image())
 		game.addVisual(capybara)
-		game.errorReporter(capybara)	
-		capybara.gravityOn()
+		game.addVisual(display)
+		display.write(humanGenerator.timeHumanGravity().toString())		
+		game.errorReporter(display)	
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
+		keyboard.down().onPressDo( { capybara.mover(abajo) } )
 		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
 	}	
 }

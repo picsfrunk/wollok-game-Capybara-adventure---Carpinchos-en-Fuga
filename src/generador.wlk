@@ -36,20 +36,31 @@ object humanGenerator inherits ObjectGenerator {
 			objetosGenerados.add(nuevo)
 		}
 	}
+	method onlyEnemies() =
+		game.allVisuals().filter( {visual => visual.isEnemy()} )
 	method show(){
 		game.onTick(2000, "HUMANS", { self.generar() })
-		game.onTick(timeHumanGravity, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
+		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
+			self.onlyEnemies()
+			.forEach( { enemy => enemy.velocidad()} )
+		} )		
 	}
 	method upTimeHumanGravity(n){
 		self.timeHumanGravity(timeHumanGravity + n)
+		display.write(timeHumanGravity.toString())
 		game.removeTickEvent("HUMANGRAVITY")
-		game.onTick(timeHumanGravity, "HUMANGRAVITY", { game.allVisuals().filter( {visual => visual.isEnemy()} ).forEach( { enemy => enemy.gravedad()} ) } )		
+		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
+			self.onlyEnemies()
+			.forEach( { enemy => enemy.velocidad()} )
+		} )		
 		
 	}
 }
 object bottleGenerator inherits ObjectGenerator {
 	const factories = [beerFactory, tequilaFactory, birkirFactory]
 	method newBottle() = factories.anyOne().buildBottle()
+	method onlyBottles() = 
+		game.allVisuals().filter( {visual => visual.isBottle()} )		
 	method generar() {
 		max = 3
 		if(self.hayQueGenerar()) {
@@ -60,7 +71,10 @@ object bottleGenerator inherits ObjectGenerator {
 	}
 	method show(){
 		game.onTick(5000, "BOTTLES", { self.generar() })
-		game.onTick(500, "BOTTLESGRAVITY", { game.allVisuals().filter( {visual => visual.isBottle()} ).forEach( { bottle => bottle.gravedad()} ) } )		
+		game.onTick(500, "BOTTLESGRAVITY", { 
+			self.onlyBottles()
+			.forEach( { bottle => bottle.velocidad()} )
+		} )		
 	}	
 }
 
