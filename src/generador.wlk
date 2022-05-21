@@ -31,8 +31,8 @@ class ObjectGenerator {
 	
 }
 object humanGenerator inherits ObjectGenerator {
-	var property timeHumanGravity = 700
-	var property timeHumanTickGen = nivel1.initTimeHumanTick()
+	var property timeHumanGravity = nivel1.initTimeHumanGravity()
+	var property timeHumanTickGen = nivel1.initTimeHumanGenerator()
 	method generate() {
 		max = 6
 		if(self.haveToGenerate()) {
@@ -43,12 +43,18 @@ object humanGenerator inherits ObjectGenerator {
 	}
 	method onlyEnemies() =
 		game.allVisuals().filter( {visual => visual.isEnemy()} )
-	method show(timeTick){
-		game.onTick(timeTick, "HUMANS", { self.generate() })
+	method onTickGenerator(){
+		game.onTick(timeHumanTickGen, "HUMANS", { self.generate() })	 		
+	}
+	method gravityOn(){
 		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
 			self.onlyEnemies()
 			.forEach( { enemy => enemy.gravity()} )
-		} )		
+		} )				
+	}
+	method show(){
+		self.onTickGenerator()
+		self.gravityOn()
 	}
 	method upTimeHumanGravity(n){ //ver la manera de limitar despues
 		timeHumanTickGen = timeHumanTickGen - (n+200) //pruebas
@@ -71,7 +77,7 @@ object humanGenerator inherits ObjectGenerator {
 	method refreshTick(){
 		display2.write(timeHumanTickGen.toString())
 		game.removeTickEvent("HUMANS") //pruebas
-		game.onTick(timeHumanTickGen, "HUMANS", { self.generate() })		
+		self.onTickGenerator()
 	}
 	method refresh(){
 		self.refreshGravity()

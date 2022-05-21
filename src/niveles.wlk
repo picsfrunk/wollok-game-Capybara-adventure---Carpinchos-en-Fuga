@@ -29,11 +29,12 @@ class Nivel {
 	}	
 }
 object nivel1 inherits Nivel {
-	var property initTimeHumanTick = 2000 
+	var property initTimeHumanGenerator = 2000 
+	var property initTimeHumanGravity = 700
 	override method cargar() {
 		self.nivel(1)
 		super()
-		humanGenerator.show(initTimeHumanTick)
+		humanGenerator.show()
 		bottleGenerator.show()
 	}
 	
