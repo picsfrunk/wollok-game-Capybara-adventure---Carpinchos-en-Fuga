@@ -19,7 +19,6 @@ class Human inherits Enemy{
 	override method crash(visual){
 		visual.loseLives(damage)
 		visual.shock()
-//		game.removeVisual(self)
 	}
 }
 class AnimalControl inherits Human {

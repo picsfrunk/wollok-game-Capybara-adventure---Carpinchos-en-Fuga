@@ -42,7 +42,7 @@ class Beer inherits Bottle { // desacelera el tiempo osea sube el tiempo de grav
 	var property timeDown = 200
 	method image() = "beer.png"	
 	override method taken(visual){
-		humanGenerator.downTimeHumanGravity(timeDown)
+		visual.decelerate(timeDown)
 	}	
 			
 }
@@ -50,7 +50,7 @@ class Tequila inherits Bottle { //acelera tiempo osea baja el tiempo de gravedad
 	var property timeUp = 200
 	method image() = "tequila.png"	
 	override method taken(visual){
-		humanGenerator.upTimeHumanGravity(timeUp)
+		visual.acelerate(timeUp)
 	}	
 }
 class Birkir inherits Bottle {
@@ -103,11 +103,18 @@ object arriba {
 object display inherits DefaultObjects {
 	var property message = ''
 	var property position = game.at(game.width() - 3, game.height() - 1)
-	method text() = 'Gravedad: ' + message
+	method text() = 'Gravedad: '+ '\n' + message
 	method write(_message){
 		message = _message
-		}
-		
+		}		
+}
+object display2 inherits DefaultObjects {
+	var property message = ''
+	var property position = game.at(game.width() - 5, game.height() - 1)
+	method text() = 'Tiempo de Tick: ' + '\n' + message
+	method write(_message){
+		message = _message
+		}		
 }
 object hp {
 	

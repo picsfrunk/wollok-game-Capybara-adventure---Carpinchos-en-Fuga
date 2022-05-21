@@ -50,15 +50,15 @@ object humanGenerator inherits ObjectGenerator {
 			.forEach( { enemy => enemy.gravity()} )
 		} )		
 	}
-	method upTimeHumanGravity(n){
+	method upTimeHumanGravity(n){ //ver la manera de limitar despues
+		timeHumanTickGen = timeHumanTickGen - (n+200) //pruebas
 		timeHumanGravity = timeHumanGravity - n
-//		timeHumanTickGen = timeHumanTickGen - n
-		self.refreshGravity()
+		self.refresh()
 	}	
 	method downTimeHumanGravity(n){
+		timeHumanTickGen = timeHumanTickGen + (n+200)	//pruebas
 		timeHumanGravity = timeHumanGravity + n
-//		timeHumanTickGen = timeHumanTickGen + n		
-		self.refreshGravity()
+		self.refresh()
 	}
 	method refreshGravity(){
 		display.write(timeHumanGravity.toString())
@@ -66,10 +66,16 @@ object humanGenerator inherits ObjectGenerator {
 		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
 			self.onlyEnemies()
 			.forEach( { enemy => enemy.gravity()} )
-		} )
-//		game.removeTickEvent("HUMANS")
-//		self.show(timeHumanTickGen)
-					
+		} )		
+	}
+	method refreshTick(){
+		display2.write(timeHumanTickGen.toString())
+		game.removeTickEvent("HUMANS") //pruebas
+		game.onTick(timeHumanTickGen, "HUMANS", { self.generate() })		
+	}
+	method refresh(){
+		self.refreshGravity()
+		self.refreshTick()
 	}
 }
 object bottleGenerator inherits ObjectGenerator {

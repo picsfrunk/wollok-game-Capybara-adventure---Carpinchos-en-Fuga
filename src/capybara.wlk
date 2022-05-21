@@ -44,15 +44,23 @@ object capybara inherits objects.DefaultObjects {
 	}
 	method drinkBottle(bottle){
 		bottle.taken(self)
-//		game.say(self, humanGenerator.timeHumanGravity().toString() )
+	}
+	method acelerate(timeUp){
+		humanGenerator.upTimeHumanGravity(timeUp)
+	}
+	method decelerate(timeDown){
+		humanGenerator.downTimeHumanGravity(timeDown)		
 	}
 	method shock(){
-		self.sufijo("shock")
+		sufijo = "shock"
 	}
 	method lose(){
 		
 	}
 	method win(){
+		
+	}
+	method levelUp(){
 		
 	}
 }

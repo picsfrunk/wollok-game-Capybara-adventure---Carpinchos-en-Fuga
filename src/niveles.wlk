@@ -16,7 +16,9 @@ class Nivel {
 		game.boardGround(self.image())
 		game.addVisual(capybara)
 		game.addVisual(display)
-		display.write(humanGenerator.timeHumanGravity().toString())		
+		game.addVisual(display2)
+		display.write(humanGenerator.timeHumanGravity().toString())		// solo para pruebas
+		display2.write(humanGenerator.timeHumanTickGen().toString())	// solo para pruebas			
 		game.errorReporter(display)	
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
