@@ -26,12 +26,11 @@ class Nivel {
 	}	
 }
 object nivel1 inherits Nivel {
+	var property initTimeHumanTick = 2000 
 	override method cargar() {
 		self.nivel(1)
 		super()
-//	    game.hideAttributes(capybara)	
-		
-		humanGenerator.show()
+		humanGenerator.show(initTimeHumanTick)
 		bottleGenerator.show()
 	}
 	

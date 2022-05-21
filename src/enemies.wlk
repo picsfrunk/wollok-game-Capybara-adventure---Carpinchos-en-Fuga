@@ -23,18 +23,12 @@ class Human inherits Enemy{
 	}
 }
 class AnimalControl inherits Human {
-	
 	override method image() = "animal_control" + sufijo.toString() + ".png"	
 }
 class Aligator inherits Enemy {
-	
-	method image() = "aligator.png"	
-	
+	method image() = "aligator.png"		
 }
 class Snake inherits Enemy {
-
-	
-	method image() = "snake.png"		
-		
+	method image() = "snake.png"				
 }
 

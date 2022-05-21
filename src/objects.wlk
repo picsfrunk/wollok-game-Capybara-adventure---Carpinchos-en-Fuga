@@ -8,12 +8,14 @@ class DefaultObjects {
 	method isObstacle() = false
 	method isEnemy() = false
 	method isBottle() = false
+	method passThrough() = false	
 	
 }
+//VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleactoriamente
 class VisualObjects inherits DefaultObjects {
 	var property position = game.at(0,0)
 	method borrar()	
-	method velocidad() {
+	method gravity() {
 		if(position.y() >= 0 ) {
 			position = abajo.siguiente(position)
 		}
@@ -25,7 +27,6 @@ class VisualObjects inherits DefaultObjects {
 	method crash(visual)
 }
 class Bottle inherits VisualObjects {
-	var property timeUp = 500
 	override method isBottle() = true
 	override method borrar(){
 		bottleGenerator.borrar(self)
@@ -35,21 +36,29 @@ class Bottle inherits VisualObjects {
 		game.removeVisual(self)
 		self.borrar()
 	}
-	method drink(){
+	method taken(visual)
+}
+class Beer inherits Bottle { // desacelera el tiempo osea sube el tiempo de gravedad
+	var property timeDown = 200
+	method image() = "beer.png"	
+	override method taken(visual){
+		humanGenerator.downTimeHumanGravity(timeDown)
+	}	
+			
+}
+class Tequila inherits Bottle { //acelera tiempo osea baja el tiempo de gravedad
+	var property timeUp = 200
+	method image() = "tequila.png"	
+	override method taken(visual){
 		humanGenerator.upTimeHumanGravity(timeUp)
 	}	
 }
-class Beer inherits Bottle {
-	method image() = "beer.png"	
-
-			
-}
-class Tequila inherits Bottle {
-	method image() = "tequila.png"	
-}
-
 class Birkir inherits Bottle {
+	var property lifeUp = 10
 	method image() = "birkir.png"	
+	override method taken(visual){
+		visual.winLives(lifeUp)
+	}		
 }
 class Obstacles inherits DefaultObjects {
 	override method isObstacle() = true
@@ -67,17 +76,17 @@ object fence inherits Obstacles {
 	method image() = "fence.png"
 	
 }
-class Llave  {
-	var property position = game.at(0,0)
+class Llave inherits VisualObjects {
 	method image() = "key.png"	
-	method atravesable() = true
+	override method passThrough() = true
 	
 }
-object cave {
-	var property position = game.at(0,0)
+object cave inherits DefaultObjects {
 	method image() = "cave.png"	
-	method atravesable() = true
-	
+	override method passThrough() = true
+	method crash(visual){
+		visual.levelUp()
+	}
 }
 object izquierda {
 	method siguiente(position) = position.left(1)
@@ -87,6 +96,9 @@ object derecha {
 }
 object abajo {
 	method siguiente(position) = position.down(1)
+}
+object arriba {
+	method siguiente(position) = position.up(1)
 }
 object display inherits DefaultObjects {
 	var property message = ''
@@ -102,7 +114,4 @@ object hp {
 }
 object time {
 	
-}
-object arriba {
-	method siguiente(position) = position.up(1)
 }

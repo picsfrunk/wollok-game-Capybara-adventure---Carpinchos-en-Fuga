@@ -3,19 +3,22 @@ import randomizer.*
 import wollok.game.* 
 import objects.*
 import sonido.*
-
-object humanFactory {
-	const rango = [1,2,3]
-	method buildHuman() = new Human(sufijo=rango.anyOne(),position=randomizer.emptyPosition())
+import niveles.*
+class Factory {
+	method random() = randomizer.emptyPosition()
 }
-object beerFactory {
-	method buildBottle() = new Beer(position=randomizer.emptyPosition())
+object humanFactory inherits Factory{
+	const suf = [1,2,3]
+	method buildHuman() = new Human(sufijo=suf.anyOne(),position=self.random())
 }
-object tequilaFactory {
-	method buildBottle() = new Tequila(position=randomizer.emptyPosition())
+object beerFactory inherits Factory{
+	method buildBottle() = new Beer(position=self.random())
 }
-object birkirFactory {
-	method buildBottle() = new Birkir(position=randomizer.emptyPosition())
+object tequilaFactory inherits Factory{
+	method buildBottle() = new Tequila(position=self.random())
+}
+object birkirFactory inherits Factory{
+	method buildBottle() = new Birkir(position=self.random())
 }
 class ObjectGenerator {
 	var property max = 0
@@ -23,37 +26,49 @@ class ObjectGenerator {
 	method borrar(obj) {
 		objetosGenerados.remove(obj)
 	}
-	method hayQueGenerar() = objetosGenerados.size() <= max
+	method hayQuegenerate() = objetosGenerados.size() <= max
 	
 }
 object humanGenerator inherits ObjectGenerator {
-	var property timeHumanGravity = 800
-	method generar() {
+	var property timeHumanGravity = 700
+	var property timeHumanTickGen = nivel1.initTimeHumanTick()
+	method generate() {
 		max = 6
-		if(self.hayQueGenerar()) {
-			const nuevo = humanFactory.buildHuman()
-			game.addVisual(nuevo)
-			objetosGenerados.add(nuevo)
+		if(self.hayQuegenerate()) {
+			const newHuman = humanFactory.buildHuman()
+			game.addVisual(newHuman)
+			objetosGenerados.add(newHuman)
 		}
 	}
 	method onlyEnemies() =
 		game.allVisuals().filter( {visual => visual.isEnemy()} )
-	method show(){
-		game.onTick(2000, "HUMANS", { self.generar() })
+	method show(timeTick){
+		game.onTick(timeTick, "HUMANS", { self.generate() })
 		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
 			self.onlyEnemies()
-			.forEach( { enemy => enemy.velocidad()} )
+			.forEach( { enemy => enemy.gravity()} )
 		} )		
 	}
 	method upTimeHumanGravity(n){
-		self.timeHumanGravity(timeHumanGravity + n)
+		timeHumanGravity = timeHumanGravity - n
+//		timeHumanTickGen = timeHumanTickGen - n
+		self.refreshGravity()
+	}	
+	method downTimeHumanGravity(n){
+		timeHumanGravity = timeHumanGravity + n
+//		timeHumanTickGen = timeHumanTickGen + n		
+		self.refreshGravity()
+	}
+	method refreshGravity(){
 		display.write(timeHumanGravity.toString())
 		game.removeTickEvent("HUMANGRAVITY")
 		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
 			self.onlyEnemies()
-			.forEach( { enemy => enemy.velocidad()} )
-		} )		
-		
+			.forEach( { enemy => enemy.gravity()} )
+		} )
+//		game.removeTickEvent("HUMANS")
+//		self.show(timeHumanTickGen)
+					
 	}
 }
 object bottleGenerator inherits ObjectGenerator {
@@ -61,19 +76,19 @@ object bottleGenerator inherits ObjectGenerator {
 	method newBottle() = factories.anyOne().buildBottle()
 	method onlyBottles() = 
 		game.allVisuals().filter( {visual => visual.isBottle()} )		
-	method generar() {
+	method generate() {
 		max = 3
-		if(self.hayQueGenerar()) {
-			const nuevo = self.newBottle()
-			game.addVisual(nuevo)
-			objetosGenerados.add(nuevo)
+		if(self.hayQuegenerate()) {
+			const newBottle = self.newBottle()
+			game.addVisual(newBottle)
+			objetosGenerados.add(newBottle)
 		}
 	}
 	method show(){
-		game.onTick(5000, "BOTTLES", { self.generar() })
+		game.onTick(5000, "BOTTLES", { self.generate() })
 		game.onTick(500, "BOTTLESGRAVITY", { 
 			self.onlyBottles()
-			.forEach( { bottle => bottle.velocidad()} )
+			.forEach( { bottle => bottle.gravity()} )
 		} )		
 	}	
 }
