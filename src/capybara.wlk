@@ -11,6 +11,9 @@ object capybara inherits objects.DefaultObjects {
 	var property sufijo = "inicial"
 	var property life = 100
 	var property nextPosition = game.at(0,0)
+	var property keys = []
+	var property keysForWin = 0
+	const maxLife = 100
 	//agregar limite de cero para perder
 	method image() = "capy_" + self.sufijo() + ".png"		
 	method mover(direccion) {
@@ -35,12 +38,20 @@ object capybara inherits objects.DefaultObjects {
 				all({visual => ! visual.isObstacle() } )	
 	}		
 	method loseLives(damage){
-		life = life - damage
-		game.say(self, self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
+		const newLife = life - damage
+		if (newLife < 0 )
+			self.lose()
+		else
+			life = newLife
+		display.write(self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
 	}
-	method winLives(how){
-		life = life + how
-		game.say(self, self.life().toString()) 	//sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso	
+	method winLives(won){
+		const newLife = life + won
+		if (newLife > maxLife )
+			life = maxLife
+		else
+			life = newLife
+		display.write(self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
 	}
 	method drinkBottle(bottle){
 		bottle.taken(self)
@@ -54,14 +65,26 @@ object capybara inherits objects.DefaultObjects {
 	method shock(){
 		sufijo = "shock"
 	}
+	method addKey(key){
+		keys.add(key)
+		display2.write(self.keyscount().toString())	// solo para pruebas	
+		if (self.keyscount() == keysForWin)	
+			self.levelUp()			
+	}
+	method keyscount() = keys.size()
 	method lose(){
-		
+		pantallaFinal.perder()
 	}
 	method win(){
-		
+		pantallaFinal.ganar()
 	}
 	method levelUp(){
-		
+		if ( nivel1.enCurso() )
+			nivel1.terminar()
+		if ( nivel2.enCurso() )
+			nivel2.terminar()			
+		if ( nivel3.enCurso() )
+			self.win()
 	}
 }
 

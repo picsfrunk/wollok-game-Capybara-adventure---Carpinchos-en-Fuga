@@ -9,6 +9,7 @@ class DefaultObjects {
 	method isEnemy() = false
 	method isBottle() = false
 	method passThrough() = false	
+	method isKey() = false
 	
 }
 //VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleactoriamente
@@ -25,6 +26,19 @@ class VisualObjects inherits DefaultObjects {
 		}
 	}	
 	method crash(visual)
+}
+class Llave inherits VisualObjects {
+	method image() = "llave.png"	
+	override method passThrough() = true
+	override method isKey() = true
+	override method borrar(){
+		keyGenerator.borrar(self)
+	}		
+	override method crash(visual){
+		visual.addKey(self)
+		game.removeVisual(self)
+		self.borrar()		
+	}
 }
 class Bottle inherits VisualObjects {
 	override method isBottle() = true
@@ -76,11 +90,6 @@ object fence inherits Obstacles {
 	method image() = "fence.png"
 	
 }
-class Llave inherits VisualObjects {
-	method image() = "key.png"	
-	override method passThrough() = true
-	
-}
 object cave inherits DefaultObjects {
 	method image() = "cave.png"	
 	override method passThrough() = true
@@ -103,7 +112,7 @@ object arriba {
 object display inherits DefaultObjects {
 	var property message = ''
 	var property position = game.at(game.width() - 3, game.height() - 1)
-	method text() = 'Gravedad: '+ '\n' + message
+	method text() = 'VIDA: '+ '\n' + message
 	method write(_message){
 		message = _message
 		}		
@@ -111,7 +120,15 @@ object display inherits DefaultObjects {
 object display2 inherits DefaultObjects {
 	var property message = ''
 	var property position = game.at(game.width() - 5, game.height() - 1)
-	method text() = 'Tiempo de Tick: ' + '\n' + message
+	method text() = 'LLAVES ' + '\n' + message
+	method write(_message){
+		message = _message
+		}		
+}
+object display3 inherits DefaultObjects {
+	var property message = ''
+	var property position = game.at(2, game.height() - 1)
+	method text() = 'NIVEL ' + '\n' + message
 	method write(_message){
 		message = _message
 		}		

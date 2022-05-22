@@ -21,6 +21,9 @@ object tequilaFactory inherits Factory{
 object birkirFactory inherits Factory{
 	method buildBottle() = new Birkir(position=self.random())
 }
+object keyFactory inherits Factory {
+	method buildKey() = new Llave(position=self.random())
+}
 class ObjectGenerator {
 	var property max = 0
 	const genObjects = []
@@ -33,6 +36,7 @@ class ObjectGenerator {
 object humanGenerator inherits ObjectGenerator {
 	var property timeHumanGravity = nivel1.initTimeHumanGravity()
 	var property timeHumanTickGen = nivel1.initTimeHumanGenerator()
+	const timeGravityMax = 300
 	method generate() {
 		max = 6
 		if(self.haveToGenerate()) {
@@ -57,14 +61,18 @@ object humanGenerator inherits ObjectGenerator {
 		self.gravityOn()
 	}
 	method upTimeHumanGravity(n){ //ver la manera de limitar despues
-		timeHumanTickGen = timeHumanTickGen - (n+200) //pruebas
-		timeHumanGravity = timeHumanGravity - n
-		self.refresh()
+		if (timeHumanGravity < timeGravityMax){
+			timeHumanTickGen = timeHumanTickGen - (n+200) //pruebas
+			timeHumanGravity = timeHumanGravity - n
+			self.refresh()			
+		}
 	}	
 	method downTimeHumanGravity(n){
-		timeHumanTickGen = timeHumanTickGen + (n+200)	//pruebas
-		timeHumanGravity = timeHumanGravity + n
-		self.refresh()
+		if (timeHumanGravity < timeGravityMax){
+			timeHumanTickGen = timeHumanTickGen + (n+200) //pruebas
+			timeHumanGravity = timeHumanGravity + n
+			self.refresh()			
+		}
 	}
 	method refreshGravity(){
 		display.write(timeHumanGravity.toString())
@@ -104,5 +112,25 @@ object bottleGenerator inherits ObjectGenerator {
 			.forEach( { bottle => bottle.gravity()} )
 		} )		
 	}	
+}
+object keyGenerator inherits ObjectGenerator {
+	method newKey() = keyFactory.buildKey()
+	method onlyKeys() = 
+		game.allVisuals().filter( {visual => visual.isKey()} )	
+	method generate() {
+		max = 1
+		if(self.haveToGenerate()) {
+			const newKey = self.newKey()
+			game.addVisual(newKey)
+			genObjects.add(newKey)
+		}
+	}
+	method show(){
+		game.onTick(8000, "KEYS", { self.generate() })
+		game.onTick(300, "KEYSGRAVITY", { 
+			self.onlyKeys()
+			.forEach( { keys => keys.gravity()} )
+		} )		
+	}				
 }
 
