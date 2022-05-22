@@ -11,7 +11,7 @@ object inicio {
 //	const property pantallaInicio = true
 //	const property lvl = false
 	method iniciar() {
-		game.addVisualIn(self, game.at(0,0))
+//		game.addVisualIn(self, game.at(0,0))
 //		musicaInicial.play()
 //		musicConfig.musicaOnOff()		
 		game.schedule(2000, {pantallaInicial.iniciar()})
@@ -40,25 +40,30 @@ object pantallaInicial {
 	}
 }
 class Nivel inherits DefaultObjects {
-	var property nivel = 0
+	var property nivel
 	var property enCurso = false
-	var property pista = pistaInicial
+	var property pista
+	var property image
 	
 	method terminar() {
-		
-		self.pista().stop()
-//		game.schedule(1000, { game.clear() })
+		enCurso = false
+		self.pista().stop()	
+		if (nivel3.enCurso())
+			game.say(capybara, "GANASTE!!!")	
+		else
+			game.say(capybara, "PASASTE DE NIVEL!!!")	
+//		game.schedule(2000, { game.clear() }) // CUANDO DEJABA ESTO BORRABA TODO Y NO CARGABA EL NIVEL SIGUIENTE
 	}
 	method cargar() {
-//		game.clear()
+		game.clear()
 		game.addVisualIn(self, game.at(0,0))
-//		game.boardGround(image.toString())
 		game.addVisual(capybara)
 		game.errorReporter(capybara)	
 		game.addVisual(display)
 		game.addVisual(display2)
 		game.addVisual(display3)
 		display.write(capybara.life().toString())
+		capybara.resetKeys()
 		display2.write(capybara.keyscount().toString())	// solo para pruebas			
 		display3.write(self.nivel().toString())
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
@@ -71,57 +76,62 @@ class Nivel inherits DefaultObjects {
 		musicConfig.musicaOnOff(self.pista())
 		bottleGenerator.show()
 		keyGenerator.show()
+		
 	}	
 }
-object nivel1 inherits Nivel {
+object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1) {
 	var property initTimeHumanGenerator = 2000 
 	var property initTimeHumanGravity = 700
 	var property imagenInicioNivel = "nivel1.jpg"
-	var property image = "fondo_nivel1.jpg"
 	override method cargar() {
-		nivel = 1
-		enCurso = true
-		pista = musicaNivel1
+		self.enCurso(true) 
 		capybara.keysForWin(2)		
-		super()
 		humanGenerator.show()
+		super()
 	}
 	override method terminar(){
 		super()
-		enCurso = false
-		nivel2.cargar()
+		game.schedule(3000, { nivel2.cargar()})
+//		nivel2.cargar()
 		
 	}
 
 	
 	
 	}	
-object nivel2 inherits Nivel{
-	var property image = "fondo_nivel2.jpg"
+object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2){
+//	var property image = "fondo_nivel2.jpg"
 	
 	override method cargar() {
-		enCurso = true		
-		pista = musicaNivel2	
-		nivel = 2
-		capybara.keysForWin(4)
+		capybara.keysForWin(2)
+		self.enCurso(true) 
 		super()
 	}	
 	override method terminar(){
 		super()
-		game.schedule(1000, { nivel3.cargar()})
+		game.schedule(3000, { nivel3.cargar()})
 		
 	}	
 
 }
-object nivel3 inherits Nivel{
-	var property image = "fondo_nivel3.jpg"
+object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3){
+//	var property image = "fondo_nivel3.jpg"
 
 	override method cargar() {
-		enCurso = true		
-		pista = musicaNivel2	
-		self.nivel(3)
+//		enCurso = true		
+//		pista = musicaNivel2	
+//		self.nivel(3)
+		capybara.keysForWin(2)
+		self.enCurso(true) 
 		super()
+		
 	}	
+	
+	override method terminar(){
+		super()
+		game.schedule(2000, { pantallaFinal.ganar()})
+		
+	}		
 	
 
 }

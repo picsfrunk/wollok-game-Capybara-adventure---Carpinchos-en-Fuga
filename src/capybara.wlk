@@ -72,11 +72,15 @@ object capybara inherits objects.DefaultObjects {
 			self.levelUp()			
 	}
 	method keyscount() = keys.size()
+	method resetKeys(){
+		keys.clear()
+	}
 	method lose(){
 		pantallaFinal.perder()
 	}
-	method win(){
-		pantallaFinal.ganar()
+	method timeOver(){
+		game.say(self,"SE AGOTO EL TIEMPO!!")
+		game.schedule(2000,{self.lose()})
 	}
 	method levelUp(){
 		if ( nivel1.enCurso() )
@@ -84,7 +88,7 @@ object capybara inherits objects.DefaultObjects {
 		if ( nivel2.enCurso() )
 			nivel2.terminar()			
 		if ( nivel3.enCurso() )
-			self.win()
+			nivel3.terminar()			
 	}
 }
 
