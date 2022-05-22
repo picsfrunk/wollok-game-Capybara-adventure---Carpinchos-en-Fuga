@@ -97,8 +97,8 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 		game.schedule(3000, { nivel2.cargar()})
 //		nivel2.cargar()
 		enCurso = false
-		nivel2.iniciar()
-		
+//		nivel2.iniciar()
+		pantalla2.iniciarpantalla()
 	}	
 }
 object pantalla1 {
