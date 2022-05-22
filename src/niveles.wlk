@@ -50,7 +50,7 @@ class Nivel inherits DefaultObjects {
 //		game.schedule(1000, { game.clear() })
 	}
 	method cargar() {
-//		game.clear()
+		game.clear()
 		game.addVisualIn(self, game.at(0,0))
 //		game.boardGround(image.toString())
 		game.addVisual(capybara)
@@ -98,7 +98,7 @@ object nivel1 inherits Nivel {
 	}	
 object nivel2 inherits Nivel{
 	var property image = "fondo_nivel2.jpg"
-	
+	var property imagenInicioNivel = "nivel2.jpg"
 	override method cargar() {
 		enCurso = true		
 		pista = musicaNivel2	
@@ -115,7 +115,7 @@ object nivel2 inherits Nivel{
 }
 object nivel3 inherits Nivel{
 	var property image = "fondo_nivel3.jpg"
-
+	var property imagenInicioNivel = "nivel3.jpg"
 	override method cargar() {
 		enCurso = true		
 		pista = musicaNivel2	
