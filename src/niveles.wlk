@@ -122,7 +122,8 @@ object pantalla1 inherits DefaultObjects {
 	method iniciarpantalla() {
 		game.clear()
 		game.addVisualIn(self, game.at(0,0))
-		game.schedule(1000, { game.clear()
+		game.schedule(1000, { 
+			game.clear()
 			nivel1.cargar()
 		})	
 	}
@@ -146,7 +147,8 @@ object pantalla2 inherits DefaultObjects {
 	method iniciarpantalla() {
 		game.clear()
 		game.addVisualIn(self, game.at(0,0))
-		game.schedule(1000, { game.clear()
+		game.schedule(1000, { 
+			game.clear()
 			nivel2.cargar()
 		})	
 	}
@@ -176,7 +178,8 @@ object pantalla3 inherits DefaultObjects {
 	var property image = "nivel3.jpg"
 	method iniciarpantalla() {
 		game.clear()
-		game.addVisualIn(self, game.at(0,0))
+		game.addVisualIn(self, 
+		game.at(0,0))
 		game.schedule(1000, { game.clear()
 			nivel3.cargar()
 		})	
