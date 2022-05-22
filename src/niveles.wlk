@@ -14,14 +14,33 @@ object inicio {
 //		game.addVisualIn(self, game.at(0,0))
 //		musicaInicial.play()
 //		musicConfig.musicaOnOff()		
-		game.schedule(2000, {pantallaInicial.iniciar()})
+		game.schedule(2000, {pantallaInicial1.iniciar()})
 	}
 }
-object pantallaInicial {
+object pantallaInicial1 {
 	var property image = "comandos.png"
 	var property pista = pistaInicial
 //	const pantallaInicio = true
 //	const lvl = false
+	var property siguiente = pantallaInicial2
+	method enterParaJugar() {
+		keyboard.enter().onPressDo({ self.finalizar() })
+	}
+	method finalizar() {
+		game.clear() 
+		self.siguiente().iniciar()
+	}
+	method iniciar() {
+		game.addVisualIn(self, game.at(0,0))
+		self.pista().play()
+		musicConfig.musicaOnOff(self.pista())
+//		game.schedule(5000, {image="instrucciones.png"})
+		self.enterParaJugar()
+	}
+}
+object pantallaInicial2 {
+	var property image = "amigosenemigos.png"
+	var property pista = pistaInicial
 	var property siguiente = nivel1
 	method enterParaJugar() {
 		keyboard.enter().onPressDo({ self.finalizar() })
@@ -33,9 +52,7 @@ object pantallaInicial {
 	}
 	method iniciar() {
 		game.addVisualIn(self, game.at(0,0))
-		self.pista().play()
 		musicConfig.musicaOnOff(self.pista())
-//		game.schedule(5000, {image="instrucciones.png"})
 		self.enterParaJugar()
 	}
 }
