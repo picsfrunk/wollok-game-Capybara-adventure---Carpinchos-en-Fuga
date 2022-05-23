@@ -99,7 +99,7 @@ class Nivel inherits DefaultObjects {
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1) {
 	var property initTimeHumanGenerator = 2000 
 	var property initTimeHumanGravity = 700
-	var property imagenInicioNivel = "nivel1.jpg"
+	var property imagenInicioNivel = "nivel1.png"
 	method iniciar () {
 		pantalla1.iniciarpantalla()
 	}
@@ -128,7 +128,7 @@ object pantalla1 {
 	}
 }		
 object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2){
-	var property imagenInicioNivel = "nivel2.jpg"
+	var property imagenInicioNivel = "nivel2.png"
 	method iniciar () {
 		game.addVisualIn(imagenInicioNivel, game.at(0,0))
 		game.schedule(1000, { game.clear()
@@ -156,7 +156,7 @@ object pantalla2 {
 }
 object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3){
 
-	var property imagenInicioNivel = "nivel3.jpg"
+	var property imagenInicioNivel = "nivel3.png"
 	method iniciar () {
 		game.addVisualIn(imagenInicioNivel, game.at(0,0))
 		game.schedule(1000, { game.clear()
