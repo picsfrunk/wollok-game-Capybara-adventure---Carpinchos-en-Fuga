@@ -12,7 +12,7 @@ class DefaultObjects {
 	method isKey() = false
 	
 }
-//VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleactoriamente
+//VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleatoriamente
 class VisualObjects inherits DefaultObjects {
 	var property position = game.at(0,0)
 	method borrar()	
