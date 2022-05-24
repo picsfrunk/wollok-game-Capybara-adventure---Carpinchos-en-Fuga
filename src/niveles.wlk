@@ -63,12 +63,12 @@ class Nivel inherits DefaultObjects {
 	var property image
 	
 	method terminar() {
+		enCurso = false
 		self.pista().stop()	
 		if (nivel3.enCurso())
 			game.say(capybara, "GANASTE!!!")	
 		else
 			game.say(capybara, "PASASTE DE NIVEL!!!")	
-		enCurso = false
 //		game.schedule(2000, { game.clear() }) // CUANDO DEJABA ESTO BORRABA TODO Y NO CARGABA EL NIVEL SIGUIENTE
 	}
 	method cargar() {
@@ -99,73 +99,80 @@ class Nivel inherits DefaultObjects {
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1) {
 	var property initTimeHumanGenerator = 2000 
 	var property initTimeHumanGravity = 700
+	var property imagenInicioNivel = "nivel1.png"
 	method iniciar () {
 		pantalla1.iniciarpantalla()
 	}
 	override method cargar() {
-		super()
 		self.enCurso(true) 
-		humanGenerator.show()
 		capybara.keysForWin(2)		
+		humanGenerator.show()
+		super()
 	}
 	override method terminar(){
 		super()
-		game.schedule(3000, { nivel2.iniciar()})
+		game.schedule(3000, { nivel2.cargar()})
 //		nivel2.cargar()
 		enCurso = false
 //		nivel2.iniciar()
 		pantalla2.iniciarpantalla()
 	}	
 }
-object pantalla1 inherits DefaultObjects {
+object pantalla1 {
 	var property image = "nivel1.jpg"
 	method iniciarpantalla() {
-		game.clear()
 		game.addVisualIn(self, game.at(0,0))
-		game.schedule(1000, { 
-			game.clear()
+		game.schedule(1000, { game.clear()
 			nivel1.cargar()
 		})	
 	}
 }		
 object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2){
+	var property imagenInicioNivel = "nivel2.png"
 	method iniciar () {
-		pantalla2.iniciarpantalla()
+		game.addVisualIn(imagenInicioNivel, game.at(0,0))
+		game.schedule(1000, { game.clear()
+			self.cargar()
+		})
 	}
 	override method cargar() {
-		super()
-		self.enCurso(true) 
 		capybara.keysForWin(2)
+		self.enCurso(true) 
+		super()
 	}	
 	override method terminar(){
 		super()
 		game.schedule(3000, { nivel3.iniciar()})
 	}	
 }
-object pantalla2 inherits DefaultObjects {
+object pantalla2 {
 	var property image = "nivel2.jpg"
 	method iniciarpantalla() {
-		game.clear()
 		game.addVisualIn(self, game.at(0,0))
-		game.schedule(1000, { 
-			game.clear()
+		game.schedule(1000, { game.clear()
 			nivel2.cargar()
 		})	
 	}
 }
 object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3){
+
+	var property imagenInicioNivel = "nivel3.png"
 	method iniciar () {
-		pantalla3.iniciarpantalla()
+		game.addVisualIn(imagenInicioNivel, game.at(0,0))
+		game.schedule(1000, { game.clear()
+			self.cargar()
+		})
 	}
 	override method cargar() {
 //		enCurso = true		
 //		pista = musicaNivel2	
 //		self.nivel(3)
-		super()
-		self.enCurso(true) 
 		capybara.keysForWin(2)
+		self.enCurso(true) 
+		super()
 		
 	}	
+	
 	override method terminar(){
 		super()
 		game.schedule(2000, { pantallaFinal.ganar()})
@@ -174,19 +181,17 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 	
 
 }
-object pantalla3 inherits DefaultObjects {
+object pantalla3 {
 	var property image = "nivel3.jpg"
 	method iniciarpantalla() {
-		game.clear()
-		game.addVisualIn(self, 
-		game.at(0,0))
+		game.addVisualIn(self, game.at(0,0))
 		game.schedule(1000, { game.clear()
 			nivel3.cargar()
 		})	
 	}
 }
-object pantallaFinal inherits DefaultObjects {
-	var property image = ''
+object pantallaFinal {
+	var property image
 	method ganar() {
 		image = "ganaste.png"
 		sonidoGanar.play()
