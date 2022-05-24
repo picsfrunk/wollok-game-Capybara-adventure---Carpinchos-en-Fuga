@@ -33,6 +33,9 @@ class ObjectGenerator {
 	method haveToGenerate() = genObjects.size() <= max
 	
 }
+class EnemiesGenerator inherits ObjectGenerator {
+	var property timeGravity = nivelActual.es()
+}
 object humanGenerator inherits ObjectGenerator {
 	var property timeHumanGravity = nivel1.initTimeHumanGravity()
 	var property timeHumanTickGen = nivel1.initTimeHumanGenerator()
@@ -92,6 +95,7 @@ object humanGenerator inherits ObjectGenerator {
 		self.refreshTick()
 	}
 }
+
 object bottleGenerator inherits ObjectGenerator {
 	const factories = [beerFactory, tequilaFactory, birkirFactory]
 	method newBottle() = factories.anyOne().buildBottle()

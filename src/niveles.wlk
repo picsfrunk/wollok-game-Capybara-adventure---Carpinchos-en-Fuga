@@ -208,3 +208,18 @@ object pantallaFinal inherits DefaultObjects {
 	}
 	
 }
+object nivelActual {
+	method es() =
+		if (nivel1.enCurso())
+			nivel1
+		else 
+		if (nivel2.enCurso())
+			nivel2
+		else 
+		if (nivel3.enCurso())
+			nivel3
+		else
+			0
+					
+		
+}
