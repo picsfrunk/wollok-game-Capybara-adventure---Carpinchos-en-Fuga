@@ -4,6 +4,7 @@ import capybara.*
 import randomizer.*
 import generador.*
 import sonido.*
+
 class DefaultObjects {
 	method isObstacle() = false
 	method isEnemy() = false
@@ -74,20 +75,26 @@ class Birkir inherits Bottle {
 		visual.winLives(lifeUp)
 	}		
 }
-class Obstacles inherits DefaultObjects {
+class Obstacles inherits VisualObjects {
 	override method isObstacle() = true
-	
+	override method borrar(){}
+	override method crash(visual){}
 } 
 class Stump inherits Obstacles {
-	method image() = "stump.png"		
+	var sufijo
+	method image() = "stump_" + sufijo.toString() + ".png"		
 	
 }
-object wall inherits Obstacles {
-	method image() = "wall.png"		
+class Wall inherits Obstacles {
+	method image() = "wall.png"
+	//override method borrar(){}
+	//override method crash(visual){}
 	
 }
-object fence inherits Obstacles {
+class Fence inherits Obstacles {
 	method image() = "fence.png"
+	//override method borrar(){}
+	//override method crash(visual){}
 	
 }
 object cave inherits DefaultObjects {

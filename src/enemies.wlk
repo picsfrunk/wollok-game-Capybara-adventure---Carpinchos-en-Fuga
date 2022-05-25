@@ -25,9 +25,11 @@ class AnimalControl inherits Human {
 	override method image() = "animal_control" + sufijo.toString() + ".png"	
 }
 class Aligator inherits Enemy {
+	const damage = 10
 	method image() = "aligator.png"		
 }
 class Snake inherits Enemy {
+	const damage = 10
 	method image() = "snake.png"				
 }
 

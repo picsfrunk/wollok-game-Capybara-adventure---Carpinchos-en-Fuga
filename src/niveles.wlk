@@ -107,6 +107,7 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 		self.enCurso(true) 
 		capybara.keysForWin(2)		
 		humanGenerator.show()
+		obstacleGenerator.show()
 		super()
 	}
 	override method terminar(){
@@ -137,6 +138,7 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 	}
 	override method cargar() {
 		capybara.keysForWin(2)
+		humanGenerator.show()
 		self.enCurso(true) 
 		super()
 	}	
