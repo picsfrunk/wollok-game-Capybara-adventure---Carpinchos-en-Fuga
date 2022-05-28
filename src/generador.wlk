@@ -9,8 +9,8 @@ class Factory {
 	method random() = randomizer.emptyPosition()
 }
 object humanFactory inherits Factory{//same obstáculos
-	const suf = [1,2,3]
-	method buildHuman()= new Human(sufijo=suf.anyOne(), position=self.random())
+	//const suf = [1,2,3]
+	method buildHuman()= nivelActual.humans() //new Human(sufijo=suf.anyOne(), position=self.random())
 }
 object predatorFactory inherits Factory{ //falta generator
 	const suf = [1,2]

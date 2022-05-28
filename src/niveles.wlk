@@ -215,6 +215,13 @@ object nivelActual {
 		if (nivel3.enCurso()) new Stump(sufijo=suf3.anyOne(),position=self.random())
 		else null
 
-					
+	method humans() = 	
+	
+		if (nivel1.enCurso()) new Human (sufijo=suf3.anyOne(), position=self.random())
+		else
+		if (nivel2.enCurso()) new AnimalControl(sufijo=suf3.anyOne(),position=self.random())
+		else  
+		if (nivel3.enCurso()) new Swimmer(sufijo=suf2.anyOne(),position=self.random())
+		else null			
 		
 }
