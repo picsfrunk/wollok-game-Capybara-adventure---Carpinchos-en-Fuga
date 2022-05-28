@@ -13,6 +13,6 @@ object randomizer {
 		else {
 			return self.emptyPosition()
 		}
-	}
+	} 
 	
 }

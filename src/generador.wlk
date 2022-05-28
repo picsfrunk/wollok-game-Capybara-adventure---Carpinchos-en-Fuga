@@ -17,7 +17,6 @@ object humanFactory inherits Factory{
 		else 0
 }
 
-
 object beerFactory inherits Factory{
 	method buildBottle() = new Beer(position=self.random())
 }
