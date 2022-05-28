@@ -32,8 +32,6 @@ object obstacleFactory inherits Factory { //otra opción: hacer una factory x ob
 
 	method buildObstacle() = //new Wall(position=self.random())
 		nivelActual.obstacles()
-		
-
 }
 
 class ObjectGenerator {

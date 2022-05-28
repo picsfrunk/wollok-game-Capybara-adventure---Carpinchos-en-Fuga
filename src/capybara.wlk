@@ -84,12 +84,7 @@ object capybara inherits objects.DefaultObjects {
 		game.schedule(2000,{self.lose()})
 	}
 	method levelUp(){
-		if ( nivel1.enCurso() )
-			nivel1.terminar()
-		if ( nivel2.enCurso() )
-			nivel2.terminar()			
-		if ( nivel3.enCurso() )
-			nivel3.terminar()			
+		nivelActual.is().terminar()		
 	}
 }
 
