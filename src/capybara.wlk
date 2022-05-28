@@ -65,6 +65,7 @@ object capybara inherits objects.DefaultObjects {
 	method shock(){
 		sufijo = "shock"
 	}
+	
 	method addKey(key){
 		keys.add(key)
 		display2.write(self.keyscount().toString())	// solo para pruebas	

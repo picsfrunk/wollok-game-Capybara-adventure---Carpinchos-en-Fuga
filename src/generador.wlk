@@ -10,11 +10,11 @@ class Factory {
 }
 object humanFactory inherits Factory{
 	const suf = [1,2,3]
-	method buildHuman()= 
-		if (nivelActual.es() == nivel1) new Human(sufijo=suf.anyOne(),position=self.random())
-		else
-		if (nivelActual.es() == nivel2) new AnimalControl(sufijo=suf.anyOne(),position=self.random())
-		else 0
+	method buildHuman()= new Human(sufijo=suf.anyOne(),position=self.random())
+//		if (nivelActual.es() == nivel1) new Human(sufijo=suf.anyOne(),position=self.random())
+//		else
+//		if (nivelActual.es() == nivel2) new AnimalControl(sufijo=suf.anyOne(),position=self.random())
+//		else 0
 }
 
 object beerFactory inherits Factory{
@@ -29,17 +29,16 @@ object birkirFactory inherits Factory{
 object keyFactory inherits Factory {
 	method buildKey() = new Llave(position=self.random())
 }
-object obstacleFactory inherits Factory {
-	const suf = [1,2,3]
-	method buildObstacle() = 
-		if (nivelActual.es() == nivel1) new Wall(position=self.random())
-		else
-		if (nivelActual.es() == nivel2) new Fence(position=self.random())
-		else  
-		if (nivelActual.es() == nivel3) new Stump(sufijo=suf.anyOne(),position=self.random())
-		else 0
-}
-
+//object obstacleFactory inherits Factory {
+//	const suf = [1,2,3]
+//	method buildObstacle() = 
+//		if (nivelActual.es() == nivel1) new Wall(position=self.random())
+//		else
+//		if (nivelActual.es() == nivel2) new Fence(position=self.random())
+//		else  
+//		if (nivelActual.es() == nivel3) new Stump(sufijo=suf.anyOne(),position=self.random())
+//		else 0
+//}
 
 class ObjectGenerator {
 	var property max = 0
@@ -65,8 +64,10 @@ object humanGenerator inherits ObjectGenerator {
 			genObjects.add(newHuman)
 		}
 	}
+	
 	method onlyEnemies() =
 		game.allVisuals().filter( {visual => visual.isEnemy()} )
+	
 	method onTickGenerator(){
 		game.onTick(timeHumanTickGen, "HUMANS", { self.generate() })	 		
 	}
@@ -155,23 +156,23 @@ object keyGenerator inherits ObjectGenerator {
 	}				
 }
 
-object obstacleGenerator inherits ObjectGenerator {
-	method newObstacle() = obstacleFactory.buildObstacle()
-	method onlyObstacle() = 
-		game.allVisuals().filter( {visual => visual.isObstacle()} )	
-	method generate() {
-		max = 3
-		if(self.haveToGenerate()) {
-			const newObstacle = self.newObstacle()
-			game.addVisual(newObstacle)
-			genObjects.add(newObstacle)
-		}
-	}
-	method show(){
-		game.onTick(8000, "OBSTACLE", { self.generate() })
-		game.onTick(300, "OBSTACLEGRAVITY", { 
-			self.onlyObstacle()
-			.forEach( { obstacle => obstacle.gravity()} )
-		} )		
-	}				
-}
+//object obstacleGenerator inherits ObjectGenerator {
+//	method newObstacle() = obstacleFactory.buildObstacle()
+//	method onlyObstacle() = 
+//		game.allVisuals().filter( {visual => visual.isObstacle()} )	
+//	method generate() {
+//		max = 3
+//		if(self.haveToGenerate()) {
+//			const newObstacle = self.newObstacle()
+//			game.addVisual(newObstacle)
+//			genObjects.add(newObstacle)
+//		}
+//	}
+//	method show(){
+//		game.onTick(8000, "OBSTACLE", { self.generate() })
+//		game.onTick(300, "OBSTACLEGRAVITY", { 
+//			self.onlyObstacle()
+//			.forEach( { obstacle => obstacle.gravity()} )
+//		} )		
+//	}				
+//}
