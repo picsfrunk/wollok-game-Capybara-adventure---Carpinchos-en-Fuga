@@ -24,12 +24,25 @@ class Human inherits Enemy{
 class AnimalControl inherits Human {
 	override method image() = "animal_control" + sufijo.toString() + ".png"	
 }
-class Aligator inherits Enemy {
+//class Aligator inherits Enemy {
+//	const damage = 10
+//	method image() = "aligator.png"		
+//}
+//class Snake inherits Enemy {
+//	const damage = 10
+//	method image() = "snake.png"				
+//}
+class Predator inherits Enemy {
+	var sufijo
 	const damage = 10
-	method image() = "aligator.png"		
-}
-class Snake inherits Enemy {
-	const damage = 10
-	method image() = "snake.png"				
+	
+	override method crash(visual){
+		visual.loseLives(damage)
+		visual.shock()
+	}
+	override method borrar(){
+		predatorGenerator.borrar(self)
+	}
+	method image() = "predator_" + sufijo.toString() + ".png"				
 }
 

@@ -76,26 +76,34 @@ class Birkir inherits Bottle {
 	}		
 }
 class Obstacles inherits VisualObjects {
+	const damage = 10
 	override method isObstacle() = true
 	override method borrar(){}
-	override method crash(visual){}
+//{
+//		if(position.y() >= 1 ) {
+//			position = abajo.siguiente(position)
+//		}
+//		else{
+//			game.schedule(3000,{game.removeVisual(self)})
+//		}
+	
+//		game.onCollideDo(self,{obstacle => obstacle.game().schedule(5000,{obstacleGenerator.borrar(self)})})
+//}
+	override method crash(visual){
+		visual.loseLives(damage)
+		visual.shock()	
+	}
 } 
+class Wall inherits Obstacles {
+	method image() = "wall.png"	
+}
+class Fence inherits Obstacles {
+	var sufijo
+	method image() = "fence_" + sufijo.toString() + ".png"
+}
 class Stump inherits Obstacles {
 	var sufijo
 	method image() = "stump_" + sufijo.toString() + ".png"		
-	
-}
-class Wall inherits Obstacles {
-	method image() = "wall.png"
-	//override method borrar(){}
-	//override method crash(visual){}
-	
-}
-class Fence inherits Obstacles {
-	method image() = "fence.png"
-	//override method borrar(){}
-	//override method crash(visual){}
-	
 }
 object cave inherits DefaultObjects {
 	method image() = "cave.png"	

@@ -93,6 +93,7 @@ class Nivel inherits DefaultObjects {
 		musicConfig.musicaOnOff(self.pista())
 		bottleGenerator.show()
 		keyGenerator.show()
+		obstacleGenerator.show()
 		
 	}	
 }
@@ -108,7 +109,6 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 		self.enCurso(true) 
 		capybara.keysForWin(2)		
 		humanGenerator.show()
-//		obstacleGenerator.show()
 		super()
 	}
 	override method terminar(){
@@ -172,6 +172,8 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 //		self.nivel(3)
 		capybara.keysForWin(2)
 		self.enCurso(true) 
+//		humanGenerator.show()
+//		predatorGenerator.show()
 		super()
 	}	
 	
