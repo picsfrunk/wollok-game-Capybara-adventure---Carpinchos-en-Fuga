@@ -29,15 +29,11 @@ object keyFactory inherits Factory {
 	method buildKey() = new Llave(position=self.random())
 }
 object obstacleFactory inherits Factory { //otra opción: hacer una factory x obstáculo y tratarlo como las botellas
-	const suf3 = [1,2,3]
-	const suf2 = [1,2]
+
 	method buildObstacle() = //new Wall(position=self.random())
-		if (nivelActual.es() == nivel1) new Wall(position=self.random())
-		else
-		if (nivelActual.es() == nivel2) new Fence(sufijo=suf2.anyOne(),position=self.random())
-		else  
-		if (nivelActual.es() == nivel3) new Stump(sufijo=suf3.anyOne(),position=self.random())
-		else 0
+		nivelActual.obstacles()
+		
+
 }
 
 class ObjectGenerator {
@@ -50,7 +46,7 @@ class ObjectGenerator {
 	
 }
 class EnemiesGenerator inherits ObjectGenerator {
-	var property timeGravity = nivelActual.es()
+//	var property timeGravity = nivelActual.es()
 }
 object humanGenerator inherits ObjectGenerator {
 	var property timeHumanGravity = nivel1.initTimeHumanGravity()

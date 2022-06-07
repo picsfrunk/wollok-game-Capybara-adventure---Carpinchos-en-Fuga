@@ -209,15 +209,19 @@ object pantallaFinal {
 	
 }
 object nivelActual {
-	method es() =
-		if (nivel1.enCurso())
-			nivel1
-		else if (nivel2.enCurso())
-			nivel2
-		else if (nivel3.enCurso())
-			nivel3
+	const suf3 = [1,2,3]
+	const suf2 = [1,2]	
+	
+	method random() = randomizer.emptyPosition()	
+	method obstacles() =
+	
+		if (nivel1.enCurso()) new Wall(position=self.random())
 		else
-			0
+		if (nivel2.enCurso()) new Fence(sufijo=suf2.anyOne(),position=self.random())
+		else  
+		if (nivel3.enCurso()) new Stump(sufijo=suf3.anyOne(),position=self.random())
+		else null
+
 					
 		
 }
