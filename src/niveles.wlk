@@ -163,19 +163,10 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 		})
 	}
 	override method cargar() {
-//		enCurso = true		
-//		pista = musicaNivel2	
-//		self.nivel(3)
 		capybara.keysForWin(2)
 		self.enCurso(true) 
-//		predatorGenerator.show()
 		super()
-	}	
-	
-	override method terminar(){
-		super()
-		game.schedule(2000, { pantallaFinal.ganar()})
-	}		
+	}			
 }
 object pantalla3 {
 	var property image = "nivel3.png"
