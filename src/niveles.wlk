@@ -77,8 +77,9 @@ class Nivel inherits DefaultObjects {
 		game.addVisual(display3)
 		display.write(capybara.life().toString())
 		capybara.resetKeys()
+		enCurso = true
 		display2.write(capybara.keyscount().toString())	// solo para pruebas			
-		display3.write(self.nivel().toString())
+		display3.write(nivelActual.is().toString())
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
@@ -91,7 +92,6 @@ class Nivel inherits DefaultObjects {
 		bottleGenerator.show()
 		keyGenerator.show()
 		obstacleGenerator.show()
-		enCurso = true
 		
 	}	
 }
