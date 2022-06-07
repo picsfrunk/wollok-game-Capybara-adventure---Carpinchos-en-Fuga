@@ -138,7 +138,9 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 	}	
 	override method terminar(){
 		super()
-		game.schedule(3000, { nivel3.iniciar()})
+		game.schedule(3000, { nivel3.cargar()})
+		enCurso = false
+		pantalla3.iniciarpantalla()
 	}	
 }
 object pantalla2 {
