@@ -91,6 +91,7 @@ class Nivel inherits DefaultObjects {
 		bottleGenerator.show()
 		keyGenerator.show()
 		obstacleGenerator.show()
+		enCurso = true
 		
 	}	
 }
@@ -103,15 +104,13 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 		pantalla1.iniciarpantalla()
 	}
 	override method cargar() {
-		self.enCurso(true) 
 		capybara.keysForWin(2)		
 		super()
 	}
 	override method terminar(){
 		super()
-		game.schedule(3000, { nivel2.cargar()})
-		enCurso = false
 		pantalla2.iniciarpantalla()
+		game.schedule(3000, { nivel2.cargar()})
 	}	
 }
 object pantalla1 {
@@ -133,14 +132,13 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 	}
 	override method cargar() {
 		capybara.keysForWin(2)
-		self.enCurso(true) 
 		super()
 	}	
 	override method terminar(){
 		super()
-		game.schedule(3000, { nivel3.cargar()})
-		enCurso = false
 		pantalla3.iniciarpantalla()
+		game.schedule(3000, { nivel3.cargar()})
+//		enCurso = false
 	}	
 }
 object pantalla2 {
@@ -164,7 +162,6 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 	}
 	override method cargar() {
 		capybara.keysForWin(2)
-		self.enCurso(true) 
 		super()
 	}			
 }
@@ -207,14 +204,23 @@ object nivelActual {
 	
 	method random() = randomizer.emptyPosition()	
 	method obstacles() =
-	
-		if (nivel1.enCurso()) new Wall(position=self.random())
+		if (nivel1.enCurso()) 
+			new Wall(position=self.random())
 		else
-		if (nivel2.enCurso()) new Fence(sufijo=suf2.anyOne(),position=self.random())
+		if (nivel2.enCurso()) 
+			new Fence(sufijo=suf2.anyOne(),position=self.random())
 		else  
-		if (nivel3.enCurso()) new Stump(sufijo=suf3.anyOne(),position=self.random())
-		else null
+			new Stump(sufijo=suf3.anyOne(),position=self.random())
 
+	method is() =
+		if (nivel1.enCurso()) 
+			nivel1
+		else
+		if (nivel2.enCurso()) 
+			nivel2
+		else  
+			nivel3
+	
 					
 		
 }
