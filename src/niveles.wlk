@@ -8,8 +8,6 @@ import sonido.*
 
 object inicio {
 	var property image = "start.png"
-//	const property pantallaInicio = true
-//	const property lvl = false
 	method iniciar() {
 //		game.addVisualIn(self, game.at(0,0))
 //		musicaInicial.play()
@@ -20,8 +18,6 @@ object inicio {
 object pantallaInicial1 {
 	var property image = "comandos.png"
 	var property pista = pistaInicial
-//	const pantallaInicio = true
-//	const lvl = false
 	var property siguiente = pantallaInicial2
 	method enterParaJugar() {
 		keyboard.enter().onPressDo({ self.finalizar() })
@@ -91,6 +87,7 @@ class Nivel inherits DefaultObjects {
 		game.schedule(60000, { capybara.lose() })
 		self.pista().play()
 		musicConfig.musicaOnOff(self.pista())
+		humanGenerator.show()
 		bottleGenerator.show()
 		keyGenerator.show()
 		obstacleGenerator.show()
@@ -108,15 +105,12 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 	override method cargar() {
 		self.enCurso(true) 
 		capybara.keysForWin(2)		
-		humanGenerator.show()
 		super()
 	}
 	override method terminar(){
 		super()
 		game.schedule(3000, { nivel2.cargar()})
-//		nivel2.cargar()
 		enCurso = false
-//		nivel2.iniciar()
 		pantalla2.iniciarpantalla()
 	}	
 }
@@ -139,7 +133,6 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 	}
 	override method cargar() {
 		capybara.keysForWin(2)
-		humanGenerator.show()
 		self.enCurso(true) 
 		super()
 	}	
@@ -172,7 +165,6 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 //		self.nivel(3)
 		capybara.keysForWin(2)
 		self.enCurso(true) 
-//		humanGenerator.show()
 //		predatorGenerator.show()
 		super()
 	}	

@@ -10,7 +10,6 @@ program capybaras {
 	game.height(14)
 	game.width(14)
 	game.boardGround("start.png")
-//	nivel1.cargar()
 	inicio.iniciar()
 	game.start()
 }
