@@ -58,8 +58,7 @@ class Beer inherits Bottle { // desacelera el tiempo osea sube el tiempo de grav
 	method image() = "beer.png"	
 	override method taken(visual){
 		visual.decelerate(timeDown)
-	}	
-			
+	}				
 }
 class Tequila inherits Bottle { //acelera tiempo osea baja el tiempo de gravedad
 	var property timeUp = 200
