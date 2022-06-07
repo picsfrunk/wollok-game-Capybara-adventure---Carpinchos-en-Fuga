@@ -144,6 +144,7 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 object pantalla2 {
 	var property image = "nivel2.png"
 	method iniciarpantalla() {
+		game.clear()
 		game.addVisualIn(self, game.at(0,0))
 		game.schedule(1000, { game.clear()
 			nivel2.cargar()
@@ -177,6 +178,7 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 object pantalla3 {
 	var property image = "nivel3.png"
 	method iniciarpantalla() {
+		game.clear()
 		game.addVisualIn(self, game.at(0,0))
 		game.schedule(1000, { game.clear()
 			nivel3.cargar()
@@ -210,11 +212,9 @@ object nivelActual {
 	method es() =
 		if (nivel1.enCurso())
 			nivel1
-		else 
-		if (nivel2.enCurso())
+		else if (nivel2.enCurso())
 			nivel2
-		else 
-		if (nivel3.enCurso())
+		else if (nivel3.enCurso())
 			nivel3
 		else
 			0

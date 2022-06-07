@@ -32,11 +32,11 @@ object obstacleFactory inherits Factory { //otra opción: hacer una factory x ob
 	const suf3 = [1,2,3]
 	const suf2 = [1,2]
 	method buildObstacle() = //new Wall(position=self.random())
-		if (nivelActual.es().equal(nivel1)) new Wall(position=self.random())
+		if (nivelActual.es() == nivel1) new Wall(position=self.random())
 		else
-		if (nivelActual.es().equal(nivel2)) new Fence(sufijo=suf2.anyOne(),position=self.random())
+		if (nivelActual.es() == nivel2) new Fence(sufijo=suf2.anyOne(),position=self.random())
 		else  
-		if (nivelActual.es().equal(nivel3)) new Stump(sufijo=suf3.anyOne(),position=self.random())
+		if (nivelActual.es() == nivel3) new Stump(sufijo=suf3.anyOne(),position=self.random())
 		else 0
 }
 
