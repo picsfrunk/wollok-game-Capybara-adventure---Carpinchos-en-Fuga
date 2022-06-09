@@ -69,7 +69,7 @@ object capybara inherits objects.DefaultObjects {
 	method addKey(key){
 		keys.add(key)
 		display2.write(self.keyscount().toString())	// solo para pruebas	
-		if (self.keyscount() == keysForWin)	
+		if (self.keyscount() == keysForWin)
 			self.levelUp()			
 	}
 	method keyscount() = keys.size()
@@ -87,8 +87,7 @@ object capybara inherits objects.DefaultObjects {
 		game.schedule(2000,{self.lose()})
 	}
 	method levelUp(){
-		if (nivel3.enCurso()) {self.win()}
-		else {nivelActual.is().terminar()}	
+		nivelActual.is().terminar()	
 	}
 }
 

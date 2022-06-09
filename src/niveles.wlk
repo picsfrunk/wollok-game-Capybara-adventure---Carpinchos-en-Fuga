@@ -105,12 +105,12 @@ class Nivel inherits DefaultObjects {
 	var property image
 	
 	method terminar() {
-		enCurso = false
 		self.pista().stop()	
 		if (nivel3.enCurso())
 			game.say(capybara, "GANASTE!!!")	
 		else
 			game.say(capybara, "PASASTE DE NIVEL!!!")	
+		enCurso = false
 //		game.schedule(2000, { game.clear() }) // CUANDO DEJABA ESTO BORRABA TODO Y NO CARGABA EL NIVEL SIGUIENTE
 	}
 	method cargar() {
@@ -137,7 +137,7 @@ class Nivel inherits DefaultObjects {
 		keyGenerator.show()
 		obstacleGenerator.show()
 		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
-		game.schedule(60000, { capybara.lose() })
+		game.schedule(60000, { capybara.timeOver() })
 		
 	}	
 }
@@ -192,12 +192,47 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 		capybara.keysForWin(2)
 		super()
 	}		
+		
+}
+object pantalla3 {
+	var property image = "nivel3.png"
+	method iniciarpantalla() {
+		game.clear()
+		game.addVisualIn(self, game.at(0,0))
+		game.schedule(1000, { game.clear()
+			nivel3.cargar()
+		})	
+	}
+}
+object pantallaFinal {
+	var property image
+	method ganar() {
+		image = "ganaste.png"
+		sonidoGanar.play()
+		self.final()
+	}
+	method perder() {
+		image = "perdiste.png"
+	    sonidoPerder.play()
+		self.final()
+	}
+	method enterParaFin(){
+		keyboard.enter().onPressDo({ game.stop()})
+	}
+	method final() {
+		game.clear()
+		game.addVisualIn(self, game.at(0, 0))
+		self.enterParaFin()
+//		sonidoMusica.stop()
+	}
+	
 }
 object nivelActual {
 	const suf3 = [1,2,3]
 	const suf2 = [1,2]	
 	
-	method random() = randomizer.emptyPosition()	
+	method random() = randomizer.emptyPosition()
+	method randomRight() = randomizer.emptyPositionRight()
 	method obstacles() =
 		if (nivel1.enCurso()) 
 			new Wall(position=self.random())
@@ -213,10 +248,11 @@ object nivelActual {
 		else
 		if (nivel2.enCurso()) new AnimalControl(sufijo=suf3.anyOne(),position=self.random())
 		else  
-		if (nivel3.enCurso()) new Swimmer(sufijo=suf2.anyOne(),position=self.random())
+		if (nivel3.enCurso()) new Swimmer(sufijo=suf2.anyOne(),position=self.randomRight())
 		else null			
 
 	method is() =
+		
 		if (nivel1.enCurso()) 
 			nivel1
 		else
@@ -224,6 +260,7 @@ object nivelActual {
 			nivel2
 		else  
 			nivel3
+		
 	
 					
 		

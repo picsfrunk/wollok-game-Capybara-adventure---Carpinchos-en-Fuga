@@ -35,25 +35,27 @@ object obstacleFactory inherits Factory { //otra opción: hacer una factory x ob
 }
 
 class ObjectGenerator {
-	var property max = 0
+	var property max
 	const genObjects = []
 	method borrar(obj) {
 		genObjects.remove(obj)
 	}
 	method haveToGenerate() = genObjects.size() <= max
+	method resetColection(){
+		genObjects.clear()
+	}
 	
 }
 class EnemiesGenerator inherits ObjectGenerator {
 //	var property timeGravity = nivelActual.es()
 }
-object humanGenerator inherits ObjectGenerator {
+object humanGenerator inherits ObjectGenerator (max = 6){
 	var property timeHumanGravity = nivel1.initTimeHumanGravity()
 	var property timeHumanTickGen = nivel1.initTimeHumanGenerator()
 	const timeGravityMax = 300
 	method generate() {
 		
-		
-		console.println("Human Generator" + timeHumanTickGen)
+//		console.println("Human Generator" + timeHumanTickGen)
 		if(self.haveToGenerate()) {
 			const newHuman = humanFactory.buildHuman()
 			game.addVisual(newHuman)
@@ -65,9 +67,8 @@ object humanGenerator inherits ObjectGenerator {
 		game.allVisuals().filter( {visual => visual.isEnemy()} )
 	
 	method onTickGenerator(){
-		console.println("Human Generator" + timeHumanTickGen)
-		max = 6
-		genObjects.clear()
+//		console.println("Human Generator" + timeHumanTickGen)
+		
 		game.onTick(timeHumanTickGen, "HUMANS", { self.generate()  })	 		
 	}
 	method gravityOn(){
@@ -77,6 +78,7 @@ object humanGenerator inherits ObjectGenerator {
 		} )				
 	}
 	method show(){
+		self.resetColection()
 		self.onTickGenerator()
 		self.gravityOn()
 	}
@@ -113,7 +115,7 @@ object humanGenerator inherits ObjectGenerator {
 	}
 }
 
-object bottleGenerator inherits ObjectGenerator {
+object bottleGenerator inherits ObjectGenerator (max = 3){
 	const factories = [beerFactory, tequilaFactory, birkirFactory]
 	method newBottle() = factories.anyOne().buildBottle()
 	method onlyBottles() = 
@@ -134,11 +136,11 @@ object bottleGenerator inherits ObjectGenerator {
 		} )		
 	}	
 }
-object keyGenerator inherits ObjectGenerator {
+object keyGenerator inherits ObjectGenerator (max = 1) {
 	method newKey() = keyFactory.buildKey()
 	method onlyKeys() = game.allVisuals().filter( {visual => visual.isKey()} )	
 	method generate() {
-		max = 1
+//		max = 1
 		if(self.haveToGenerate()) {
 			const newKey = self.newKey()
 			game.addVisual(newKey)
@@ -146,6 +148,7 @@ object keyGenerator inherits ObjectGenerator {
 		}
 	}
 	method show(){
+		self.resetColection()
 		game.onTick(8000, "KEYS", { self.generate() })
 		game.onTick(300, "KEYSGRAVITY", { 
 			self.onlyKeys()
@@ -154,11 +157,11 @@ object keyGenerator inherits ObjectGenerator {
 	}				
 }
 
-object obstacleGenerator inherits ObjectGenerator {
+object obstacleGenerator inherits ObjectGenerator (max = 5){
 	method newObstacle() = obstacleFactory.buildObstacle()
 	method onlyObstacles() = game.allVisuals().filter( {visual => visual.isObstacle()} )	
 	method generate() {
-		max = 5
+//		max = 5
 		if(self.haveToGenerate()) {
 			const newObstacle = self.newObstacle()
 			game.addVisual(newObstacle)
@@ -174,4 +177,4 @@ object obstacleGenerator inherits ObjectGenerator {
 	}				
 }
 
-object predatorGenerator inherits ObjectGenerator{}//falta hacer 
+object predatorGenerator inherits ObjectGenerator(max = 2){}//falta hacer 
