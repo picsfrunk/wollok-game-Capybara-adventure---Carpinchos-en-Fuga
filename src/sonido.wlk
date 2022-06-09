@@ -12,21 +12,6 @@ const sonidoGanar = game.sound("win.mp3")
 const sonidoPerder = game.sound("lose.mp3")
 
 object musicConfig {
-//	var track = self.pista()
-//	method pista(){
-//		if (pantallaInicio & ! lvl) 
-//			return musicaInicial
-//		if (! inicio & lvl)
-//			if (nivel1.enCurso() == true)
-//				return musicaNivel1
-//			if (nivel2.enCurso() == true)
-//				return musicaNivel2
-//			if (nivel3.enCurso() == true)
-//				return musicaNivel2
-//		else{
-//			return 0
-//		}
-//	}
 	method musicaOnOff(pista) {
 		keyboard.m().onPressDo({ if (pista.paused()) {
 				pista.resume()

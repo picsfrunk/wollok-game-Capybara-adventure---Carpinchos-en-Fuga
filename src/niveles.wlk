@@ -44,28 +44,26 @@ object pantallaInicial2 inherits PantallaInicial
 		self.pista().stop()
 	}
 }
-object pantallaFinal {
+class PantallaFinal {
 	var property image
-	method ganar() {
-		image = "ganaste.png"
-		sonidoGanar.play()
-		self.final()
-	}
-	method perder() {
-		image = "perdiste.png"
-	    sonidoPerder.play()
-		self.final()
-	}
+	var property pista
 	method enterParaFin(){
-		keyboard.enter().onPressDo({ game.stop()})
-	}
+		keyboard.enter().onPressDo({ game.stop()}) }
 	method final() {
 		game.clear()
 		game.addVisualIn(self, game.at(0, 0))
 		self.enterParaFin()
-//		sonidoMusica.stop()
+		game.schedule(10000, {game.stop()})
 	}
-	
+	method finalizar(){
+		self.pista().play()
+		self.final()
+		//self.pista().stop()
+	}
+}
+object pantallaGanar inherits PantallaFinal (image = "ganaste.png",pista = sonidoGanar){
+}
+object pantallaPerder inherits PantallaFinal (image = "perdiste.png",pista = sonidoPerder){
 }
 class PantallaNivel {
 	var property image
@@ -178,7 +176,6 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 //		enCurso = false
 	}	
 }
-
 object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3){
 
 	var property imagenInicioNivel = "nivel3.png"
@@ -191,41 +188,8 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 	override method cargar() {
 		capybara.keysForWin(2)
 		super()
-	}		
-		
-}
-object pantalla3 {
-	var property image = "nivel3.png"
-	method iniciarpantalla() {
-		game.clear()
-		game.addVisualIn(self, game.at(0,0))
-		game.schedule(1000, { game.clear()
-			nivel3.cargar()
-		})	
 	}
-}
-object pantallaFinal {
-	var property image
-	method ganar() {
-		image = "ganaste.png"
-		sonidoGanar.play()
-		self.final()
-	}
-	method perder() {
-		image = "perdiste.png"
-	    sonidoPerder.play()
-		self.final()
-	}
-	method enterParaFin(){
-		keyboard.enter().onPressDo({ game.stop()})
-	}
-	method final() {
-		game.clear()
-		game.addVisualIn(self, game.at(0, 0))
-		self.enterParaFin()
-//		sonidoMusica.stop()
-	}
-	
+	override method terminar() {}		
 }
 object nivelActual {
 	const suf3 = [1,2,3]
