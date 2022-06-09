@@ -76,22 +76,22 @@ class Nivel inherits DefaultObjects {
 		game.addVisual(display2)
 		game.addVisual(display3)
 		display.write(capybara.life().toString())
-		capybara.resetKeys()
-		enCurso = true
 		display2.write(capybara.keyscount().toString())	// solo para pruebas			
 		display3.write(nivelActual.is().toString())
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
 		keyboard.down().onPressDo( { capybara.mover(abajo) } )
-		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
-		game.schedule(60000, { capybara.lose() })
+		capybara.resetKeys()
+		enCurso = true
 		self.pista().play()
 		musicConfig.musicaOnOff(self.pista())
 		humanGenerator.show()
 		bottleGenerator.show()
 		keyGenerator.show()
 		obstacleGenerator.show()
+		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
+		game.schedule(60000, { capybara.lose() })
 		
 	}	
 }
