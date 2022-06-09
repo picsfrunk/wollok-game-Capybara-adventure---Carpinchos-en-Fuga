@@ -37,7 +37,8 @@ class Llave inherits VisualObjects {
 	}		
 	override method crash(visual){
 		visual.addKey(self)
-		game.removeVisual(self)
+		if(game.hasVisual(self))
+			game.removeVisual(self)
 		self.borrar()		
 	}
 }

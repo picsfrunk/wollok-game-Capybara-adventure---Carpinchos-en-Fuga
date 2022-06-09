@@ -51,7 +51,9 @@ object humanGenerator inherits ObjectGenerator {
 	var property timeHumanTickGen = nivel1.initTimeHumanGenerator()
 	const timeGravityMax = 300
 	method generate() {
-		max = 6
+		
+		
+		console.println("Human Generator" + timeHumanTickGen)
 		if(self.haveToGenerate()) {
 			const newHuman = humanFactory.buildHuman()
 			game.addVisual(newHuman)
@@ -63,7 +65,10 @@ object humanGenerator inherits ObjectGenerator {
 		game.allVisuals().filter( {visual => visual.isEnemy()} )
 	
 	method onTickGenerator(){
-		game.onTick(timeHumanTickGen, "HUMANS", { self.generate() })	 		
+		console.println("Human Generator" + timeHumanTickGen)
+		max = 6
+		genObjects.clear()
+		game.onTick(timeHumanTickGen, "HUMANS", { self.generate()  })	 		
 	}
 	method gravityOn(){
 		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
