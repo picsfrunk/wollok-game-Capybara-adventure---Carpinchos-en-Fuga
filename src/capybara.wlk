@@ -77,17 +77,21 @@ object capybara inherits objects.DefaultObjects {
 		keys.clear()
 	}
 	method lose(){
-		pantallaFinal.perder()
+		pantallaPerder.finalizar()
 	}
 	method win() {
-		pantallaFinal.ganar()
+		pantallaGanar.finalizar()
 	}
 	method timeOver(){
 		game.say(self,"SE AGOTO EL TIEMPO!!")
-		game.schedule(2000,{self.lose()})
+		game.schedule(2000,{ (nivelActual.is()).pista().stop()
+			self.lose()
+		})
 	}
 	method levelUp(){
-		if (nivel3.enCurso()) {self.win()}
+		if (nivel3.enCurso()) { (nivelActual.is()).pista().stop()
+			self.win()
+		}
 		else {nivelActual.is().terminar()}	
 	}
 }
