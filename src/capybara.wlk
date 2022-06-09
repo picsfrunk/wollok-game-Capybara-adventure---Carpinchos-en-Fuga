@@ -79,12 +79,16 @@ object capybara inherits objects.DefaultObjects {
 	method lose(){
 		pantallaFinal.perder()
 	}
+	method win() {
+		pantallaFinal.ganar()
+	}
 	method timeOver(){
 		game.say(self,"SE AGOTO EL TIEMPO!!")
 		game.schedule(2000,{self.lose()})
 	}
 	method levelUp(){
-		nivelActual.is().terminar()		
+		if (nivel3.enCurso()) {self.win()}
+		else {nivelActual.is().terminar()}	
 	}
 }
 

@@ -8,17 +8,14 @@ import sonido.*
 
 object inicio {
 	var property image = "start.png"
-	method iniciar() {
-//		game.addVisualIn(self, game.at(0,0))
-//		musicaInicial.play()
-//		musicConfig.musicaOnOff()		
+	method iniciar() {	
 		game.schedule(2000, {pantallaInicial1.iniciar()})
 	}
 }
-object pantallaInicial1 {
-	var property image = "comandos.png"
-	var property pista = pistaInicial
-	var property siguiente = pantallaInicial2
+class PantallaInicial {
+	var property image
+	var property pista
+	var property siguiente
 	method enterParaJugar() {
 		keyboard.enter().onPressDo({ self.finalizar() })
 	}
@@ -28,28 +25,77 @@ object pantallaInicial1 {
 	}
 	method iniciar() {
 		game.addVisualIn(self, game.at(0,0))
-		self.pista().play()
 		musicConfig.musicaOnOff(self.pista())
-//		game.schedule(5000, {image="instrucciones.png"})
 		self.enterParaJugar()
 	}
 }
-object pantallaInicial2 {
-	var property image = "amigosenemigos.jpg"
-	var property pista = pistaInicial
-	var property siguiente = nivel1
-	method enterParaJugar() {
-		keyboard.enter().onPressDo({ self.finalizar() })
-	}
-	method finalizar() {
-		game.clear() 
-		self.pista().stop()
-		self.siguiente().iniciar()
-	}
-	method iniciar() {
-		game.addVisualIn(self, game.at(0,0))
-		musicConfig.musicaOnOff(self.pista())
+object pantallaInicial1 inherits PantallaInicial 
+	(image = "comandos.png", pista = pistaInicial, siguiente = pantallaInicial2) {
+	override method iniciar() {
+		super()
+		self.pista().play()
 		self.enterParaJugar()
+	}
+}
+object pantallaInicial2 inherits PantallaInicial
+	(image = "amigosenemigos.jpg", pista = pistaInicial, siguiente = nivel1){
+	override method finalizar() {
+		super()
+		self.pista().stop()
+	}
+}
+object pantallaFinal {
+	var property image
+	method ganar() {
+		image = "ganaste.png"
+		sonidoGanar.play()
+		self.final()
+	}
+	method perder() {
+		image = "perdiste.png"
+	    sonidoPerder.play()
+		self.final()
+	}
+	method enterParaFin(){
+		keyboard.enter().onPressDo({ game.stop()})
+	}
+	method final() {
+		game.clear()
+		game.addVisualIn(self, game.at(0, 0))
+		self.enterParaFin()
+//		sonidoMusica.stop()
+	}
+	
+}
+class PantallaNivel {
+	var property image
+	method iniciarpantalla() {
+		game.clear()
+		game.addVisualIn(self, game.at(0,0))
+	}	
+}
+object pantalla1 inherits PantallaNivel (image = "nivel1.png") {
+	override method iniciarpantalla() {
+		super()
+		game.schedule(1000, { game.clear()
+			nivel1.cargar()
+		})	
+	}
+}
+object pantalla2 inherits PantallaNivel (image = "nivel2.png"){
+	override method iniciarpantalla() {
+		super()
+		game.schedule(1000, { game.clear()
+			nivel2.cargar()
+		})	
+	}
+}
+object pantalla3 inherits PantallaNivel (image = "nivel3.png"){
+	override method iniciarpantalla() {
+		super()
+		game.schedule(1000, { game.clear()
+			nivel3.cargar()
+		})	
 	}
 }
 class Nivel inherits DefaultObjects {
@@ -68,6 +114,7 @@ class Nivel inherits DefaultObjects {
 //		game.schedule(2000, { game.clear() }) // CUANDO DEJABA ESTO BORRABA TODO Y NO CARGABA EL NIVEL SIGUIENTE
 	}
 	method cargar() {
+		enCurso = true
 		game.clear()
 		game.addVisualIn(self, game.at(0,0))
 		game.addVisual(capybara)
@@ -83,7 +130,6 @@ class Nivel inherits DefaultObjects {
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
 		keyboard.down().onPressDo( { capybara.mover(abajo) } )
 		capybara.resetKeys()
-		enCurso = true
 		self.pista().play()
 		musicConfig.musicaOnOff(self.pista())
 		humanGenerator.show()
@@ -112,15 +158,6 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 		pantalla2.iniciarpantalla()
 		game.schedule(3000, { nivel2.cargar()})
 	}	
-}
-object pantalla1 {
-	var property image = "nivel1.png"
-	method iniciarpantalla() {
-		game.addVisualIn(self, game.at(0,0))
-		game.schedule(1000, { game.clear()
-			nivel1.cargar()
-		})	
-	}
 }		
 object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2){
 	var property imagenInicioNivel = "nivel2.png"
@@ -141,16 +178,7 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 //		enCurso = false
 	}	
 }
-object pantalla2 {
-	var property image = "nivel2.png"
-	method iniciarpantalla() {
-		game.clear()
-		game.addVisualIn(self, game.at(0,0))
-		game.schedule(1000, { game.clear()
-			nivel2.cargar()
-		})	
-	}
-}
+
 object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3){
 
 	var property imagenInicioNivel = "nivel3.png"
@@ -163,40 +191,7 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 	override method cargar() {
 		capybara.keysForWin(2)
 		super()
-	}			
-}
-object pantalla3 {
-	var property image = "nivel3.png"
-	method iniciarpantalla() {
-		game.clear()
-		game.addVisualIn(self, game.at(0,0))
-		game.schedule(1000, { game.clear()
-			nivel3.cargar()
-		})	
-	}
-}
-object pantallaFinal {
-	var property image
-	method ganar() {
-		image = "ganaste.png"
-		sonidoGanar.play()
-		self.final()
-	}
-	method perder() {
-		image = "perdiste.png"
-	    sonidoPerder.play()
-		self.final()
-	}
-	method enterParaFin(){
-		keyboard.enter().onPressDo({ game.stop()})
-	}
-	method final() {
-		game.clear()
-		game.addVisualIn(self, game.at(0, 0))
-		self.enterParaFin()
-//		sonidoMusica.stop()
-	}
-	
+	}		
 }
 object nivelActual {
 	const suf3 = [1,2,3]

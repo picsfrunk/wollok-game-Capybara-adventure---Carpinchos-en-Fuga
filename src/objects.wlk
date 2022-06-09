@@ -11,7 +11,6 @@ class DefaultObjects {
 	method isBottle() = false
 	method passThrough() = false	
 	method isKey() = false
-	
 }
 //VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleatoriamente
 class VisualObjects inherits DefaultObjects {
