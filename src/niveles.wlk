@@ -108,10 +108,6 @@ class Nivel inherits DefaultObjects {
 		
 	}
 	method initVisualsGenerators(){
-//		humanGenerator.show()
-//		bottleGenerator.show()
-//		obstacleGenerator.show()
-//		keyGenerator.show()		
 		generators.forEach( { gen => gen.show() } )
 	}
 	
@@ -122,7 +118,6 @@ class Nivel inherits DefaultObjects {
 		else
 			game.say(capybara, "PASASTE DE NIVEL!!!")	
 		enCurso = false
-//		game.schedule(2000, { game.clear() }) // CUANDO DEJABA ESTO BORRABA TODO Y NO CARGABA EL NIVEL SIGUIENTE
 	}
 	method cargar() {
 		enCurso = true
