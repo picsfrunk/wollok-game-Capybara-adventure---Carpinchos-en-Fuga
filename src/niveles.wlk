@@ -101,6 +101,19 @@ class Nivel inherits DefaultObjects {
 	var property enCurso = false
 	var property pista
 	var property image
+	const property generators = #{humanGenerator,bottleGenerator,obstacleGenerator,keyGenerator}
+	
+	
+	method resetAllVisuals(){
+		
+	}
+	method initVisualsGenerators(){
+//		humanGenerator.show()
+//		bottleGenerator.show()
+//		obstacleGenerator.show()
+//		keyGenerator.show()		
+		generators.forEach( { gen => gen.show() } )
+	}
 	
 	method terminar() {
 		self.pista().stop()	
@@ -120,6 +133,7 @@ class Nivel inherits DefaultObjects {
 		game.addVisual(display)
 		game.addVisual(display2)
 		game.addVisual(display3)
+		capybara.resetKeys()
 		display.write(capybara.life().toString())
 		display2.write(capybara.keyscount().toString())	// solo para pruebas			
 		display3.write(nivelActual.is().toString())
@@ -127,15 +141,11 @@ class Nivel inherits DefaultObjects {
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
 		keyboard.down().onPressDo( { capybara.mover(abajo) } )
-		capybara.resetKeys()
 		self.pista().play()
 		musicConfig.musicaOnOff(self.pista())
-		humanGenerator.show()
-		bottleGenerator.show()
-		keyGenerator.show()
-		obstacleGenerator.show()
 		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
 		game.schedule(60000, { capybara.timeOver() })
+		self.initVisualsGenerators()
 		
 	}	
 }
@@ -215,17 +225,16 @@ object nivelActual {
 		if (nivel3.enCurso()) new Swimmer(sufijo=suf2.anyOne(),position=self.randomRight())
 		else null			
 
-	method is() =
-		
-		if (nivel1.enCurso()) 
-			nivel1
-		else
-		if (nivel2.enCurso()) 
-			nivel2
-		else  
-			nivel3
-		
-	
-					
-		
+	method is(){
+		return
+			if (nivel1.enCurso()) 
+				nivel1
+			else
+			if (nivel2.enCurso()) 
+				nivel2
+			else  
+				nivel3	
+		}
+			
 }
+

@@ -44,6 +44,9 @@ class ObjectGenerator {
 	method resetColection(){
 		genObjects.clear()
 	}
+	method show(){
+		self.resetColection()
+	}
 	
 }
 class EnemiesGenerator inherits ObjectGenerator {
@@ -77,8 +80,9 @@ object humanGenerator inherits ObjectGenerator (max = 6){
 			.forEach( { enemy => enemy.gravity()} )
 		} )				
 	}
-	method show(){
-		self.resetColection()
+	override method show(){
+//		self.resetColection()
+		super()
 		self.onTickGenerator()
 		self.gravityOn()
 	}
@@ -121,14 +125,14 @@ object bottleGenerator inherits ObjectGenerator (max = 3){
 	method onlyBottles() = 
 		game.allVisuals().filter( {visual => visual.isBottle()} )		
 	method generate() {
-		max = 3
 		if(self.haveToGenerate()) {
 			const newBottle = self.newBottle()
 			game.addVisual(newBottle)
 			genObjects.add(newBottle)
 		}
 	}
-	method show(){
+	override method show(){
+		super()
 		game.onTick(5000, "BOTTLES", { self.generate() })
 		game.onTick(500, "BOTTLESGRAVITY", { 
 			self.onlyBottles()
@@ -140,15 +144,15 @@ object keyGenerator inherits ObjectGenerator (max = 1) {
 	method newKey() = keyFactory.buildKey()
 	method onlyKeys() = game.allVisuals().filter( {visual => visual.isKey()} )	
 	method generate() {
-//		max = 1
 		if(self.haveToGenerate()) {
 			const newKey = self.newKey()
 			game.addVisual(newKey)
 			genObjects.add(newKey)
 		}
 	}
-	method show(){
-		self.resetColection()
+	override method show(){
+//		self.resetColection()
+		super()
 		game.onTick(8000, "KEYS", { self.generate() })
 		game.onTick(300, "KEYSGRAVITY", { 
 			self.onlyKeys()
@@ -168,7 +172,8 @@ object obstacleGenerator inherits ObjectGenerator (max = 5){
 			genObjects.add(newObstacle)
 		}
 	}
-	method show(){
+	override method show(){
+		super()
 		game.onTick(5500, "OBSTACLE", { self.generate() })
 		game.onTick(550, "OBSTACLEGRAVITY", { 
 			self.onlyObstacles()

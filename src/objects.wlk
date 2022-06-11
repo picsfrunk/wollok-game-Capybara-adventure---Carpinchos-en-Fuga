@@ -143,9 +143,17 @@ object display3 inherits DefaultObjects {
 	var property message = ''
 	var property position = game.at(2, game.height() - 1)
 	method text() = 'NIVEL ' + '\n' + message
+	method textColor() = colores.naranja()
 	method write(_message){
 		message = _message
 		}		
+}
+object colores {
+
+	const property verde = "00FF00FF"
+	const property rojo = "FF0000FF"
+	const property naranja = "F99500FF"
+
 }
 object hp {
 	
