@@ -177,6 +177,7 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 	override method cargar() {
 		super()
 		capybara.keysForWin(2)
+		predatorGenerator.show()
 	}
 	override method terminar() {}		
 }
@@ -186,6 +187,7 @@ object nivelActual {
 	
 	method random() = randomizer.emptyPosition()
 	method randomRight() = randomizer.emptyPositionRight()
+
 	method obstacles() =
 		if (nivel1.enCurso()) 
 			new Wall(position=self.random())
