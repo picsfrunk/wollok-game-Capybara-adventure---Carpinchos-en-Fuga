@@ -77,17 +77,17 @@ class Birkir inherits Bottle {
 class Obstacles inherits VisualObjects {
 	const damage = 10
 	override method isObstacle() = true
-	override method borrar(){}
-//{
-//		if(position.y() >= 1 ) {
-//			position = abajo.siguiente(position)
-//		}
-//		else{
-//			game.schedule(3000,{game.removeVisual(self)})
-//		}
-	
-//		game.onCollideDo(self,{obstacle => obstacle.game().schedule(5000,{obstacleGenerator.borrar(self)})})
-//}
+	override method borrar(){
+		obstacleGenerator.borrar(self)
+	}
+	override method gravity(){
+		super()
+		if (position.y() == 0 ){
+			self.borrar()
+			game.schedule(5000,{game.removeVisual(self)})
+		}
+	}
+
 	override method crash(visual){
 		visual.loseLives(damage)
 		visual.shock()	
