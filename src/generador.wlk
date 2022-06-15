@@ -7,14 +7,16 @@ import niveles.*
 
 class Factory {
 	method random() = randomizer.emptyPosition()
+	method randomLeft() = randomizer.emptyPositionLeft()
+	
 }
-object humanFactory inherits Factory{//same obstáculos
+object humanFactory inherits Factory{
 	//const suf = [1,2,3]
 	method buildHuman()= nivelActual.humans() //new Human(sufijo=suf.anyOne(), position=self.random())
 }
-object predatorFactory inherits Factory{ //falta generator
+object predatorFactory inherits Factory{
 	const suf = [1,2]
-	method buildPredator() = new Predator (sufijo=suf.anyOne(), position=self.random())
+	method buildPredator() = new Predator (sufijo=suf.anyOne(), position=self.randomLeft())
 }
 object beerFactory inherits Factory{
 	method buildBottle() = new Beer(position=self.random())
@@ -182,4 +184,23 @@ object obstacleGenerator inherits ObjectGenerator (max = 5){
 	}				
 }
 
-object predatorGenerator inherits ObjectGenerator(max = 2){}//falta hacer 
+object predatorGenerator inherits ObjectGenerator(max = 5){
+	method newPredator() = predatorFactory.buildPredator()
+	method onlyPredator() = game.allVisuals().filter( {visual => visual.isPredator()} )	
+	method generate() {
+//		max = 5
+		if(self.haveToGenerate()) {
+			const newPredator = self.newPredator()
+			game.addVisual(newPredator)
+			genObjects.add(newPredator)
+		}
+	}
+	override method show(){
+		super()
+		game.onTick(5500, "PREDATOR", { self.generate() })
+		game.onTick(550, "PREDATORGRAVITY", { 
+			self.onlyPredator()
+			.forEach( { predator => predator.gravity()} )
+		} )		
+	}			
+}

@@ -9,6 +9,7 @@ class DefaultObjects {
 	method isObstacle() = false
 	method isEnemy() = false
 	method isBottle() = false
+	method isPredator() = false
 	method passThrough() = false	
 	method isKey() = false
 }
