@@ -70,7 +70,8 @@ object capybara inherits objects.DefaultObjects {
 		keys.add(key)
 		display2.write(self.keyscount().toString())	// solo para pruebas	
 		if (self.keyscount() == keysForWin)
-			self.levelUp()			
+			nivelActual.is().showExit()
+//			self.levelUp()			
 	}
 	method keyscount() = keys.size()
 	method resetKeys(){

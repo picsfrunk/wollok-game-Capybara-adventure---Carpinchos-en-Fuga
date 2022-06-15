@@ -28,6 +28,20 @@ class VisualObjects inherits DefaultObjects {
 	}	
 	method crash(visual)
 }
+class Exit inherits DefaultObjects {
+	override method passThrough() = true
+	
+	method show(){
+		game.addVisualIn(self,game.at(game.width() - 2,0))
+	}
+	method crash(visual){
+		visual.levelUp()
+	}
+}
+object wallcrack inherits Exit {
+	method image() = "wallcrack.png"
+}
+
 class Llave inherits VisualObjects {
 	method image() = "llave.png"	
 	override method passThrough() = true

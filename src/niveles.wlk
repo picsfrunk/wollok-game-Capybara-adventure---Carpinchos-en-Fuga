@@ -103,7 +103,9 @@ class Nivel inherits DefaultObjects {
 	var property image
 	var property imagenInicioNivel
 	const property generators = #{humanGenerator,bottleGenerator,obstacleGenerator,keyGenerator}
-
+	const property exit
+	method showExit() = exit.show()
+	
 	method resetAllVisuals(){
 		
 	}
@@ -148,9 +150,11 @@ class Nivel inherits DefaultObjects {
 		})
 	}
 }
-object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, imagenInicioNivel  = "nivel1.png") {
+object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, 
+						     imagenInicioNivel  = "nivel1.png", exit = wallcrack) {
 	var property initTimeHumanGenerator = 2000 
 	var property initTimeHumanGravity = 700
+	
 	override method cargar() {
 		capybara.keysForWin(2)		
 		super()
@@ -161,7 +165,9 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 		game.schedule(3000, { nivel2.cargar()})
 	}	
 }		
-object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2, imagenInicioNivel = "nivel2.png"){
+object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2, 
+							  imagenInicioNivel = "nivel2.png", exit = wallcrack){
+	
 	override method cargar() {
 		capybara.keysForWin(2)
 		super()
@@ -173,7 +179,8 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 //		enCurso = false
 	}	
 }
-object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3, imagenInicioNivel = "nivel3.png"){
+object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3, 
+					          imagenInicioNivel = "nivel3.png", exit = wallcrack){
 	override method cargar() {
 		super()
 		capybara.keysForWin(2)
