@@ -70,8 +70,7 @@ object humanGenerator inherits ObjectGenerator (max = 6){
 	
 
 	method onTickGenerator(){
-//		console.println("Human Generator" + timeHumanTickGen)
-		
+	
 		game.onTick(timeHumanTickGen, "HUMANS", { self.generate()  })	 		
 	}
 	method gravityOn(){
@@ -174,7 +173,6 @@ object obstacleGenerator inherits ObjectGenerator (max = 5){
 
 object predatorGenerator inherits ObjectGenerator(max = 5){
 	method newPredator() = predatorFactory.buildPredator()
-	method onlyPredator() = game.allVisuals().filter( {visual => visual.isPredator()} )	
 	method generate() {
 //		max = 5
 		if(self.haveToGenerate()) {
