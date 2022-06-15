@@ -187,8 +187,7 @@ object predatorGenerator inherits ObjectGenerator(max = 5){
 		super()
 		game.onTick(5500, "PREDATOR", { self.generate() })
 		game.onTick(550, "PREDATORGRAVITY", { 
-			self.onlyPredator()
-			.forEach( { predator => predator.gravity()} )
+			genObjects.forEach( { predator => predator.gravity()} )
 		} )		
 	}			
 }
