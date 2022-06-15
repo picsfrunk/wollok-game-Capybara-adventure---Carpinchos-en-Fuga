@@ -156,8 +156,10 @@ object colores {
 	const property naranja = "F99500FF"
 
 }
-object hp {
-	
+object hp inherits DefaultObjects{
+	var property position = game.at(0, 13)
+	var sufijo = capybara.life()
+	method image() = "hp_" + sufijo.toString() + ".png"	
 }
 object time {
 	

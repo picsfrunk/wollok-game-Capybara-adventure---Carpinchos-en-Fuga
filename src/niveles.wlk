@@ -124,6 +124,7 @@ class Nivel inherits DefaultObjects {
 		game.addVisualIn(self, game.at(0,0))
 		game.addVisual(capybara)
 		game.errorReporter(capybara)	
+		game.addVisual(hp)
 		game.addVisual(display)
 		game.addVisual(display2)
 		game.addVisual(display3)
