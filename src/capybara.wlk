@@ -44,7 +44,7 @@ object capybara inherits objects.DefaultObjects {
 			self.lose()
 		else
 			life = newLife
-		display.write(self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
+//		display.write(self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
 		game.addVisual(hp)
 	}
 	method winLives(won){
@@ -54,7 +54,7 @@ object capybara inherits objects.DefaultObjects {
 			life = maxLife
 		else
 			life = newLife
-		display.write(self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
+//		display.write(self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
 		game.addVisual(hp)
 	}
 	method drinkBottle(bottle){
@@ -73,7 +73,7 @@ object capybara inherits objects.DefaultObjects {
 	method addKey(key){
 		game.removeVisual(keychain)
 		keys.add(key)
-		display2.write(self.keyscount().toString())	// solo para pruebas	
+//		display2.write(self.keyscount().toString())	// solo para pruebas	
 		if (self.keyscount() == keysForWin)
 			nivelActual.is().showExit()
 //			self.levelUp()	
