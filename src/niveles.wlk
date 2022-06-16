@@ -114,6 +114,10 @@ class Nivel inherits DefaultObjects {
 		exitInvisible.show()
 	}
 	
+	method exitImagePosition(){
+		return game.at(game.width() - 1,0)
+	}
+
 	method initVisualsGenerators(){
 		generators.forEach( { gen => gen.show() } )
 	}
@@ -199,7 +203,12 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 		super()
 		capybara.keysForWin(2)
 		predatorGenerator.show()
-	}		
+	}
+	override method terminar() {}	
+	
+	override method exitImagePosition(){
+		return game.at(game.width() - 4,0)
+	}
 }
 
 object nivelActual {
