@@ -7,14 +7,18 @@ import sonido.*
 import generador.*
 
 object capybara inherits objects.DefaultObjects {
-	var property position = game.at(game.width().div(2)-1,0)
+	var property position = game.at(1,0)
 	var property sufijo = "inicial"
 	var property life = 100
-	var property nextPosition = game.at(0,0)
+	var property nextPosition = game.at(1,0)
 	var property keys = []
 	var property keysForWin = 0
 	const maxLife = 100
-	//agregar limite de cero para perder
+	
+	method resetPosition(){
+		position = game.at(1,0)
+	}
+	
 	method image() = "capy_" + self.sufijo() + ".png"		
 	method mover(direccion) {
 		nextPosition = direccion.siguiente(position)
@@ -94,16 +98,17 @@ object capybara inherits objects.DefaultObjects {
 		pantallaGanar.prefinal()
 	}
 	method timeOver(){
-		game.say(self,"SE AGOTO EL TIEMPO!!")
 		game.schedule(2000,{ (nivelActual.is()).pista().stop()
 			self.lose()
 		})
 	}
 	method levelUp(){
+		self.resetPosition()
 		if (nivel3.enCurso()) { (nivelActual.is()).pista().stop()
 			self.win()
 		}
 		else {nivelActual.is().terminar()}	
 	}
+
 }
 
