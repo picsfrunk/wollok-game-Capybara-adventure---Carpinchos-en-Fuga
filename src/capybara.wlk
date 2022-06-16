@@ -86,12 +86,12 @@ object capybara inherits objects.DefaultObjects {
 	method lose(){
 		game.addVisual(fade)
 		game.removeVisual(hp)
-		pantallaPerder.finalizar()
+		pantallaPerder.prefinal()
 	}
 	method win() {
 		game.addVisual(fade)
 		game.removeVisual(hp)
-		pantallaGanar.finalizar()
+		pantallaGanar.prefinal()
 	}
 	method timeOver(){
 		game.say(self,"SE AGOTO EL TIEMPO!!")
