@@ -62,6 +62,7 @@ class Llave inherits VisualObjects {
 	}
 }
 class Bottle inherits VisualObjects {
+	var property cartel
 //	override method isBottle() = true
 	override method borrar(){
 		bottleGenerator.borrar(self)
@@ -71,42 +72,47 @@ class Bottle inherits VisualObjects {
 		game.removeVisual(self)
 		self.borrar()
 	}
-	method taken(visual)
+	method taken(visual){
+		game.addVisual(cartelBeer)
+		game.schedule(3000, {game.removeVisual(cartelBeer)})
+	}
 }
-class Beer inherits Bottle { // desacelera el tiempo osea sube el tiempo de gravedad
+class CartelBotella {
+	var property position = game.at(9, 13)
+	method image()
+}
+class Beer inherits Bottle (cartel = cartelBeer){ // desacelera el tiempo osea sube el tiempo de gravedad
 	var property timeDown = 200
 	method image() = "beer.png"	
 	override method taken(visual){
+		super(cartel)
 		visual.decelerate(timeDown)
 	}				
 }
-object cartelBeer {
-	var property position = game.at(7, 13)
-	method image() = "cartelBeer.png"
+object cartelBeer inherits CartelBotella {
+	override method image() = "cartelBirkir.jpg"
 }
-class Tequila inherits Bottle { //acelera tiempo osea baja el tiempo de gravedad
+class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea baja el tiempo de gravedad
 	var property timeUp = 200
 	method image() = "tequila.png"	
 	override method taken(visual){
+		super(cartel)
 		visual.acelerate(timeUp)
 	}	
 }
-object cartelTequila {
-	var property position = game.at(7, 13)
-	method image() = "cartelTequila.png"
+object cartelTequila inherits CartelBotella {
+	override method image() = "cartelBirkir.jpg"
 }
-class Birkir inherits Bottle { //aumenta la vida 
+class Birkir inherits Bottle (cartel = cartelBirkir) { //aumenta la vida 
 	var property lifeUp = 10
 	method image() = "birkir.png"	
 	override method taken(visual){
-		game.addVisual(cartelBirkir)
+		super(cartel)
 		visual.winLives(lifeUp)
-		game.schedule(3000, {game.addVisual(cartelBirkir)})
 	}		
 }
-object cartelBirkir {
-	var property position = game.at(7, 13)
-	method image() = "cartelBirkir.jpg"
+object cartelBirkir inherits CartelBotella{
+	override method image() = "cartelBirkir.jpg"
 }
 class Obstacles inherits VisualObjects {
 	const damage = 10

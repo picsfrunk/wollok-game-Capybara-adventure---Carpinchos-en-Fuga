@@ -53,7 +53,7 @@ class PantallaFinal {
 		game.clear()
 		game.addVisual(fade)
 		game.onTick(1000, "CONTEOINVERSO" , {fade.countBackwards()})
-		game.onTick(2000, "IMAGENFINAL" , {self.final()})	
+		game.schedule(2000,{self.final()})	
 	}
 	method final() {
 		game.addVisualIn(self, game.at(0, 0))
