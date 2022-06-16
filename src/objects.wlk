@@ -11,7 +11,7 @@ class DefaultObjects {
 //	method isEnemy() = false
 //	method isBottle() = false
 //	method isPredator() = false
-//	method passThrough() = false	
+	method passThrough() = false	
 //	method isKey() = false
 }
 //VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleatoriamente
