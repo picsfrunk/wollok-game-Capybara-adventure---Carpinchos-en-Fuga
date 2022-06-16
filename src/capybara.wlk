@@ -10,7 +10,7 @@ object capybara inherits objects.DefaultObjects {
 	var property position = game.at(1,0)
 	var property sufijo = "inicial"
 	var property life = 100
-	var property nextPosition = game.at(1,0)
+	var property nextPosition = game.at(0,0)
 	var property keys = []
 	var property keysForWin = 0
 	const maxLife = 100
