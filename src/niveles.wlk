@@ -133,14 +133,14 @@ class Nivel inherits DefaultObjects {
 		game.addVisual(capybara)
 		game.errorReporter(capybara)	
 		game.addVisual(hp)
-<<<<<<< HEAD
+
 		time.resetCounter()
 		game.addVisual(time)
 		game.addVisual(keychain)
 		game.addVisual(display)
-=======
+
 //		game.addVisual(display)
->>>>>>> 95388a866f07a0a9689e4062c9a7d890b6766b43
+
 		game.addVisual(display2)
 //		game.addVisual(display3)
 		capybara.resetKeys()
