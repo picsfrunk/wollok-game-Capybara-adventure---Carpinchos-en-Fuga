@@ -186,24 +186,23 @@ object keychain inherits DefaultObjects {
 	method image() = "time_" + (capybara.keyscount()).toString() + ".png"
 }
 class Counter inherits DefaultObjects{
-	
+	var property counter
+	var property position
+	method image()
+	method countBackwards()
 }
-object time inherits Counter {
-	var property counter = 60
-	var property position = game.at(12, 13)
+object time inherits Counter (counter = 60, position = game.at(12, 13) ){
 	method resetCounter() {counter = 60}
-	method image() = "time_" + counter.toString() + ".png"
-	method countBackwards() {
+	override method image() = "time_" + counter.toString() + ".png"
+	override method countBackwards() {
 		game.removeVisual(self)
 		counter = counter - 1
 		game.addVisual(self)
 	}	
 }
-object fade inherits Counter {
-	var property counter = 5
-	var property position = game.at(0, 0)
-	method image() = "fade_" + counter.toString() + ".png"
-	method countBackwards() {
+object fade inherits Counter (counter = 5, position = game.at(0, 0)){
+	override method image() = "fade_" + counter.toString() + ".png"
+	override method countBackwards() {
 		game.removeVisual(self)
 		if (counter==0) {counter=0}
 		else {counter = counter - 1}

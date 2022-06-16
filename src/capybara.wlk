@@ -84,10 +84,12 @@ object capybara inherits objects.DefaultObjects {
 		keys.clear()
 	}
 	method lose(){
+		game.addVisual(fade)
 		game.removeVisual(hp)
 		pantallaPerder.finalizar()
 	}
 	method win() {
+		game.addVisual(fade)
 		game.removeVisual(hp)
 		pantallaGanar.finalizar()
 	}
