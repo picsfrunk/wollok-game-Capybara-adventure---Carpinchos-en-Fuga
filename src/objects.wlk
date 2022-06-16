@@ -73,8 +73,8 @@ class Bottle inherits VisualObjects {
 		self.borrar()
 	}
 	method taken(visual){
-		game.addVisual(cartelBeer)
-		game.schedule(3000, {game.removeVisual(cartelBeer)})
+		game.addVisual(cartel)
+		game.schedule(3000, {game.removeVisual(cartel)})
 	}
 }
 class CartelBotella {
@@ -90,7 +90,7 @@ class Beer inherits Bottle (cartel = cartelBeer){ // desacelera el tiempo osea s
 	}				
 }
 object cartelBeer inherits CartelBotella {
-	override method image() = "cartelBirkir.jpg"
+	override method image() = "cartelBeer.png"
 }
 class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea baja el tiempo de gravedad
 	var property timeUp = 200
@@ -101,7 +101,7 @@ class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea b
 	}	
 }
 object cartelTequila inherits CartelBotella {
-	override method image() = "cartelBirkir.jpg"
+	override method image() = "cartelTequila.png"
 }
 class Birkir inherits Bottle (cartel = cartelBirkir) { //aumenta la vida 
 	var property lifeUp = 10
@@ -112,7 +112,7 @@ class Birkir inherits Bottle (cartel = cartelBirkir) { //aumenta la vida
 	}		
 }
 object cartelBirkir inherits CartelBotella{
-	override method image() = "cartelBirkir.jpg"
+	override method image() = "cartelBirkir.png"
 }
 class Obstacles inherits VisualObjects {
 	const damage = 10
