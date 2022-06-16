@@ -42,9 +42,8 @@ class InvisibleExit inherits DefaultObjects {
 class Exit inherits DefaultObjects{
 	method image() = nivelActual.is().exit()
 	method show(){
-		game.addVisualIn(self,nivelActual.is().exitImagePosition())
-	}
-	method crash(visual){}	
+		game.addVisualIn(self,game.at(game.width() - 1,0))
+	}	
 }
 
 

@@ -105,5 +105,6 @@ object capybara inherits objects.DefaultObjects {
 		}
 		else {nivelActual.is().terminar()}	
 	}
+
 }
 
