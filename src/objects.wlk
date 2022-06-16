@@ -101,12 +101,12 @@ class Birkir inherits Bottle { //aumenta la vida
 	override method taken(visual){
 		game.addVisual(cartelBirkir)
 		visual.winLives(lifeUp)
-		game.onTick(3000, "CARTELBIRKIR" , {game.addVisual(cartelBirkir)})
+		game.schedule(3000, {game.addVisual(cartelBirkir)})
 	}		
 }
 object cartelBirkir {
 	var property position = game.at(7, 13)
-	method image() = "cartelBirkir.png"
+	method image() = "cartelBirkir.jpg"
 }
 class Obstacles inherits VisualObjects {
 	const damage = 10
