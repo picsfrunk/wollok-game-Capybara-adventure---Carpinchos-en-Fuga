@@ -177,22 +177,36 @@ object colores {
 	const property amarillo = "#FFF633FF"
 
 }
-object hp inherits DefaultObjects{
+object hp inherits DefaultObjects {
 	var property position = game.at(0, 13)
 	method image() = "hp_" + (capybara.life()).toString() + ".png"	
 }
-object time {
+object keychain inherits DefaultObjects {
+	var property position = game.at(6, 13)
+	method image() = "time_" + (capybara.keyscount()).toString() + ".png"
+}
+class Counter inherits DefaultObjects{
+	
+}
+object time inherits Counter {
 	var property counter = 60
 	var property position = game.at(12, 13)
 	method resetCounter() {counter = 60}
+	method image() = "time_" + counter.toString() + ".png"
 	method countBackwards() {
-		game.removeVisual(time)
+		game.removeVisual(self)
 		counter = counter - 1
-		game.addVisual(time)
-	}
-	method image() = "time_" + (counter).toString() + ".png"	
+		game.addVisual(self)
+	}	
 }
-object keychain {
-	var property position = game.at(6, 13)
-	method image() = "time_" + (capybara.keyscount()).toString() + ".png"
+object fade inherits Counter {
+	var property counter = 5
+	var property position = game.at(0, 0)
+	method image() = "fade_" + counter.toString() + ".png"
+	method countBackwards() {
+		game.removeVisual(self)
+		if (counter==0) {counter=0}
+		else {counter = counter - 1}
+		game.addVisual(self)
+	}
 }
