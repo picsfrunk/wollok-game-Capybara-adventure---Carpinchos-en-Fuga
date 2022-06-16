@@ -4,6 +4,7 @@ import capybara.*
 import randomizer.*
 import generador.*
 import sonido.*
+import niveles.*
 
 class DefaultObjects {
 	method isObstacle() = false
@@ -16,6 +17,7 @@ class DefaultObjects {
 //VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleatoriamente
 class VisualObjects inherits DefaultObjects {
 	var property position = game.at(0,0)
+	method crash(visual)
 	method borrar()	
 	method gravity() {
 		if(position.y() >= 0 ) {
@@ -26,11 +28,10 @@ class VisualObjects inherits DefaultObjects {
 			self.borrar()
 		}
 	}	
-	method crash(visual)
 }
-class Exit inherits DefaultObjects {
-	//override method passThrough() = true
-	
+class InvisibleExit inherits DefaultObjects {
+	override method passThrough() = true
+		
 	method show(){
 		game.addVisualIn(self,game.at(game.width() - 2,0))
 	}
@@ -38,9 +39,13 @@ class Exit inherits DefaultObjects {
 		visual.levelUp()
 	}
 }
-object wallcrack inherits Exit {
-	method image() = "wallcrack.png"
+class Exit inherits DefaultObjects{
+	method image() = nivelActual.is().exit()
+	method show(){
+		game.addVisualIn(self,game.at(game.width() - 1,0))
+	}
 }
+
 
 class Llave inherits VisualObjects {
 	method image() = "llave.png"	
