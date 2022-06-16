@@ -107,6 +107,8 @@ class Nivel inherits DefaultObjects {
 	var property pista
 	var property image
 	var property imagenInicioNivel
+	var property initTimeHumanGenerator
+	var property initTimeHumanGravity
 	const property generators = #{humanGenerator,bottleGenerator,obstacleGenerator,keyGenerator}
 	const property exit
 	method showExit(){
@@ -171,9 +173,10 @@ class Nivel inherits DefaultObjects {
 	}
 }
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, 
-						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png") {
-	var property initTimeHumanGenerator = 2000 
-	var property initTimeHumanGravity = 700
+						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png",
+						     initTimeHumanGenerator = 2000,  initTimeHumanGravity = 700) {
+//	var property initTimeHumanGenerator = 2000 
+//	var property initTimeHumanGravity = 700
 	
 	override method cargar() {
 		capybara.keysForWin(2)		
@@ -186,7 +189,8 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 	}	
 }		
 object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2, 
-							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png"){
+							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png",
+						     initTimeHumanGenerator = 2000,  initTimeHumanGravity = 600){
 	
 	override method cargar() {
 		capybara.keysForWin(2)
@@ -200,7 +204,8 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 	}	
 }
 object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3, 
-					          imagenInicioNivel = "nivel3.png", exit = "burrow.png"){
+					          imagenInicioNivel = "nivel3.png", exit = "burrow.png",
+						     initTimeHumanGenerator = 2000,  initTimeHumanGravity = 500){
 	override method cargar() {
 		super()
 		capybara.keysForWin(2)
