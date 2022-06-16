@@ -80,6 +80,10 @@ class Beer inherits Bottle { // desacelera el tiempo osea sube el tiempo de grav
 		visual.decelerate(timeDown)
 	}				
 }
+object cartelBeer {
+	var property position = game.at(7, 13)
+	method image() = "cartelBeer.png"
+}
 class Tequila inherits Bottle { //acelera tiempo osea baja el tiempo de gravedad
 	var property timeUp = 200
 	method image() = "tequila.png"	
@@ -87,12 +91,22 @@ class Tequila inherits Bottle { //acelera tiempo osea baja el tiempo de gravedad
 		visual.acelerate(timeUp)
 	}	
 }
+object cartelTequila {
+	var property position = game.at(7, 13)
+	method image() = "cartelTequila.png"
+}
 class Birkir inherits Bottle { //aumenta la vida 
 	var property lifeUp = 10
 	method image() = "birkir.png"	
 	override method taken(visual){
+		game.addVisual(cartelBirkir)
 		visual.winLives(lifeUp)
+		game.schedule(3000, {game.addVisual(cartelBirkir)})
 	}		
+}
+object cartelBirkir {
+	var property position = game.at(7, 13)
+	method image() = "cartelBirkir.jpg"
 }
 class Obstacles inherits VisualObjects {
 	const damage = 10

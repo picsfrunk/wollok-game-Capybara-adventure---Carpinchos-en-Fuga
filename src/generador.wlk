@@ -56,8 +56,8 @@ class EnemiesGenerator inherits ObjectGenerator {
 //	var property timeGravity = nivelActual.es()
 }
 object humanGenerator inherits ObjectGenerator (max = 6){
-	var property timeHumanGravity = nivel1.initTimeHumanGravity()
-	var property timeHumanTickGen = nivel1.initTimeHumanGenerator()
+	var property timeHumanGravity = (nivelActual.is()).initTimeHumanGravity()
+	var property timeHumanTickGen = (nivelActual.is()).initTimeHumanGenerator()
 	const timeGravityMax = 300
 	method generate() {
 		
