@@ -7,7 +7,7 @@ import generador.*
 import sonido.*
 
 class Enemy inherits objects.VisualObjects {
-	override method isEnemy() = true
+	//override method isEnemy() = true
 }
 class Human inherits Enemy{
 	var sufijo 
@@ -32,7 +32,7 @@ class Predator inherits Enemy {
 	var sufijo
 	const damage = 10
 	
-	override method isPredator() = true
+	//override method isPredator() = true
 	
 	override method crash(visual){
 		visual.loseLives(damage)
