@@ -114,7 +114,6 @@ class Nivel inherits DefaultObjects {
 		exitInvisible.show()
 	}
 	
-
 	method initVisualsGenerators(){
 		generators.forEach( { gen => gen.show() } )
 	}
@@ -123,10 +122,10 @@ class Nivel inherits DefaultObjects {
 		game.removeVisual(hp)
 		game.removeVisual(keychain)
 		self.pista().stop()	
-		if (nivel3.enCurso())
-			game.say(capybara, "GANASTE!!!")	
-		else
-			game.say(capybara, "PASASTE DE NIVEL!!!")	
+//		if (nivel3.enCurso())
+//			game.say(capybara, "GANASTE!!!")	
+//		else
+//			game.say(capybara, "PASASTE DE NIVEL!!!")	
 		enCurso = false
 	}
 	method cargar() {
@@ -136,20 +135,10 @@ class Nivel inherits DefaultObjects {
 		game.addVisual(capybara)
 		game.errorReporter(capybara)	
 		game.addVisual(hp)
-
 		time.resetCounter()
 		game.addVisual(time)
 		game.addVisual(keychain)
-		game.addVisual(display)
-
-//		game.addVisual(display)
-
-		game.addVisual(display2)
-//		game.addVisual(display3)
 		capybara.resetKeys()
-//		display.write(capybara.life().toString())
-		display2.write(capybara.keyscount().toString())	// solo para pruebas			
-//		display3.write(nivelActual.is().toString())
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
@@ -160,6 +149,13 @@ class Nivel inherits DefaultObjects {
 		game.schedule(60000, { capybara.timeOver() })
 		game.onTick(1000, "CONTEOINVERSO" , {time.countBackwards()})
 		self.initVisualsGenerators()
+//		game.addVisual(display)
+//		game.addVisual(display)
+//		game.addVisual(display2)
+//		game.addVisual(display3)
+//		display.write(capybara.life().toString())
+//		display2.write(capybara.keyscount().toString())	// solo para pruebas			
+//		display3.write(nivelActual.is().toString())
 	}	
 	method iniciar () {
 		game.addVisualIn(imagenInicioNivel, game.at(0,0))
@@ -203,8 +199,7 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 		super()
 		capybara.keysForWin(2)
 		predatorGenerator.show()
-	}
-	override method terminar() {}		
+	}		
 }
 
 object nivelActual {
