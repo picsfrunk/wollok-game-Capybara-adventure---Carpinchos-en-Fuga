@@ -116,6 +116,7 @@ class Nivel inherits DefaultObjects {
 		generators.forEach( { gen => gen.show() } )
 	}
 	method terminar() {
+		game.removeVisual(hp)
 		self.pista().stop()	
 		if (nivel3.enCurso())
 			game.say(capybara, "GANASTE!!!")	
