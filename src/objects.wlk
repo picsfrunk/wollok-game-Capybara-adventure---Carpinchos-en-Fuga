@@ -11,7 +11,7 @@ class DefaultObjects {
 //	method isEnemy() = false
 //	method isBottle() = false
 //	method isPredator() = false
-//	method passThrough() = false	
+	method passThrough() = false	
 //	method isKey() = false
 }
 //VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleatoriamente
@@ -30,7 +30,7 @@ class VisualObjects inherits DefaultObjects {
 	}	
 }
 class InvisibleExit inherits DefaultObjects {
-	override method passThrough() = true
+//	override method passThrough() = true
 		
 	method show(){
 		game.addVisualIn(self,game.at(game.width() - 2,0))
@@ -153,8 +153,9 @@ object display inherits DefaultObjects {
 }
 object display2 inherits DefaultObjects {
 	var property message = ''
-	var property position = game.at(game.width() - 5, game.height() - 1)
-	method text() = 'LLAVES ' + '\n' + message
+	var property position = game.at(game.width() - 8, game.height() - 1)
+	method textColor() = colores.amarillo()
+	method text() = '\n' + message
 	method write(_message){
 		message = _message
 		}		
@@ -173,6 +174,7 @@ object colores {
 	const property verde = "00FF00FF"
 	const property rojo = "FF0000FF"
 	const property naranja = "F99500FF"
+	const property amarillo = "#FFF633FF"
 
 }
 object hp inherits DefaultObjects{
