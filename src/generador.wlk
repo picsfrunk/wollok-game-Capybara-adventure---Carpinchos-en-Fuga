@@ -51,6 +51,7 @@ class ObjectGenerator {
 	}
 	
 }
+
 class EnemiesGenerator inherits ObjectGenerator {
 //	var property timeGravity = nivelActual.es()
 }

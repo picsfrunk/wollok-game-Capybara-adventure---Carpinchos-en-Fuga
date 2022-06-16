@@ -126,6 +126,7 @@ class Nivel inherits DefaultObjects {
 		game.addVisualIn(self, game.at(0,0))
 		game.addVisual(capybara)
 		game.errorReporter(capybara)	
+		game.addVisual(hp)
 		game.addVisual(display)
 		game.addVisual(display2)
 		game.addVisual(display3)
@@ -139,7 +140,7 @@ class Nivel inherits DefaultObjects {
 		keyboard.down().onPressDo( { capybara.mover(abajo) } )
 		self.pista().play()
 		musicConfig.musicaOnOff(self.pista())
-		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
+		game.onCollideDo(capybara, { someone => someone.crash(capybara) } )
 		game.schedule(60000, { capybara.timeOver() })
 		self.initVisualsGenerators()
 	}	
