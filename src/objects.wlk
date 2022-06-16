@@ -158,8 +158,7 @@ object colores {
 }
 object hp inherits DefaultObjects{
 	var property position = game.at(0, 13)
-	var sufijo = capybara.life()
-	method image() = "hp_" + sufijo.toString() + ".png"	
+	method image() = "hp_" + (capybara.life()).toString() + ".png"	
 }
 object time {
 	

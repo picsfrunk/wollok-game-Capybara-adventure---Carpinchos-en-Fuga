@@ -138,7 +138,7 @@ class Nivel inherits DefaultObjects {
 		keyboard.down().onPressDo( { capybara.mover(abajo) } )
 		self.pista().play()
 		musicConfig.musicaOnOff(self.pista())
-		game.onCollideDo(capybara, { someone => someone.crash(capybara) })
+		game.onCollideDo(capybara, { someone => someone.crash(capybara) } )
 		game.schedule(60000, { capybara.timeOver() })
 		self.initVisualsGenerators()
 	}	
