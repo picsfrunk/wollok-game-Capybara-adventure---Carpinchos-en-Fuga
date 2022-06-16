@@ -116,7 +116,9 @@ class Nivel inherits DefaultObjects {
 		generators.forEach( { gen => gen.show() } )
 	}
 	method terminar() {
+		game.removeVisual(time)
 		game.removeVisual(hp)
+		game.removeVisual(keychain)
 		self.pista().stop()	
 		if (nivel3.enCurso())
 			game.say(capybara, "GANASTE!!!")	
@@ -131,6 +133,9 @@ class Nivel inherits DefaultObjects {
 		game.addVisual(capybara)
 		game.errorReporter(capybara)	
 		game.addVisual(hp)
+		time.resetCounter()
+		game.addVisual(time)
+		game.addVisual(keychain)
 		game.addVisual(display)
 		game.addVisual(display2)
 		game.addVisual(display3)
@@ -146,6 +151,7 @@ class Nivel inherits DefaultObjects {
 		musicConfig.musicaOnOff(self.pista())
 		game.onCollideDo(capybara, { someone => someone.crash(capybara) } )
 		game.schedule(60000, { capybara.timeOver() })
+		game.onTick(1000, "CONTEOINVERSO" , {time.countBackwards()})
 		self.initVisualsGenerators()
 	}	
 	method iniciar () {

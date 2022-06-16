@@ -71,11 +71,13 @@ object capybara inherits objects.DefaultObjects {
 	}
 	
 	method addKey(key){
+		game.removeVisual(keychain)
 		keys.add(key)
 		display2.write(self.keyscount().toString())	// solo para pruebas	
 		if (self.keyscount() == keysForWin)
 			nivelActual.is().showExit()
-//			self.levelUp()			
+//			self.levelUp()	
+		game.addVisual(keychain)		
 	}
 	method keyscount() = keys.size()
 	method resetKeys(){

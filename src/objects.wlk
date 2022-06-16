@@ -180,5 +180,17 @@ object hp inherits DefaultObjects{
 	method image() = "hp_" + (capybara.life()).toString() + ".png"	
 }
 object time {
-	
+	var property counter = 60
+	var property position = game.at(12, 13)
+	method resetCounter() {counter = 60}
+	method countBackwards() {
+		game.removeVisual(time)
+		counter = counter - 1
+		game.addVisual(time)
+	}
+	method image() = "time_" + (counter).toString() + ".png"	
+}
+object keychain {
+	var property position = game.at(6, 13)
+	method image() = "time_" + (capybara.keyscount()).toString() + ".png"
 }
