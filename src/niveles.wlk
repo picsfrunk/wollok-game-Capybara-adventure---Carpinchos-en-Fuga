@@ -133,16 +133,20 @@ class Nivel inherits DefaultObjects {
 		game.addVisual(capybara)
 		game.errorReporter(capybara)	
 		game.addVisual(hp)
+<<<<<<< HEAD
 		time.resetCounter()
 		game.addVisual(time)
 		game.addVisual(keychain)
 		game.addVisual(display)
+=======
+//		game.addVisual(display)
+>>>>>>> 95388a866f07a0a9689e4062c9a7d890b6766b43
 		game.addVisual(display2)
-		game.addVisual(display3)
+//		game.addVisual(display3)
 		capybara.resetKeys()
-		display.write(capybara.life().toString())
+//		display.write(capybara.life().toString())
 		display2.write(capybara.keyscount().toString())	// solo para pruebas			
-		display3.write(nivelActual.is().toString())
+//		display3.write(nivelActual.is().toString())
 		keyboard.left().onPressDo(  { capybara.mover(izquierda) } )
 		keyboard.right().onPressDo(  { capybara.mover(derecha) } )	
 		keyboard.up().onPressDo( { capybara.mover(arriba) } )
