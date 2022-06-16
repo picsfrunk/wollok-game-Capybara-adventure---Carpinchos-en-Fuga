@@ -49,14 +49,16 @@ class PantallaFinal {
 	var property pista
 	method enterParaFin(){
 		keyboard.enter().onPressDo({ game.stop()}) }
-	method final() {
+	method prefinal() {
 		game.clear()
 		game.addVisual(fade)
 		game.onTick(1000, "CONTEOINVERSO" , {fade.countBackwards()})
+		game.onTick(2000, "IMAGENFINAL" , {self.final()})	
+	}
+	method final() {
 		game.addVisualIn(self, game.at(0, 0))
 		self.enterParaFin()
-		game.schedule(10000, {game.stop()})
-		
+		game.schedule(10000, {game.stop()})	
 	}
 	method finalizar(){
 		self.pista().play()
