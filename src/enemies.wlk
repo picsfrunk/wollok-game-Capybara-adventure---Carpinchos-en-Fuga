@@ -8,6 +8,7 @@ import sonido.*
 
 class Enemy inherits objects.VisualObjects {
 	//override method isEnemy() = true
+
 }
 class Human inherits Enemy{
 	var sufijo 
@@ -17,7 +18,7 @@ class Human inherits Enemy{
 		humanGenerator.borrar(self)
 	}
 	override method crash(visual){
-		visual.loseLives(damage)
+		self.loseLives(damage)
 		visual.shock()
 	}
 }
@@ -35,7 +36,7 @@ class Predator inherits Enemy {
 	//override method isPredator() = true
 	
 	override method crash(visual){
-		visual.loseLives(damage)
+		self.loseLives(damage)
 		visual.shock()
 	}
 	override method borrar(){

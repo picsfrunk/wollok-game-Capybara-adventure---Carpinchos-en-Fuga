@@ -100,7 +100,7 @@ object humanGenerator inherits ObjectGenerator (max = 6){
 		}
 	}
 	method refreshGravity(){
-		display.write(timeHumanGravity.toString())
+
 		game.removeTickEvent("HUMANGRAVITY")
 		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
 			genObjects.forEach( { enemy => enemy.gravity()} )
