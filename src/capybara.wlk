@@ -64,12 +64,12 @@ object capybara inherits objects.DefaultObjects {
 	method drinkBottle(bottle){
 		bottle.taken(self)
 	}
-	method acelerate(timeUp){
-		humanGenerator.upTimeHumanGravity(timeUp)
-	}
-	method decelerate(timeDown){
-		humanGenerator.downTimeHumanGravity(timeDown)		
-	}
+//	method acelerate(timeUp){
+//		humanGenerator.upTimeGravity(timeUp)
+//	}
+//	method decelerate(timeDown){
+//		humanGenerator.downTimeGravity(timeDown)		
+//	}
 	method shock(){
 		sufijo = "shock"
 	}

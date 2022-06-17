@@ -107,8 +107,8 @@ class Nivel inherits DefaultObjects {
 	var property pista
 	var property image
 	var property imagenInicioNivel
-	var property initTimeHumanGenerator
-	var property initTimeHumanGravity
+	var property initTimeGenerator
+	var property initTimeGravity
 	const property generators = #{humanGenerator,bottleGenerator,obstacleGenerator,keyGenerator}
 	const property exit
 	method showExit(){
@@ -117,7 +117,12 @@ class Nivel inherits DefaultObjects {
 		exitImage.show()
 		exitInvisible.show()
 	}
-	
+	method acelerarEnemigos(timeUp){
+		humanGenerator.upTimeGravity(timeUp)
+	}
+	method desAcelerarEnemigos(timeUp){
+		humanGenerator.downTimeGravity(timeUp)
+	}	
 //	method exitImagePosition(){
 //		return game.at(game.width() - 1,0)
 //	}
@@ -174,7 +179,7 @@ class Nivel inherits DefaultObjects {
 }
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, 
 						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png",
-						     initTimeHumanGenerator = 2000,  initTimeHumanGravity = 700) {
+						     initTimeGenerator = 2000,  initTimeGravity = 700) {
 //	var property initTimeHumanGenerator = 2000 
 //	var property initTimeHumanGravity = 700
 	
@@ -190,7 +195,7 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 }		
 object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2, 
 							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png",
-						     initTimeHumanGenerator = 2000,  initTimeHumanGravity = 600){
+						     initTimeGenerator = 2000,  initTimeGravity = 600){
 	
 	override method cargar() {
 		capybara.keysForWin(2)
@@ -205,14 +210,21 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 }
 object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3, 
 					          imagenInicioNivel = "nivel3.png", exit = "burrow.png",
-						     initTimeHumanGenerator = 2000,  initTimeHumanGravity = 500){
+						     initTimeGenerator = 2000,  initTimeGravity = 500){
 	override method cargar() {
 		super()
 		capybara.keysForWin(2)
 		predatorGenerator.show()
 	}
 	override method terminar() {}	
-	
+	override method acelerarEnemigos(timeUp){
+		super(timeUp)
+		predatorGenerator.upTimeGravity(timeUp)
+	}
+	override method desAcelerarEnemigos(timeDown){
+		super(timeDown)
+		predatorGenerator.downTimeGravity(timeDown)
+	}	
 //	override method exitImagePosition(){
 //		return game.at(game.width() - 4,0)
 //	}
@@ -235,7 +247,6 @@ object nivelActual {
 			new Stump(sufijo=suf3.anyOne(),position=self.random())
 
 	method humans() = 	
-	
 		if (nivel1.enCurso()) new Human (sufijo=suf3.anyOne(), position=self.random())
 		else
 		if (nivel2.enCurso()) new AnimalControl(sufijo=suf3.anyOne(),position=self.random())
@@ -243,16 +254,15 @@ object nivelActual {
 		if (nivel3.enCurso()) new Swimmer(sufijo=suf2.anyOne(),position=self.randomRight())
 		else null			
 
-	method is(){
-		return
-			if (nivel1.enCurso()) 
-				nivel1
-			else
-			if (nivel2.enCurso()) 
-				nivel2
-			else  
-				nivel3	
-		}
+	method is() =
+		if (nivel1.enCurso()) 
+			nivel1
+		else
+		if (nivel2.enCurso()) 
+			nivel2
+		else  
+			nivel3	
+
 			
 }
 

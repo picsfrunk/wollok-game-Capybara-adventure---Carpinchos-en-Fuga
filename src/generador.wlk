@@ -8,31 +8,32 @@ import niveles.*
 class Factory {
 	method random() = randomizer.emptyPosition()
 	method randomLeft() = randomizer.emptyPositionLeft()
+	method build()
 	
 }
 object humanFactory inherits Factory{
 	//const suf = [1,2,3]
-	method buildHuman()= nivelActual.humans() //new Human(sufijo=suf.anyOne(), position=self.random())
+	override method build()= nivelActual.humans() //new Human(sufijo=suf.anyOne(), position=self.random())
 }
 object predatorFactory inherits Factory{
 	const suf = [1,2]
-	method buildPredator() = new Predator (sufijo=suf.anyOne(), position=self.randomLeft())
+	override method build() = new Predator(sufijo=suf.anyOne(), position=self.randomLeft())
 }
 object beerFactory inherits Factory{
-	method buildBottle() = new Beer(position=self.random())
+	override method build() = new Beer(position=self.random())
 }
 object tequilaFactory inherits Factory{
-	method buildBottle() = new Tequila(position=self.random())
+	override method build() = new Tequila(position=self.random())
 }
 object birkirFactory inherits Factory{
-	method buildBottle() = new Birkir(position=self.random())
+	override method build() = new Birkir(position=self.random())
 }
 object keyFactory inherits Factory {
-	method buildKey() = new Llave(position=self.random())
+	override method build() = new Llave(position=self.random())
 }
 object obstacleFactory inherits Factory { //otra opción: hacer una factory x obstáculo y tratarlo como las botellas
 
-	method buildObstacle() = //new Wall(position=self.random())
+	override method build() = //new Wall(position=self.random())
 		nivelActual.obstacles()
 }
 
@@ -53,30 +54,27 @@ class ObjectGenerator {
 }
 
 class EnemiesGenerator inherits ObjectGenerator {
-//	var property timeGravity = nivelActual.es()
-}
-object humanGenerator inherits ObjectGenerator (max = 6){
-	var property timeHumanGravity = (nivelActual.is()).initTimeHumanGravity()
-	var property timeHumanTickGen = (nivelActual.is()).initTimeHumanGenerator()
+	var property timeGravity = nivelActual.is().initTimeGravity()
+	var property timeTickGen = nivelActual.is().initTimeGenerator()
 	const timeGravityMax = 300
+	method enemiesGenerator() //aqui colocar el objeto generador
 	method generate() {
 		
 //		console.println("Human Generator" + timeHumanTickGen)
 		if(self.haveToGenerate()) {
-			const newHuman = humanFactory.buildHuman()
-			game.addVisual(newHuman)
-			genObjects.add(newHuman)
+			const newEnemy = self.enemiesGenerator().build()
+			game.addVisual(newEnemy)
+			genObjects.add(newEnemy)
 		}
 	}
 	
 
 	method onTickGenerator(){
-	
-		game.onTick(timeHumanTickGen, "HUMANS", { self.generate()  })	 		
+		game.onTick(timeTickGen, self.enemiesGenerator().toString(), { self.generate()  })	 		
 	}
 	method gravityOn(){
-		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
-			genObjects.forEach( { enemy => enemy.gravity()} )
+		game.onTick(timeGravity, self.enemiesGenerator().toString() + "gravity", { 
+			genObjects.forEach( { obj => obj.gravity()} )
 		} )				
 	}
 	override method show(){
@@ -85,29 +83,28 @@ object humanGenerator inherits ObjectGenerator (max = 6){
 		self.onTickGenerator()
 		self.gravityOn()
 	}
-	method upTimeHumanGravity(n){ //ver la manera de limitar despues
-		if (timeHumanGravity < timeGravityMax){
-			timeHumanTickGen = timeHumanTickGen - (n+200) //pruebas
-			timeHumanGravity = timeHumanGravity - n
+	method upTimeGravity(n){ //ver la manera de limitar despues
+		if (timeGravity < timeGravityMax){
+			timeTickGen = timeTickGen - (n+200) //pruebas
+			timeGravity = timeGravity - n
 			self.refresh()			
 		}
 	}	
-	method downTimeHumanGravity(n){
-		if (timeHumanGravity < timeGravityMax){
-			timeHumanTickGen = timeHumanTickGen + (n+200) //pruebas
-			timeHumanGravity = timeHumanGravity + n
+	method downTimeGravity(n){
+		if (timeGravity < timeGravityMax){
+			timeTickGen = timeTickGen + (n+200) //pruebas
+			timeGravity = timeGravity + n
 			self.refresh()			
 		}
 	}
 	method refreshGravity(){
-		display.write(timeHumanGravity.toString())
-		game.removeTickEvent("HUMANGRAVITY")
-		game.onTick(timeHumanGravity, "HUMANGRAVITY", { 
-			genObjects.forEach( { enemy => enemy.gravity()} )
+		game.removeTickEvent(self.enemiesGenerator().toString() + "gravity")
+		game.onTick(timeGravity, self.enemiesGenerator().toString() + "gravity", { 
+			genObjects.forEach( { obj => obj.gravity()} )
 		} )		
 	}
 	method refreshTick(){
-		game.removeTickEvent("HUMANS") //pruebas
+		game.removeTickEvent(self.enemiesGenerator().toString()) //pruebas
 		self.onTickGenerator()
 	}
 	method refresh(){
@@ -116,9 +113,20 @@ object humanGenerator inherits ObjectGenerator (max = 6){
 	}
 }
 
+object humanGenerator inherits EnemiesGenerator (max = 6){
+	override method enemiesGenerator() = humanFactory
+	
+}
+
+object predatorGenerator inherits EnemiesGenerator (max = 5){
+	override method enemiesGenerator() = predatorFactory
+	
+}
+
+
 object bottleGenerator inherits ObjectGenerator (max = 3){
 	const factories = [beerFactory, tequilaFactory, birkirFactory]
-	method newBottle() = factories.anyOne().buildBottle()
+	method newBottle() = factories.anyOne().build()
 	method generate() {
 		if(self.haveToGenerate()) {
 			const newBottle = self.newBottle()
@@ -135,7 +143,7 @@ object bottleGenerator inherits ObjectGenerator (max = 3){
 	}	
 }
 object keyGenerator inherits ObjectGenerator (max = 1) {
-	method newKey() = keyFactory.buildKey()
+	method newKey() = keyFactory.build()
 	method generate() {
 		if(self.haveToGenerate()) {
 			const newKey = self.newKey()
@@ -154,7 +162,7 @@ object keyGenerator inherits ObjectGenerator (max = 1) {
 }
 
 object obstacleGenerator inherits ObjectGenerator (max = 5){
-	method newObstacle() = obstacleFactory.buildObstacle()
+	method newObstacle() = obstacleFactory.build()
 	method generate() {
 //		max = 5
 		if(self.haveToGenerate()) {
@@ -172,21 +180,3 @@ object obstacleGenerator inherits ObjectGenerator (max = 5){
 	}			
 }
 
-object predatorGenerator inherits ObjectGenerator(max = 5){
-	method newPredator() = predatorFactory.buildPredator()
-	method generate() {
-//		max = 5
-		if(self.haveToGenerate()) {
-			const newPredator = self.newPredator()
-			game.addVisual(newPredator)
-			genObjects.add(newPredator)
-		}
-	}
-	override method show(){
-		super()
-		game.onTick(5500, "PREDATOR", { self.generate() })
-		game.onTick(550, "PREDATORGRAVITY", { 
-			genObjects.forEach( { predator => predator.gravity()} )
-		} )		
-	}			
-}

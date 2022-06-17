@@ -86,7 +86,7 @@ class Beer inherits Bottle (cartel = cartelBeer){ // desacelera el tiempo osea s
 	method image() = "beer.png"	
 	override method taken(visual){
 		super(cartel)
-		visual.decelerate(timeDown)
+		nivelActual.is().desAcelerarEnemigos(timeDown)
 	}				
 }
 object cartelBeer inherits CartelBotella {
@@ -97,7 +97,7 @@ class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea b
 	method image() = "tequila.png"	
 	override method taken(visual){
 		super(cartel)
-		visual.acelerate(timeUp)
+		nivelActual.is().acelerarEnemigos(timeUp)
 	}	
 }
 object cartelTequila inherits CartelBotella {
