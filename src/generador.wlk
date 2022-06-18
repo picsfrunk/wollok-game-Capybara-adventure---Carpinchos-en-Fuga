@@ -99,7 +99,7 @@ class ObjGeneratorWithGravity inherits ObjectGenerator {
 		nameGravityOn = self.objToFactory().toString() + "Gravity"		
 		self.onTickGenerator()
 		self.gravityOn()
-		console.println("Init TimeGravity: "+timeGravity+" Init timeTickGen: "+timeTickGen)		
+//		console.println("Init TimeGravity: "+timeGravity+" Init timeTickGen: "+timeTickGen)		
 	}
 	method upTimeGravity(n){ //subir la gravedad es bajar el tiempo
 		const newtimeGravity = timeGravity - n
@@ -107,26 +107,26 @@ class ObjGeneratorWithGravity inherits ObjectGenerator {
 			timeTickGen = timeTickGen - n*1.2
 			timeGravity = newtimeGravity
 			self.refresh()	
-			console.println("Up TimeGravity: "+timeGravity+"\n"+"Up timeTickGen: "+timeTickGen+"\n")
+//			.println("Up TimeGravity: "+timeGravity+"\n"+"Up timeTickGen: "+timeTickGen+"\n")
 		}
-		else
-			console.println("Don't modified")
+		
+//			console.println("Not modified")
 		
 	}	
 	method downTimeGravity(n){ //bajar la gravedad es aumentar el tiempo de tickGen y Gravedad
 		timeTickGen = timeTickGen + n*1.2
 		timeGravity = timeGravity + n
 		self.refresh()						
-		console.println("Down TimeGravity: "+timeGravity+"\n"+"Down timeTickGen: "+timeTickGen+"\n")			
+//		console.println("Down TimeGravity: "+timeGravity+"\n"+"Down timeTickGen: "+timeTickGen+"\n")			
 	}
 	method refreshGravity(){
 		game.removeTickEvent(nameGravityOn)
-		console.println("Removed TickEvent refreshGravity(): "+nameGravityOn)
+//		console.println("Removed TickEvent refreshGravity(): "+nameGravityOn)
 		self.gravityOn()	
 	}
 	method refreshTickGenerator(){
 		game.removeTickEvent(nameOnTickGenerator) 
-		console.println("Removed TickEvent refreshTick(): "+nameOnTickGenerator)
+//		console.println("Removed TickEvent refreshTick(): "+nameOnTickGenerator)
 		self.onTickGenerator()
 	}
 	method refresh(){

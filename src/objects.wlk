@@ -86,7 +86,7 @@ class Beer inherits Bottle (cartel = cartelBeer){ // desacelera el tiempo osea s
 	method image() = "beer.png"	
 	override method taken(visual){
 		super(cartel)
-		console.println("Beer timeGravity ")
+//		console.println("Beer timeGravity ")
 		nivelActual.is().desacelerar(timeDown)
 	}				
 }
@@ -98,7 +98,7 @@ class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea b
 	method image() = "tequila.png"	
 	override method taken(visual){
 		super(cartel)
-		console.println("Tequila timeGravity ")
+//		console.println("Tequila timeGravity ")
 		nivelActual.is().acelerar(timeUp)
 	}	
 }

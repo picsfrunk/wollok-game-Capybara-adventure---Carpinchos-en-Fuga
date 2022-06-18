@@ -194,7 +194,7 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 //	var property initTimeHumanGravity = 700
 	
 	override method cargar() {
-		capybara.keysForWin(2)		
+		capybara.keysForWin(2)	//configurar antes de entrega	
 		super()
 	}
 	override method terminar(){
@@ -214,14 +214,13 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png"){
 	
 	override method cargar() {
-		capybara.keysForWin(2)
+		capybara.keysForWin(2) //configurar antes de entrega
 		super()
 	}	
 	override method terminar(){
 		super()
 		pantalla3.iniciar()
 		game.schedule(3000, { nivel3.cargar()})
-//		enCurso = false
 	}	
 	override method addGenerators(){
 		super()
@@ -234,7 +233,7 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 					          imagenInicioNivel = "nivel3.png", exit = "burrow.png"){
 	override method cargar() {
 		super()
-		capybara.keysForWin(2)
+		capybara.keysForWin(2) //configurar antes de entrega
 	}
 	override method terminar() {}	
 	override method initTimeGenerator() = 1600
@@ -243,10 +242,6 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 		super()
 		generators.addAll(#{predatorGenerator,swimmerGenerator})
 	} 	
-
-//	override method exitImagePosition(){
-//		return game.at(game.width() - 4,0)
-//	}
 }
 
 object nivelActual {
@@ -254,7 +249,6 @@ object nivelActual {
 	const suf2 = [1,2]	
 	
 	method random() = randomizer.emptyPosition()
-//	method randomRight() = randomizer.emptyPositionRight()
 
 	method obstacles() =
 		if (nivel1.enCurso()) 
@@ -265,13 +259,7 @@ object nivelActual {
 		else  
 			new Stump(sufijo=suf3.anyOne(),position=self.random())
 
-//	method humans() = 	
-//		if (nivel1.enCurso()) new Human (sufijo=suf3.anyOne(), position=self.random())
-//		else
-//		if (nivel2.enCurso()) new AnimalControl(sufijo=suf3.anyOne(),position=self.random())
-//		else  
-//		if (nivel3.enCurso()) new Swimmer(sufijo=suf2.anyOne(),position=self.randomRight())
-//		else null			
+		
 
 	method is() =
 		if (nivel1.enCurso()) 

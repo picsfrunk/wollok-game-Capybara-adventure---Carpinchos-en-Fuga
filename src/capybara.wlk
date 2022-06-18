@@ -41,6 +41,7 @@ object capybara inherits objects.DefaultObjects {
 		return 	game.getObjectsIn(_position).
 				all({visual => ! visual.isObstacle() } )	
 	}		
+
 //	method loseLives(damage){ //en enemies
 //		game.removeVisual(hp)
 //		const newLife = life - damage
@@ -62,12 +63,7 @@ object capybara inherits objects.DefaultObjects {
 	method drinkBottle(bottle){
 		bottle.taken(self)
 	}
-//	method acelerate(timeUp){
-//		humanGenerator.upTimeGravity(timeUp)
-//	}
-//	method decelerate(timeDown){
-//		humanGenerator.downTimeGravity(timeDown)		
-//	}
+
 	method shock(){
 		sufijo = "shock"
 	}
@@ -75,16 +71,12 @@ object capybara inherits objects.DefaultObjects {
 	method addKey(key){
 		game.removeVisual(keychain)
 		keys.add(key)
-//		display2.write(self.keyscount().toString())	// solo para pruebas	
 		if (self.keyscount() == keysForWin)
 			nivelActual.is().showExit()
-//			self.levelUp()	
 		game.addVisual(keychain)		
 	}
 	method keyscount() = keys.size()
-	method resetKeys(){
-		keys.clear()
-	}
+	method resetKeys(){	keys.clear() }
 	method lose(){
 		game.addVisual(fade)
 		game.removeVisual(hp)
@@ -97,12 +89,13 @@ object capybara inherits objects.DefaultObjects {
 	}
 	method timeOver(){
 		game.schedule(2000,{ (nivelActual.is()).pista().stop()
-			self.lose()
-		})
+							  self.lose()
+							  } )
 	}
 	method levelUp(){
 		self.resetPosition()
-		if (nivel3.enCurso()) { (nivelActual.is()).pista().stop()
+		if (nivel3.enCurso()) { 
+			(nivelActual.is()).pista().stop()
 			self.win()
 		}
 		else {nivelActual.is().terminar()}	
