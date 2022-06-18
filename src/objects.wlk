@@ -20,8 +20,8 @@ class VisualObjects inherits DefaultObjects {
 			position = abajo.siguiente(position)
 		}
 		else{
-			self.borrar()
 			game.removeVisual(self)
+			self.borrar()
 		}
 	}
 	method loseLives(damage){
@@ -76,10 +76,8 @@ class Bottle inherits VisualObjects {
 		self.borrar()
 	}
 	method taken(visual){
-		if(! game.hasVisual(cartelBeer)){
-			game.addVisual(cartelBeer)
-			game.schedule(3000, {game.removeVisual(cartelBeer)})
-			}
+		game.addVisual(cartelBeer)
+		game.schedule(3000, {game.removeVisual(cartelBeer)})
 	}
 }
 class CartelBotella {
@@ -87,24 +85,22 @@ class CartelBotella {
 	method image()
 }
 class Beer inherits Bottle (cartel = cartelBeer){ // desacelera el tiempo osea sube el tiempo de gravedad
-	var property timeDown = 100
+	var property timeDown = 200
 	method image() = "beer.png"	
 	override method taken(visual){
 		super(cartel)
-		console.println("Beer timeGravity ")
-		nivelActual.is().desacelerar(timeDown)
+		nivelActual.is().desAcelerarEnemigos(timeDown)
 	}				
 }
 object cartelBeer inherits CartelBotella {
 	override method image() = "cartelBeer.png"
 }
 class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea baja el tiempo de gravedad
-	var property timeUp = 100
+	var property timeUp = 200
 	method image() = "tequila.png"	
 	override method taken(visual){
 		super(cartel)
-		console.println("Tequila timeGravity ")
-		nivelActual.is().acelerar(timeUp)
+		nivelActual.is().acelerarEnemigos(timeUp)
 	}	
 }
 object cartelTequila inherits CartelBotella {
@@ -179,7 +175,40 @@ object abajo {
 object arriba {
 	method siguiente(position) = position.up(1)
 }
+object display inherits DefaultObjects {
+	var property message = ''
+	var property position = game.at(game.width() - 3, game.height() - 1)
+	method text() = 'VIDA: '+ '\n' + message
+	method write(_message){
+		message = _message
+		}		
+}
+object display2 inherits DefaultObjects {
+	var property message = ''
+	var property position = game.at(game.width() - 8, game.height() - 1)
+	method textColor() = colores.amarillo()
+	method text() = '\n' + message
+	method write(_message){
+		message = _message
+		}		
+}
+object display3 inherits DefaultObjects {
+	var property message = ''
+	var property position = game.at(2, game.height() - 1)
+	method text() = 'NIVEL ' + '\n' + message
+	method textColor() = colores.naranja()
+	method write(_message){
+		message = _message
+		}		
+}
+object colores {
 
+	const property verde = "00FF00FF"
+	const property rojo = "FF0000FF"
+	const property naranja = "F99500FF"
+	const property amarillo = "#FFF633FF"
+
+}
 object hp inherits DefaultObjects {
 	var property position = game.at(0, 13)
 	method image() = "hp_" + (capybara.life()).toString() + ".png"	
