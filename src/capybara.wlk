@@ -13,7 +13,7 @@ object capybara inherits objects.DefaultObjects {
 	var property nextPosition = game.at(0,0)
 	var property keys = []
 	var property keysForWin = 0
-	const maxLife = 100
+	const property maxLife = 100
 	
 	method resetPosition(){
 		position = game.at(1,0)
@@ -41,26 +41,24 @@ object capybara inherits objects.DefaultObjects {
 		return 	game.getObjectsIn(_position).
 				all({visual => ! visual.isObstacle() } )	
 	}		
-	method loseLives(damage){
-		game.removeVisual(hp)
-		const newLife = life - damage
-		if (newLife < 0 )
-			self.lose()
-		else
-			life = newLife
-//		display.write(self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
-		game.addVisual(hp)
-	}
-	method winLives(won){
-		game.removeVisual(hp)
-		const newLife = life + won
-		if (newLife > maxLife )
-			life = maxLife
-		else
-			life = newLife
-//		display.write(self.life().toString()) //sacar o cambiar despues de poner barrita de vida y hacer directamente metodo para eso
-		game.addVisual(hp)
-	}
+//	method loseLives(damage){ //en enemies
+//		game.removeVisual(hp)
+//		const newLife = life - damage
+//		if (newLife < 0 )
+//			self.lose()
+//		else
+//			life = newLife
+//		game.addVisual(hp)
+//	}
+//	method winLives(won){ // en birkir
+//		game.removeVisual(hp)
+//		const newLife = life + won
+//		if (newLife > maxLife )
+//			life = maxLife
+//		else
+//			life = newLife
+//		game.addVisual(hp)
+//	}
 	method drinkBottle(bottle){
 		bottle.taken(self)
 	}

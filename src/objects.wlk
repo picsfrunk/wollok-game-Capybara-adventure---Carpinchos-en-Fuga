@@ -8,11 +8,7 @@ import niveles.*
 
 class DefaultObjects {
 	method isObstacle() = false
-//	method isEnemy() = false
-//	method isBottle() = false
-//	method isPredator() = false
 	method passThrough() = false	
-//	method isKey() = false
 }
 //VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleatoriamente
 class VisualObjects inherits DefaultObjects {
@@ -27,11 +23,20 @@ class VisualObjects inherits DefaultObjects {
 			self.borrar()
 			game.removeVisual(self)
 		}
-	}	
+	}
+	method loseLives(damage){
+		game.removeVisual(hp)
+		const newLife = capybara.life() - damage
+		if (newLife < 0 )
+			capybara.lose()
+		else
+			capybara.life(newLife)
+		game.addVisual(hp)
+	}
+	method giveLife() {}	
 }
 class InvisibleExit inherits DefaultObjects {
 //	override method passThrough() = true
-		
 	method show(){
 		game.addVisualIn(self,game.at(game.width() - 2,0))
 	}
@@ -45,8 +50,6 @@ class Exit inherits DefaultObjects{
 		game.addVisualIn(self,game.at(game.width() - 1,0))
 	}	
 }
-
-
 class Llave inherits VisualObjects {
 	method image() = "llave.png"	
 //	override method passThrough() = true
@@ -93,7 +96,7 @@ class Beer inherits Bottle (cartel = cartelBeer){ // desacelera el tiempo osea s
 	}				
 }
 object cartelBeer inherits CartelBotella {
-	override method image() = "cartelBirkir.jpg"
+	override method image() = "cartelBeer.png"
 }
 class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea baja el tiempo de gravedad
 	var property timeUp = 100
@@ -105,18 +108,27 @@ class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea b
 	}	
 }
 object cartelTequila inherits CartelBotella {
-	override method image() = "cartelBirkir.jpg"
+	override method image() = "cartelTequila.png"
 }
 class Birkir inherits Bottle (cartel = cartelBirkir) { //aumenta la vida 
 	var property lifeUp = 10
-	method image() = "birkir.png"	
+	method image() = "birkir.png"
+	method winLives(won){
+		game.removeVisual(hp)
+		const newLife = capybara.life() + won
+		if (newLife > capybara.maxLife() )
+			capybara.life(capybara.maxLife()) 
+		else
+			capybara.life(newLife)
+		game.addVisual(hp)
+	}	
 	override method taken(visual){
 		super(cartel)
-		visual.winLives(lifeUp)
+		self.winLives(lifeUp)
 	}		
 }
 object cartelBirkir inherits CartelBotella{
-	override method image() = "cartelBirkir.jpg"
+	override method image() = "cartelBirkir.png"
 }
 class Obstacles inherits VisualObjects {
 	const damage = 10
@@ -133,7 +145,7 @@ class Obstacles inherits VisualObjects {
 	}
 
 	override method crash(visual){
-		visual.loseLives(damage)
+		self.loseLives(damage)
 		visual.shock()	
 	}
 } 
