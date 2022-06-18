@@ -107,9 +107,9 @@ class Nivel inherits DefaultObjects {
 	var property pista
 	var property image
 	var property imagenInicioNivel
-	var property initTimeGenerator
-	var property initTimeGravity
-	const property generators = #{humanGenerator,bottleGenerator,obstacleGenerator,keyGenerator}
+//	var property initTimeGenerator
+//	var property initTimeGravity
+	const property generators = #{}
 	const property exit
 	method showExit(){
 		const exitImage = new Exit()
@@ -117,17 +117,28 @@ class Nivel inherits DefaultObjects {
 		exitImage.show()
 		exitInvisible.show()
 	}
-	method acelerarEnemigos(timeUp){
-		humanGenerator.upTimeGravity(timeUp)
+	method initTimeGenerator()
+	method initTimeGravity()
+	method acelerar(timeUp){
+//		console.println("Up timeGravity en Nivel " + nivel.toString())
+//		humanGenerator.upTimeGravity(timeUp)
+		generators.forEach( { gen => gen.upTimeGravity(timeUp) } )
 	}
-	method desAcelerarEnemigos(timeUp){
-		humanGenerator.downTimeGravity(timeUp)
+	method desacelerar(timeDown){
+//		console.println("Down timeGravity en Nivel " + nivel.toString())
+//		humanGenerator.downTimeGravity(timeDown)
+		generators.forEach( { gen => gen.downTimeGravity(timeDown) } )
+
 	}	
 //	method exitImagePosition(){
 //		return game.at(game.width() - 1,0)
 //	}
-
+	method addGenerators(){
+		generators.addAll(#{bottleGenerator,obstacleGenerator,keyGenerator})
+	} 
 	method initVisualsGenerators(){
+		generators.clear()
+		self.addGenerators()		
 		generators.forEach( { gen => gen.show() } )
 	}
 	method terminar() {
@@ -178,8 +189,7 @@ class Nivel inherits DefaultObjects {
 	}
 }
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, 
-						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png",
-						     initTimeGenerator = 2000,  initTimeGravity = 700) {
+						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png") {
 //	var property initTimeHumanGenerator = 2000 
 //	var property initTimeHumanGravity = 700
 	
@@ -192,10 +202,16 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 		pantalla2.iniciar()
 		game.schedule(3000, { nivel2.cargar()})
 	}	
+	
+	override method initTimeGenerator() = 2000
+	override method initTimeGravity() = 700
+	override method addGenerators(){
+		super()
+		generators.add(humanGenerator)
+	} 		
 }		
 object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2, 
-							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png",
-						     initTimeGenerator = 2000,  initTimeGravity = 600){
+							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png"){
 	
 	override method cargar() {
 		capybara.keysForWin(2)
@@ -207,24 +223,27 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 		game.schedule(3000, { nivel3.cargar()})
 //		enCurso = false
 	}	
+	override method addGenerators(){
+		super()
+		generators.add(animalControlGenerator)
+	} 		
+	override method initTimeGenerator() = 1800
+	override method initTimeGravity() = 600	
 }
 object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3, 
-					          imagenInicioNivel = "nivel3.png", exit = "burrow.png",
-						     initTimeGenerator = 2000,  initTimeGravity = 500){
+					          imagenInicioNivel = "nivel3.png", exit = "burrow.png"){
 	override method cargar() {
 		super()
 		capybara.keysForWin(2)
-		predatorGenerator.show()
 	}
 	override method terminar() {}	
-	override method acelerarEnemigos(timeUp){
-		super(timeUp)
-		predatorGenerator.upTimeGravity(timeUp)
-	}
-	override method desAcelerarEnemigos(timeDown){
-		super(timeDown)
-		predatorGenerator.downTimeGravity(timeDown)
-	}	
+	override method initTimeGenerator() = 1600
+	override method initTimeGravity() = 500	
+	override method addGenerators(){
+		super()
+		generators.addAll(#{predatorGenerator,swimmerGenerator})
+	} 	
+
 //	override method exitImagePosition(){
 //		return game.at(game.width() - 4,0)
 //	}
@@ -235,7 +254,7 @@ object nivelActual {
 	const suf2 = [1,2]	
 	
 	method random() = randomizer.emptyPosition()
-	method randomRight() = randomizer.emptyPositionRight()
+//	method randomRight() = randomizer.emptyPositionRight()
 
 	method obstacles() =
 		if (nivel1.enCurso()) 
@@ -246,13 +265,13 @@ object nivelActual {
 		else  
 			new Stump(sufijo=suf3.anyOne(),position=self.random())
 
-	method humans() = 	
-		if (nivel1.enCurso()) new Human (sufijo=suf3.anyOne(), position=self.random())
-		else
-		if (nivel2.enCurso()) new AnimalControl(sufijo=suf3.anyOne(),position=self.random())
-		else  
-		if (nivel3.enCurso()) new Swimmer(sufijo=suf2.anyOne(),position=self.randomRight())
-		else null			
+//	method humans() = 	
+//		if (nivel1.enCurso()) new Human (sufijo=suf3.anyOne(), position=self.random())
+//		else
+//		if (nivel2.enCurso()) new AnimalControl(sufijo=suf3.anyOne(),position=self.random())
+//		else  
+//		if (nivel3.enCurso()) new Swimmer(sufijo=suf2.anyOne(),position=self.randomRight())
+//		else null			
 
 	method is() =
 		if (nivel1.enCurso()) 
