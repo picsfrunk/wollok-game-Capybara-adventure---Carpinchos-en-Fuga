@@ -8,7 +8,6 @@ import niveles.*
 
 class DefaultObjects {
 	method isObstacle() = false
-	method passThrough() = false	
 }
 //VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleatoriamente
 class VisualObjects inherits DefaultObjects {
@@ -33,10 +32,8 @@ class VisualObjects inherits DefaultObjects {
 			capybara.life(newLife)
 		game.addVisual(hp)
 	}
-//	method giveLife()	
 }
 class InvisibleExit inherits DefaultObjects {
-//	override method passThrough() = true
 	method show(){
 		game.addVisualIn(self,game.at(game.width() - 2,0))
 	}
@@ -52,8 +49,6 @@ class Exit inherits DefaultObjects{
 }
 class Llave inherits VisualObjects {
 	method image() = "llave.png"	
-//	override method passThrough() = true
-//	override method isKey() = true
 	override method borrar(){
 		keyGenerator.borrar(self)
 	}		
@@ -76,9 +71,9 @@ class Bottle inherits VisualObjects {
 		self.borrar()
 	}
 	method taken(visual){
-		if(! game.hasVisual(cartelBeer)){
-			game.addVisual(cartelBeer)
-			game.schedule(3000, {game.removeVisual(cartelBeer)})
+		if(! game.hasVisual(cartel)){
+			game.addVisual(cartel)
+			game.schedule(3000, {game.removeVisual(cartel)})
 			}
 	}
 }
@@ -162,7 +157,6 @@ class Stump inherits Obstacles {
 }
 object cave inherits DefaultObjects {
 	method image() = "cave.png"	
-	//override method passThrough() = true
 	method crash(visual){
 		visual.levelUp()
 	}
