@@ -48,6 +48,12 @@ class Exit inherits DefaultObjects{
 		game.addVisualIn(self,game.at(game.width() - 1,0))
 	}	
 }
+object cave inherits DefaultObjects {
+	method image() = "cave.png"	
+	method crash(visual){
+		visual.levelUp()
+	}
+}
 object hp inherits DefaultObjects {
 	var property position = game.at(0, 13)
 	method image() = "hp_" + (capybara.life()).toString() + ".png"	
@@ -93,6 +99,7 @@ class Llave inherits VisualObjects {
 		self.borrar()		
 	}
 }
+
 class Bottle inherits VisualObjects {
 	var property cartel
 //	override method isBottle() = true
@@ -160,6 +167,7 @@ object cartelTequila inherits CartelBotella {
 object cartelBirkir inherits CartelBotella{
 	override method image() = "cartelBirkir.png"
 }
+
 class Obstacles inherits VisualObjects {
 	const damage = 10
 	override method isObstacle() = true
@@ -178,7 +186,6 @@ class Obstacles inherits VisualObjects {
 		visual.shock()	
 	}
 } 
-
 class Wall inherits Obstacles {
 	method image() = "wall.png"	
 }
@@ -190,12 +197,7 @@ class Stump inherits Obstacles {
 	var sufijo
 	method image() = "stump_" + sufijo.toString() + ".png"		
 }
-object cave inherits DefaultObjects {
-	method image() = "cave.png"	
-	method crash(visual){
-		visual.levelUp()
-	}
-}
+
 
 object izquierda {
 	method siguiente(position) = position.left(1)
