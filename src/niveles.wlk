@@ -26,16 +26,13 @@ class PantallaInicial {
 		game.clear() 
 		self.siguiente().iniciar()
 	}
+}
+object pantallaInicial1 inherits PantallaInicial 
+	(image = "comandos.png", pista = pistaInicial, siguiente = pantallaInicial2) {
 	method iniciar() {
 		game.addVisualIn(self, game.at(0,0))
 		musicConfig.musicaOnOff(self.pista())
 		self.enterParaJugar()
-	}
-}
-object pantallaInicial1 inherits PantallaInicial 
-	(image = "comandos.png", pista = pistaInicial, siguiente = pantallaInicial2) {
-	override method iniciar() {
-		super()
 		self.pista().play()
 		self.enterParaJugar()
 	}
@@ -63,7 +60,7 @@ class PantallaFinal {
 	method final() {
 		game.addVisualIn(self, game.at(0, 0))
 		self.enterParaFin()
-		game.schedule(10000, {game.stop()})	
+		game.schedule(15000, {game.stop()})	
 	}
 	method finalizar(){
 		self.pista().play()

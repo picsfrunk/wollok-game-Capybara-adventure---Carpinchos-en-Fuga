@@ -102,7 +102,13 @@ class Llave inherits VisualObjects {
 
 class Bottle inherits VisualObjects {
 	var property cartel
-//	override method isBottle() = true
+	
+	method taken(visual){
+		if(! game.hasVisual(cartel)){
+			game.addVisual(cartel)
+			game.schedule(3000, {game.removeVisual(cartel)})
+			}
+	}
 	override method borrar(){
 		bottleGenerator.borrar(self)
 	}	
@@ -111,19 +117,12 @@ class Bottle inherits VisualObjects {
 		game.removeVisual(self)
 		self.borrar()
 	}
-	method taken(visual){
-		if(! game.hasVisual(cartel)){
-			game.addVisual(cartel)
-			game.schedule(3000, {game.removeVisual(cartel)})
-			}
-	}
 }
 class Beer inherits Bottle (cartel = cartelBeer){ // desacelera el tiempo osea sube el tiempo de gravedad
 	var property timeDown = 100
 	method image() = "beer.png"	
 	override method taken(visual){
 		super(cartel)
-//		console.println("Beer timeGravity ")
 		nivelActual.is().desacelerar(timeDown)
 	}				
 }
@@ -132,7 +131,6 @@ class Tequila inherits Bottle (cartel = cartelTequila) { //acelera tiempo osea b
 	method image() = "tequila.png"	
 	override method taken(visual){
 		super(cartel)
-//		console.println("Tequila timeGravity ")
 		nivelActual.is().acelerar(timeUp)
 	}	
 }
