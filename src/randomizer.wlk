@@ -16,7 +16,6 @@ object randomizer {
 			return self.emptyPositionRight()
 		}
 	} 
-	
 	method positionOnlyLeft() {
 		return game.at( ( 1 .. game.width() - 5 ).anyOne(), game.height() - 2 ) 
 	} 
@@ -30,7 +29,6 @@ object randomizer {
 			return self.emptyPositionLeft()
 		}
 	} 
-	
 	method emptyPosition() {
 		const position = self.position()
 		if(game.getObjectsIn(position).isEmpty()) {

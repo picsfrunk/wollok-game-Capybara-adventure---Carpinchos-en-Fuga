@@ -18,7 +18,6 @@ object capybara inherits objects.DefaultObjects {
 	method resetPosition(){
 		position = game.at(1,0)
 	}
-	
 	method image() = "capy_" + self.sufijo() + ".png"		
 	method mover(direccion) {
 		nextPosition = direccion.siguiente(position)
@@ -41,33 +40,12 @@ object capybara inherits objects.DefaultObjects {
 		return 	game.getObjectsIn(_position).
 				all({visual => ! visual.isObstacle() } )	
 	}		
-
-//	method loseLives(damage){ //en enemies
-//		game.removeVisual(hp)
-//		const newLife = life - damage
-//		if (newLife < 0 )
-//			self.lose()
-//		else
-//			life = newLife
-//		game.addVisual(hp)
-//	}
-//	method winLives(won){ // en birkir
-//		game.removeVisual(hp)
-//		const newLife = life + won
-//		if (newLife > maxLife )
-//			life = maxLife
-//		else
-//			life = newLife
-//		game.addVisual(hp)
-//	}
 	method drinkBottle(bottle){
 		bottle.taken(self)
 	}
-
 	method shock(){
 		sufijo = "shock"
 	}
-	
 	method addKey(key){
 		game.removeVisual(keychain)
 		keys.add(key)
@@ -89,8 +67,7 @@ object capybara inherits objects.DefaultObjects {
 	}
 	method timeOver(){
 		game.schedule(2000,{ (nivelActual.is()).pista().stop()
-							  self.lose()
-							  } )
+							  self.lose() } )
 	}
 	method levelUp(){
 		self.resetPosition()

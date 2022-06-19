@@ -8,6 +8,7 @@ import sonido.*
 
 class Enemy inherits objects.VisualObjects {
 	const property damage = 5
+	
 	override method crash(visual){
 		self.loseLives(damage)
 		visual.shock()
@@ -15,6 +16,7 @@ class Enemy inherits objects.VisualObjects {
 }
 class Human inherits Enemy{
 	var sufijo 
+	
 	method image() = "human_worker" + sufijo.toString() + ".png"	
 	override method borrar(){
 		humanGenerator.borrar(self)
@@ -25,9 +27,7 @@ class AnimalControl inherits Human {
 	override method borrar(){
 		animalControlGenerator.borrar(self)
 	}
-}	
-
-	
+}		
 class Swimmer inherits Human {
 	override method image() = "swimmer_" + sufijo.toString() + ".png"	
 	override method borrar(){
@@ -36,6 +36,7 @@ class Swimmer inherits Human {
 }	
 class Predator inherits Enemy (damage = 10){
 	var sufijo
+	
 	method image() = "predator_" + sufijo.toString() + ".png"				
 	override method borrar(){
 		predatorGenerator.borrar(self)

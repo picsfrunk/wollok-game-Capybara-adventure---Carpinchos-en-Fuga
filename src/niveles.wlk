@@ -8,14 +8,17 @@ import sonido.*
 
 object inicio {
 	var property image = "start.png"
+	
 	method iniciar() {	
 		game.schedule(2000, {pantallaInicial1.iniciar()})
 	}
 }
+
 class PantallaInicial {
 	var property image
 	var property pista
 	var property siguiente
+	
 	method enterParaJugar() {
 		keyboard.enter().onPressDo({ self.finalizar() })
 	}
@@ -44,9 +47,11 @@ object pantallaInicial2 inherits PantallaInicial
 		self.pista().stop()
 	}
 }
+
 class PantallaFinal {
 	var property image
 	var property pista
+	
 	method enterParaFin(){
 		keyboard.enter().onPressDo({ game.stop()}) }
 	method prefinal() {
@@ -63,15 +68,16 @@ class PantallaFinal {
 	method finalizar(){
 		self.pista().play()
 		self.final()
-		//self.pista().stop()
 	}
 }
 object pantallaGanar inherits PantallaFinal (image = "ganaste.png",pista = sonidoGanar){
 }
 object pantallaPerder inherits PantallaFinal (image = "perdiste.png",pista = sonidoPerder){
 }
+
 class PantallaNivel {
 	var property image
+	
 	method iniciar() {
 		game.clear()
 		game.addVisualIn(self, game.at(0,0))
@@ -101,16 +107,16 @@ object pantalla3 inherits PantallaNivel (image = "nivel3.png"){
 		})	
 	}
 }
+
 class Nivel inherits DefaultObjects {
 	var property nivel
 	var property enCurso = false
 	var property pista
 	var property image
 	var property imagenInicioNivel
-//	var property initTimeGenerator
-//	var property initTimeGravity
 	const property generators = #{}
 	const property exit
+	
 	method showExit(){
 		const exitImage = new Exit()
 		const exitInvisible = new InvisibleExit()
@@ -128,7 +134,6 @@ class Nivel inherits DefaultObjects {
 //		console.println("Down timeGravity en Nivel " + nivel.toString())
 //		humanGenerator.downTimeGravity(timeDown)
 		generators.forEach( { gen => gen.downTimeGravity(timeDown) } )
-
 	}	
 //	method exitImagePosition(){
 //		return game.at(game.width() - 1,0)
@@ -146,10 +151,6 @@ class Nivel inherits DefaultObjects {
 		game.removeVisual(hp)
 		game.removeVisual(keychain)
 		self.pista().stop()	
-//		if (nivel3.enCurso())
-//			game.say(capybara, "GANASTE!!!")	
-//		else
-//			game.say(capybara, "PASASTE DE NIVEL!!!")	
 		enCurso = false
 	}
 	method cargar() {
@@ -173,13 +174,6 @@ class Nivel inherits DefaultObjects {
 		game.schedule(60000, { capybara.timeOver() })
 		game.onTick(1000, "CONTEOINVERSO" , {time.countBackwards()})
 		self.initVisualsGenerators()
-//		game.addVisual(display)
-//		game.addVisual(display)
-//		game.addVisual(display2)
-//		game.addVisual(display3)
-//		display.write(capybara.life().toString())
-//		display2.write(capybara.keyscount().toString())	// solo para pruebas			
-//		display3.write(nivelActual.is().toString())
 	}	
 	method iniciar () {
 		game.addVisualIn(imagenInicioNivel, game.at(0,0))
@@ -190,9 +184,6 @@ class Nivel inherits DefaultObjects {
 }
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, 
 						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png") {
-//	var property initTimeHumanGenerator = 2000 
-//	var property initTimeHumanGravity = 700
-	
 	override method cargar() {
 		capybara.keysForWin(2)	//configurar antes de entrega	
 		super()
@@ -249,7 +240,6 @@ object nivelActual {
 	const suf2 = [1,2]	
 	
 	method random() = randomizer.emptyPosition()
-
 	method obstacles() =
 		if (nivel1.enCurso()) 
 			new Wall(position=self.random())
@@ -258,9 +248,6 @@ object nivelActual {
 			new Fence(sufijo=suf2.anyOne(),position=self.random())
 		else  
 			new Stump(sufijo=suf3.anyOne(),position=self.random())
-
-		
-
 	method is() =
 		if (nivel1.enCurso()) 
 			nivel1
@@ -268,8 +255,6 @@ object nivelActual {
 		if (nivel2.enCurso()) 
 			nivel2
 		else  
-			nivel3	
-
-			
+			nivel3				
 }
 
