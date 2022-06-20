@@ -56,6 +56,7 @@ class PantallaFinal {
 	method enterParaFin(){
 		keyboard.enter().onPressDo({ game.stop()}) }
 	method prefinal() {
+		self.pista().play()
 		game.clear()
 		game.addVisual(fade)
 		game.onTick(1000, "CONTEOINVERSO" , {fade.countBackwards()})
