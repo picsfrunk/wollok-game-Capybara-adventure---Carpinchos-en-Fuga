@@ -188,7 +188,7 @@ class Nivel inherits DefaultObject {
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, 
 						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png") {
 	override method cargar() {
-		capybara.keysForWin(2)	//configurar antes de entrega	
+		capybara.keysForWin(4)	//configurar antes de entrega	
 		super()
 	}
 	override method terminar(){
@@ -210,7 +210,7 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png"){
 	
 	override method cargar() {
-		capybara.keysForWin(2) //configurar antes de entrega
+		capybara.keysForWin(6) //configurar antes de entrega
 		super()
 	}	
 	override method terminar(){
@@ -230,7 +230,7 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 					          imagenInicioNivel = "nivel3.png", exit = "burrow.png"){
 	override method cargar() {
 		super()
-		capybara.keysForWin(2) //configurar antes de entrega
+		capybara.keysForWin(6) //configurar antes de entrega
 	}
 	override method terminar() {}	
 	override method initTimeGenerator() = 1600
