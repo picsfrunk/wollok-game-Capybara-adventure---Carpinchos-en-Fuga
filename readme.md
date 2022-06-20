@@ -44,7 +44,9 @@ https://picsfrunk.bandcamp.com/
 
 
 ## CapybaraTeam
-Mercedes Conde / Denise Martin / Alejandro Nava
+Mercedes Conde  
+Denise Martin  
+Alejandro Nava  
 
 Algoritmos I - 1er cuatrimestre 2022
 TPI
