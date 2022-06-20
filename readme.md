@@ -13,12 +13,12 @@ recolectar **4 llaves** y salir por el agujero de la pared.
 
 ### Nivel Pradera: 
 Segundo deberá huir entre los obstáculos (rejas) y escaparle al “control de plagas” para llegar rápido al lago. 
-En el camino deberá recolectar **10 llaves** y escapar por la reja.
+En el camino deberá recolectar **6 llaves** y escapar por la reja.
 
 ### Nivel Lago: 
 Por último, esquivando los árboles talados (troncos),  podrá escapar de los depredadores naturales (caimanes y serpientes) 
 para reencontrarse con sus amigos. 
-En el trayecto deberá recolectar **16 llaves** y llegar a la madriguera.
+En el trayecto deberá recolectar **6 llaves** y llegar a la madriguera.
 
 ![](https://github.com/picsfrunk/wollok-game-Capybara-adventure---Carpinchos-en-Fuga/blob/main/assets/comandos.png?raw=true)
 
