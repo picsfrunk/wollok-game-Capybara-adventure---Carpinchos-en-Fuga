@@ -32,13 +32,13 @@ En el trayecto deberá recolectar **6 llaves** y llegar a la madriguera.
 
 
 ## PISTAS
-Pistas recortadas para minimizar la carga del juego y adecuadas al cron¢metro de pantalla mediante Super Sound App? .
+Pistas recortadas para minimizar la carga del juego y adecuadas al cron¢metro de pantalla mediante Super Sound App?
 Pista inicial: Simple Orange by Pics Frunk - Alejandro Nava 
 Nivel 1: China  by Pics Frunk - Alejandro Nava 
-Nivel 2: Boat 14  by Pics Frunk - Alejandro Nava ?
-Nivel 3: Crazy black light  by Pics Frunk - Alejandro Nava 
-Ganar: Win by The Romanovs - White Flag 
-Perder: Lose by Lineage II game OST - Spring Awakening 
+Nivel 2: Boat 14  by Pics Frunk - Alejandro Nava
+Nivel 3: Crazy black light  by Pics Frunk - Alejandro Nava
+Ganar: Win by The Romanovs - White Flag
+Perder: Lose by Lineage II game OST - Spring Awakening
 
 https://picsfrunk.bandcamp.com/
 
