@@ -4,24 +4,24 @@
 
 
 ## Idea General
-En los tres niveles, capybara encontrar· paisajes nuevos , obst·culos que esquivar, adem·s de humanos y animales de los cuales debe escapar, 
-para no perder vida. Para ayudarlo, encontrar· a unos viejos amigos: botellas de los distintos paÌses donde viajÛ, que le permitir·n ir m·s r·pido 
-(Tequila de MÈxico) o lento (Cerveza de Alemania), o quiz·s darle un poquito de vida (Birkir de Islandia). Deber· recolectar las llaves necesarias 
+En los tres niveles, capybara encontrar√° paisajes nuevos , obst√°culos que esquivar, adem√°s de humanos y animales de los cuales debe escapar, 
+para no perder vida. Para ayudarlo, encontrar√° a unos viejos amigos: botellas de los distintos pa√≠ses donde viaj√≥, que le permitir√°n ir m√°s r√°pido 
+(Tequila de M√©xico) o lento (Cerveza de Alemania), o quiz√°s darle un poquito de vida (Birkir de Islandia). Deber√° recolectar las llaves necesarias 
 para poder ir a casa a encontrarse con sus amigos.
 
 ## Niveles Destacados:
-### Nivel ConstrucciÛn: 
-Primero deber· escapar de las edificaciones construidas por los humanos (paredes) y de sus garras (villanos constructores), 
+### Nivel Construcci√≥n: 
+Primero deber√° escapar de las edificaciones construidas por los humanos (paredes) y de sus garras (villanos constructores), 
 recolectar **4 llaves** y salir por el agujero de la pared.
 
 ### Nivel Pradera: 
-Segundo deber· huir entre los obst·culos (rejas) y escaparle al ìcontrol de plagasî para llegar r·pido al lago. 
-En el camino deber· recolectar **6 llaves** y escapar por la reja.
+Segundo deber√° huir entre los obst√°culos (rejas) y escaparle al ‚Äúcontrol de plagas‚Äù para llegar r√°pido al lago. 
+En el camino deber√° recolectar **6 llaves** y escapar por la reja.
 
 ### Nivel Lago: 
-Por ˙ltimo, esquivando los ·rboles talados (troncos),  podr· escapar de los depredadores naturales (caimanes y serpientes) 
+Por √∫ltimo, esquivando los √°rboles talados (troncos),  podr√° escapar de los depredadores naturales (caimanes y serpientes) 
 para reencontrarse con sus amigos. 
-En el trayecto deber· recolectar **6 llaves** y llegar a la madriguera.
+En el trayecto deber√° recolectar **6 llaves** y llegar a la madriguera.
 
 ![](https://github.com/picsfrunk/wollok-game-Capybara-adventure---Carpinchos-en-Fuga/blob/main/assets/comandos.png?raw=true)
 
@@ -32,9 +32,9 @@ En el trayecto deber· recolectar **6 llaves** y llegar a la madriguera.
 
 
 ## PISTAS
-Pistas recortadas para minimizar la carga del juego y adecuadas al cron¢metro de pantalla mediante Super Sound App?
-Pista inicial: Simple Orange by Pics Frunk - Alejandro Nava 
-Nivel 1: China  by Pics Frunk - Alejandro Nava 
+Pistas recortadas para minimizar la carga del juego y adecuadas al cron¬¢metro de pantalla mediante Super Sound App 
+Pista inicial: Simple Orange by Pics Frunk - Alejandro Nava
+Nivel 1: China  by Pics Frunk - Alejandro Nava
 Nivel 2: Boat 14  by Pics Frunk - Alejandro Nava
 Nivel 3: Crazy black light  by Pics Frunk - Alejandro Nava
 Ganar: Win by The Romanovs - White Flag
