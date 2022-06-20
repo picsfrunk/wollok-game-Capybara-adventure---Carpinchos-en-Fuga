@@ -61,7 +61,7 @@ class ObjGeneratorWithGravity inherits ObjectGenerator {
 	var property nameOnTickGenerator = 0
 	var property nameGravityOn = 0
 	const timeGravityMax = 100
-	//metodo generico para colocar el objeto generador, debe entender el method build()
+	
 	method objToFactory() 
 	method generate() {
 		if(self.haveToGenerate()) {
@@ -78,16 +78,13 @@ class ObjGeneratorWithGravity inherits ObjectGenerator {
 	}
 	method gravityOn(){
 		game.onTick(timeGravity, nameGravityOn, {self.applyGravityAllColection()} ) 		
-//		console.println("Gravity to "+timeGravity+" Name "+ nameGravityOn)	
 	}
 	override method show(){
-//		self.resetColection()
 		super()
 		nameOnTickGenerator	= self.objToFactory().toString()
 		nameGravityOn = self.objToFactory().toString() + "Gravity"		
 		self.onTickGenerator()
-		self.gravityOn()
-//		console.println("Init TimeGravity: "+timeGravity+" Init timeTickGen: "+timeTickGen)		
+		self.gravityOn()	
 	}
 	method upTimeGravity(n){ //subir la gravedad es bajar el tiempo
 		const newtimeGravity = timeGravity - n
@@ -95,24 +92,19 @@ class ObjGeneratorWithGravity inherits ObjectGenerator {
 			timeTickGen = timeTickGen - n*1.2
 			timeGravity = newtimeGravity
 			self.refresh()	
-//			.println("Up TimeGravity: "+timeGravity+"\n"+"Up timeTickGen: "+timeTickGen+"\n")
 		}
-//			console.println("Not modified")	
 	}	
 	method downTimeGravity(n){ //bajar la gravedad es aumentar el tiempo de tickGen y Gravedad
 		timeTickGen = timeTickGen + n*1.2
 		timeGravity = timeGravity + n
-		self.refresh()						
-//		console.println("Down TimeGravity: "+timeGravity+"\n"+"Down timeTickGen: "+timeTickGen+"\n")			
+		self.refresh()									
 	}
 	method refreshGravity(){
 		game.removeTickEvent(nameGravityOn)
-//		console.println("Removed TickEvent refreshGravity(): "+nameGravityOn)
 		self.gravityOn()	
 	}
 	method refreshTickGenerator(){
 		game.removeTickEvent(nameOnTickGenerator) 
-//		console.println("Removed TickEvent refreshTick(): "+nameOnTickGenerator)
 		self.onTickGenerator()
 	}
 	method refresh(){
