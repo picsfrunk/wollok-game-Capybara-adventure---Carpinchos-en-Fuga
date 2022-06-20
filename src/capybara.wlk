@@ -56,8 +56,8 @@ object capybara inherits objects.DefaultObject {
 	method keyscount() = keys.size()
 	method resetKeys(){	keys.clear() }
 	method lose(){
+		(nivelActual.is()).pista().stop()
 		game.addVisual(fade)
-		game.removeVisual(hp)
 		pantallaPerder.prefinal()
 	}
 	method win() {

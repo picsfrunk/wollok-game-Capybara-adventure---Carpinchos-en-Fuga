@@ -67,10 +67,10 @@ class PantallaFinal {
 		self.enterParaFin()
 		game.schedule(15000, {game.stop()})	
 	}
-	method finalizar(){
-		self.pista().play()
-		self.final()
-	}
+//	method finalizar(){
+//		self.pista().play()
+//		self.final()
+//	}
 }
 object pantallaGanar inherits PantallaFinal (image = "ganaste.png",pista = sonidoGanar){
 }
