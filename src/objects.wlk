@@ -166,7 +166,7 @@ object cartelBirkir inherits CartelBotella{
 	override method image() = "cartelBirkir.png"
 }
 
-class Obstacles inherits VisualObjects {
+class Obstacle inherits VisualObjects {
 	const damage = 10
 	override method isObstacle() = true
 	override method borrar(){
@@ -184,14 +184,14 @@ class Obstacles inherits VisualObjects {
 		visual.shock()	
 	}
 } 
-class Wall inherits Obstacles {
+class Wall inherits Obstacle {
 	method image() = "wall.png"	
 }
-class Fence inherits Obstacles {
+class Fence inherits Obstacle {
 	var sufijo
 	method image() = "fence_" + sufijo.toString() + ".png"
 }
-class Stump inherits Obstacles {
+class Stump inherits Obstacle {
 	var sufijo
 	method image() = "stump_" + sufijo.toString() + ".png"		
 }
