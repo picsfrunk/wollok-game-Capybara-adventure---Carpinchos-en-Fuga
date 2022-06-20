@@ -14,7 +14,7 @@ class Factory {
 	method build()	
 }
 object humanFactory inherits Factory{
-	override method build()= new Human (sufijo=suf3.anyOne(), position=self.random()) //new Human(sufijo=suf.anyOne(), position=self.random())
+	override method build()= new Human (sufijo=suf3.anyOne(), position=self.random()) 
 }
 object animalControlFactory inherits Factory{
 	override method build()= new AnimalControl(sufijo=suf3.anyOne(),position=self.random())
