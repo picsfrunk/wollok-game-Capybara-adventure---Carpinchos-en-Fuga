@@ -26,3 +26,24 @@ En el trayecto deber√° recolectar **6 llaves** y llegar a la madriguera.
 ![](https://github.com/picsfrunk/wollok-game-Capybara-adventure---Carpinchos-en-Fuga/blob/main/assets/comandos.png?raw=true)
 
 ![](https://github.com/picsfrunk/wollok-game-Capybara-adventure---Carpinchos-en-Fuga/blob/main/assets/amigosenemigos.jpg?raw=true)
+
+## PISTAS
+Pistas recortadas para minimizar la carga del juego y adecuadas al cron¢metro de pantalla mediante Super Sound App? .
+Pista inicial: ?Simple Orange? by Pics Frunk - Alejandro Nava ?
+Nivel 1: ?China?  by Pics Frunk - Alejandro Nava ?
+Nivel 2: ?Boat 14?  by Pics Frunk - Alejandro Nava ?
+Nivel 3: ?Crazy black light?  by Pics Frunk - Alejandro Nava ?
+Ganar: ?Win? by The Romanovs - White Flag ?
+Perder: ?Lose? by Lineage II game OST - Spring Awakening ?
+
+https://picsfrunk.bandcamp.com/
+
+## UNSAM TPI 2022
+
+## CapybaraTeam
+### Mercedes Conde
+### Denise Martin
+### Alejandro Nava
+
+
+
