@@ -67,12 +67,8 @@ class PantallaFinal {
 		self.enterParaFin()
 		game.schedule(15000, {game.stop()})	
 	}
-//	method finalizar(){
-//		self.pista().play()
-//		self.final()
-//	}
 }
-object pantallaGanar inherits PantallaFinal (image = "ganaste.gif",pista = sonidoGanar){
+object pantallaGanar inherits PantallaFinal (image = "ganaste.png",pista = sonidoGanar){
 }
 object pantallaPerder inherits PantallaFinal (image = "perdiste.png",pista = sonidoPerder){
 }
@@ -128,18 +124,11 @@ class Nivel inherits DefaultObject {
 	method initTimeGenerator()
 	method initTimeGravity()
 	method acelerar(timeUp){
-//		console.println("Up timeGravity en Nivel " + nivel.toString())
-//		humanGenerator.upTimeGravity(timeUp)
 		generators.forEach( { gen => gen.upTimeGravity(timeUp) } )
 	}
 	method desacelerar(timeDown){
-//		console.println("Down timeGravity en Nivel " + nivel.toString())
-//		humanGenerator.downTimeGravity(timeDown)
 		generators.forEach( { gen => gen.downTimeGravity(timeDown) } )
 	}	
-//	method exitImagePosition(){
-//		return game.at(game.width() - 1,0)
-//	}
 	method addGenerators(){
 		generators.addAll(#{bottleGenerator,obstacleGenerator,keyGenerator})
 	} 
@@ -188,7 +177,7 @@ class Nivel inherits DefaultObject {
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, 
 						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png") {
 	override method cargar() {
-		capybara.keysForWin(4)	//configurar antes de entrega	
+		capybara.keysForWin(4)
 		super()
 	}
 	override method terminar(){
@@ -210,7 +199,7 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png"){
 	
 	override method cargar() {
-		capybara.keysForWin(6) //configurar antes de entrega
+		capybara.keysForWin(6) 
 		super()
 	}	
 	override method terminar(){
@@ -230,7 +219,7 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 					          imagenInicioNivel = "nivel3.png", exit = "burrow.png"){
 	override method cargar() {
 		super()
-		capybara.keysForWin(6) //configurar antes de entrega
+		capybara.keysForWin(6)
 	}
 	override method terminar() {}	
 	override method initTimeGenerator() = 1600
