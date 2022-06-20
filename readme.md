@@ -1,5 +1,8 @@
 # Capybara adventure - Carpinchos en Fuga
 
+![](https://github.com/picsfrunk/wollok-game-Capybara-adventure---Carpinchos-en-Fuga/blob/main/assets/start.png)
+
+
 ## Idea General
 En los tres niveles, capybara encontrará paisajes nuevos , obstáculos que esquivar, además de humanos y animales de los cuales debe escapar, 
 para no perder vida. Para ayudarlo, encontrará a unos viejos amigos: botellas de los distintos países donde viajó, que le permitirán ir más rápido 
