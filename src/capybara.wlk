@@ -6,7 +6,7 @@ import niveles.*
 import sonido.*
 import generador.*
 
-object capybara inherits objects.DefaultObjects {
+object capybara inherits objects.DefaultObject {
 	var property position = game.at(1,0)
 	var property sufijo = "inicial"
 	var property life = 100
@@ -56,8 +56,8 @@ object capybara inherits objects.DefaultObjects {
 	method keyscount() = keys.size()
 	method resetKeys(){	keys.clear() }
 	method lose(){
+		(nivelActual.is()).pista().stop()
 		game.addVisual(fade)
-		game.removeVisual(hp)
 		pantallaPerder.prefinal()
 	}
 	method win() {
