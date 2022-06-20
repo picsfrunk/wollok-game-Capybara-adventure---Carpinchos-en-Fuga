@@ -38,8 +38,7 @@ object keyFactory inherits Factory {
 	override method build() = new Llave(position=self.random())
 }
 object obstacleFactory inherits Factory { //otra opción: hacer una factory x obstáculo y tratarlo como las botellas
-	override method build() = //new Wall(position=self.random())
-		nivelActual.obstacles()
+	override method build() = nivelActual.is().obstacles()
 }
 
 class ObjectGenerator {

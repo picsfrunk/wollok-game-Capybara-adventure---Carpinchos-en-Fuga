@@ -178,6 +178,7 @@ class Nivel inherits DefaultObjects {
 			self.cargar()
 		})
 	}
+	method obstacles()
 }
 object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = musicaNivel1, 
 						     imagenInicioNivel  = "nivel1.png", exit = "wallcrack.png") {
@@ -196,7 +197,9 @@ object nivel1 inherits Nivel(image ="fondo_nivel1.jpg", nivel = 1, pista = music
 	override method addGenerators(){
 		super()
 		generators.add(humanGenerator)
-	} 		
+	} 	
+	override method obstacles() = new Wall(position=randomizer.emptyPosition())		
+	
 }		
 object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = musicaNivel2, 
 							  imagenInicioNivel = "nivel2.png", exit = "fencecrack.png"){
@@ -215,7 +218,8 @@ object nivel2 inherits Nivel (image ="fondo_nivel2.jpg",nivel = 2, pista = music
 		generators.add(animalControlGenerator)
 	} 		
 	override method initTimeGenerator() = 1800
-	override method initTimeGravity() = 600	
+	override method initTimeGravity() = 600
+	override method obstacles() = new Fence(sufijo=[1,2].anyOne(),position=randomizer.emptyPosition())	
 }
 object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = musicaNivel3, 
 					          imagenInicioNivel = "nivel3.png", exit = "burrow.png"){
@@ -230,21 +234,10 @@ object nivel3 inherits Nivel (image ="fondo_nivel3.jpg",nivel = 3, pista = music
 		super()
 		generators.addAll(#{predatorGenerator,swimmerGenerator})
 	} 	
+	override method obstacles() = new Stump(sufijo=[1,2,3].anyOne(),position=randomizer.emptyPosition())
 }
 
 object nivelActual {
-	const suf3 = [1,2,3]
-	const suf2 = [1,2]	
-	
-	method random() = randomizer.emptyPosition()
-	method obstacles() =
-		if (nivel1.enCurso()) 
-			new Wall(position=self.random())
-		else
-		if (nivel2.enCurso()) 
-			new Fence(sufijo=suf2.anyOne(),position=self.random())
-		else  
-			new Stump(sufijo=suf3.anyOne(),position=self.random())
 	method is() =
 		if (nivel1.enCurso()) 
 			nivel1
