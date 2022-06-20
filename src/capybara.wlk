@@ -6,7 +6,7 @@ import niveles.*
 import sonido.*
 import generador.*
 
-object capybara inherits objects.DefaultObjects {
+object capybara inherits objects.DefaultObject {
 	var property position = game.at(1,0)
 	var property sufijo = "inicial"
 	var property life = 100

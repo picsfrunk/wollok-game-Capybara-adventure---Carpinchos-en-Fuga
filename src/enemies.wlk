@@ -6,7 +6,7 @@ import niveles.*
 import generador.*
 import sonido.*
 
-class Enemy inherits objects.VisualObjects {
+class Enemy inherits VisualObject {
 	const property damage = 5
 	
 	override method crash(visual){

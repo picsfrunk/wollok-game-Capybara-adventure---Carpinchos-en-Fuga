@@ -105,7 +105,7 @@ object pantalla3 inherits PantallaNivel (image = "nivel3.png"){
 	}
 }
 
-class Nivel inherits DefaultObjects {
+class Nivel inherits DefaultObject {
 	var property nivel
 	var property enCurso = false
 	var property pista

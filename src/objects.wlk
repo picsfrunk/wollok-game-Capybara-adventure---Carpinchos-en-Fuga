@@ -6,11 +6,11 @@ import generador.*
 import sonido.*
 import niveles.*
 
-class DefaultObjects {
+class DefaultObject {
 	method isObstacle() = false
 }
 //VisualObjects seran los que tengan gravedad e iran apareciendo en pantalla aleatoriamente
-class VisualObjects inherits DefaultObjects {
+class VisualObject inherits DefaultObject {
 	var property position = game.at(0,0)
 	method crash(visual)
 	method borrar()	
@@ -34,7 +34,7 @@ class VisualObjects inherits DefaultObjects {
 	}
 }
 
-class InvisibleExit inherits DefaultObjects {
+class InvisibleExit inherits DefaultObject {
 	method show(){
 		game.addVisualIn(self,game.at(game.width() - 2,0))
 	}
@@ -42,27 +42,27 @@ class InvisibleExit inherits DefaultObjects {
 		visual.levelUp()
 	}
 }
-class Exit inherits DefaultObjects{
+class Exit inherits DefaultObject{
 	method image() = nivelActual.is().exit()
 	method show(){
 		game.addVisualIn(self,game.at(game.width() - 1,0))
 	}	
 }
-object cave inherits DefaultObjects {
+object cave inherits DefaultObject{
 	method image() = "cave.png"	
 	method crash(visual){
 		visual.levelUp()
 	}
 }
-object hp inherits DefaultObjects {
+object hp inherits DefaultObject {
 	var property position = game.at(0, 13)
 	method image() = "hp_" + (capybara.life()).toString() + ".png"	
 }
-object keychain inherits DefaultObjects {
+object keychain inherits DefaultObject {
 	var property position = game.at(6, 13)
 	method image() = "time_" + (capybara.keyscount()).toString() + ".png"
 }
-class Counter inherits DefaultObjects{
+class Counter inherits DefaultObject{
 	var property counter
 	var property position
 	method image()
@@ -87,7 +87,7 @@ object fade inherits Counter (counter = 5, position = game.at(0, 0)){
 	}
 }
 
-class Llave inherits VisualObjects {
+class Llave inherits VisualObject {
 	method image() = "llave.png"	
 	override method borrar(){
 		keyGenerator.borrar(self)
@@ -100,7 +100,7 @@ class Llave inherits VisualObjects {
 	}
 }
 
-class Bottle inherits VisualObjects {
+class Bottle inherits VisualObject{
 	var property cartel
 	
 	method taken(visual){
@@ -166,7 +166,7 @@ object cartelBirkir inherits CartelBotella{
 	override method image() = "cartelBirkir.png"
 }
 
-class Obstacle inherits VisualObjects {
+class Obstacle inherits VisualObject{
 	const damage = 10
 	override method isObstacle() = true
 	override method borrar(){
