@@ -30,12 +30,16 @@ class PantallaInicial {
 		game.addVisualIn(self, game.at(0,0))
 		musicConfig.musicaOnOff(self.pista())
 		self.enterParaJugar()
-		self.pista().play()
-		self.enterParaJugar()
+
 	}
 }
 object pantallaInicial1 inherits PantallaInicial 
 	(image = "comandos.png", pista = pistaInicial, siguiente = pantallaInicial2) {
+	override method iniciar() {
+		super()
+		self.pista().play()
+		self.enterParaJugar()
+	}
 }
 object pantallaInicial2 inherits PantallaInicial
 	(image = "amigosenemigos.jpg", pista = pistaInicial, siguiente = pantalla1){
