@@ -72,7 +72,7 @@ class PantallaFinal {
 //		self.final()
 //	}
 }
-object pantallaGanar inherits PantallaFinal (image = "ganaste.png",pista = sonidoGanar){
+object pantallaGanar inherits PantallaFinal (image = "ganaste.gif",pista = sonidoGanar){
 }
 object pantallaPerder inherits PantallaFinal (image = "perdiste.png",pista = sonidoPerder){
 }
