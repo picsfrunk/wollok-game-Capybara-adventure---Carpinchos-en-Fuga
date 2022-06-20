@@ -41,9 +41,9 @@ https://picsfrunk.bandcamp.com/
 ## UNSAM TPI 2022
 
 ## CapybaraTeam
-### Mercedes Conde
-### Denise Martin
-### Alejandro Nava
+Mercedes Conde
+Denise Martin
+Alejandro Nava
 
 
 
