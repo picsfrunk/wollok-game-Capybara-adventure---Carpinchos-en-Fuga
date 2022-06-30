@@ -10,7 +10,7 @@ object inicio {
 	var property image = "start.png"
 	
 	method iniciar() {	
-		game.schedule(2000, {pantallaInicial1.iniciar()})
+		game.schedule(6000, {pantallaInicial1.iniciar()})
 	}
 }
 
